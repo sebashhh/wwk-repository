@@ -9,7 +9,7 @@ Created on Fri Nov 20 12:49:06 2020
 import cclib
 import numpy as np
 
-
+#GitHub test
 maeVersus= []
 osciVersus= []
 dipoleVersus= []
