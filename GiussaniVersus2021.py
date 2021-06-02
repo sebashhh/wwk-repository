@@ -8,7 +8,35 @@ Created on Fri Nov 20 12:49:06 2020
 #Possible future version could quantitatively say when values are too close to discern which way or the other
 import cclib
 import numpy as np
+import os, fnmatch
 
+class bcolors:
+    CYAN = "\033[0;36m"
+    LIGHT_GRAY = "\033[0;37m"
+    DARK_GRAY = "\033[1;30m"
+    LIGHT_RED = "\033[1;31m"
+    LIGHT_GREEN = "\033[1;32m"
+    YELLOW = "\033[1;33m"
+    LIGHT_BLUE = "\033[1;34m"
+    LIGHT_PURPLE = "\033[1;35m"
+    LIGHT_CYAN = "\033[1;36m"
+    LIGHT_WHITE = "\033[1;37m"
+    ORANGE = "\033[48;2;255;165m"
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    
+listOfFiles = os.listdir('.')
+pattern = "*.log"
+fileChoices = []
+fileCounter = 0
+print(f"{bcolors.LIGHT_PURPLE}.log files present in directory:{bcolors.ENDC}")
+for entry in listOfFiles:
+    if fnmatch.fnmatch(entry, pattern):
+            print (str(fileCounter) + ": " + entry)
+            fileCounter += 1
+            fileChoices.append(entry)
+print()
 maeVersus= []
 osciVersus= []
 dipoleVersus= []
@@ -116,29 +144,21 @@ def ToGuissani(theName):
         #print(dipoleVersus)
         #print(tranVersus)
         #print(homoValue)
-ToGuissani("FuncsLSDA.log")
-ToGuissani("FuncsLSDA2nd.log")
+        
+#runs the program
+print(f"{bcolors.LIGHT_GREEN}Type the number index of two optimization .log files to compare.{bcolors.ENDC}")
+fileOne = int(input())
+print("Selected: " + fileChoices[fileOne]) 
+fileTwo = int(input())
+print("Selected: " + fileChoices[fileTwo] + "\n")
+
+ToGuissani(fileChoices[fileOne])
+ToGuissani(fileChoices[fileTwo])
 
 maeInd = []
 osciInd = []
 dipoleInd = []
 tranInd = []
-
-class bcolors:
-    CYAN = "\033[0;36m"
-    LIGHT_GRAY = "\033[0;37m"
-    DARK_GRAY = "\033[1;30m"
-    LIGHT_RED = "\033[1;31m"
-    LIGHT_GREEN = "\033[1;32m"
-    YELLOW = "\033[1;33m"
-    LIGHT_BLUE = "\033[1;34m"
-    LIGHT_PURPLE = "\033[1;35m"
-    LIGHT_CYAN = "\033[1;36m"
-    LIGHT_WHITE = "\033[1;37m"
-    ORANGE = "\033[48;2;255;165m"
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 def MaeShows (theList):
     for k in theList:
