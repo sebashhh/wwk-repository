@@ -9,7 +9,6 @@ Created on Fri Nov 20 12:49:06 2020
 import cclib
 import numpy as np
 
-#GitHub test
 maeVersus= []
 osciVersus= []
 dipoleVersus= []
@@ -108,36 +107,66 @@ def ToGuissani(theName):
     homoValue.append(data.homos[0])
 
 #print(bondLeng)
-    print(maeVersus)
-    print(osciVersus)
-    print(dipoleVersus)
-    print(tranVersus)
-    print(homoValue)
-ToGuissani("indole-tddft-wb97x1.out")
-ToGuissani("indole-tddft-wb97x2.out")
+    #prints the values that would be parsed out manually to identify...
+    #...the La/Lb energy states
+    if len(maeVersus) == 2:
+
+        #print(maeVersus)
+        print(osciVersus)
+        #print(dipoleVersus)
+        #print(tranVersus)
+        #print(homoValue)
+ToGuissani("FuncsLSDA.log")
+ToGuissani("FuncsLSDA2nd.log")
 
 maeInd = []
 osciInd = []
 dipoleInd = []
 tranInd = []
 
-
+class bcolors:
+    CYAN = "\033[0;36m"
+    LIGHT_GRAY = "\033[0;37m"
+    DARK_GRAY = "\033[1;30m"
+    LIGHT_RED = "\033[1;31m"
+    LIGHT_GREEN = "\033[1;32m"
+    YELLOW = "\033[1;33m"
+    LIGHT_BLUE = "\033[1;34m"
+    LIGHT_PURPLE = "\033[1;35m"
+    LIGHT_CYAN = "\033[1;36m"
+    LIGHT_WHITE = "\033[1;37m"
+    ORANGE = "\033[48;2;255;165m"
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+def color (theString, theColor):
+    coloredString = ()
+    
 def MaeShows (theList):
     for k in theList:
         if k == True:
-            maeInd.append("La")
+            maeInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}") 
+
         else:
-            maeInd.append("Lb")
+            maeInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
 def OsciShows (theList):
    if theList[0] > theList[3]:
-        osciInd.append("La, Lb")
+        osciInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+        osciInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+
    else:
-        osciInd.append("Lb, La")
+        osciInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+        osciInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+
 def DipoleShows (theList):
      if theList[0] > theList[1]:
-        dipoleInd.append("La, Lb")
+        dipoleInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+        dipoleInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+
      else:
-        dipoleInd.append("Lb, La")
+        dipoleInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+        dipoleInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+
 def TranShows (theList):
 #print (theList[1])
 #print (homoValue[0] + 1)
@@ -153,22 +182,49 @@ def TranShows (theList):
         tranInd.append("Lb")
     else:
         tranInd.append("N/A")
+        
+#runs the functions that append to lists
 MaeShows(maeVersus)
 OsciShows(osciVersus)
 DipoleShows(dipoleVersus)
 TranShows(tranVersus)
+    
+es1 = "Energy State 1"
+es2 = "Energy State 2"
 
+maePrintedResult = ""
+maePrintedResult += (es1 + "'s structure is closest to " + maeInd[0] + " \n" +
+es2 + "'s structure is closest to " + maeInd[1])
+    
+osciPrintedResult = ""
+if (abs(osciVersus[0] - osciVersus[3]) < .0001):
+    osciPrintedResult += "Oscillator Strengths are too close." 
+    + " Optimization likely confused."
+else: 
+    osciPrintedResult += (es1 + "'s oscillation energy is closest to " + osciInd[0] + " \n"
+    + es2 + "'s oscillation energy is closest to " + osciInd[1] + "\n"
+    + es1 + "'s oscillator strength: " + str(osciVersus[0]) + "\n"
+    + es2 + "'s oscillator strength: " + str(osciVersus[3]) )
+dipolePrintedResult = ""
+if (abs(dipoleVersus[0] - dipoleVersus[1]) < .0001):
+    dipolePrintedResult += "Dipole Moments are too close." 
+    + " Optimization likely confused."
+else: 
+    dipolePrintedResult += (es1 + "'s dipole moment is closest to " + dipoleInd[0] + " \n"
+    + es2 + "'s dipole moment is closest to " + dipoleInd[1] + "\n"
+    + es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
+    + es2 + "'s dipole moment: " + str(dipoleVersus[1]) )
+tranPrintedResult = ""
 
 print("The four indicators tell us the identity of the indole's top two excited states")
-print("Energy State 1, Energy State 2")
-print("MAE indictates-- ")
-print(maeInd)
-print("Osci indictates-- ")
-print(osciInd)
-print("Dipole indictates-- ")
-print(dipoleInd)
-print("Tran indictates-- ")
+print(f"{bcolors.LIGHT_PURPLE + MAE indicator: {bcolors.ENDC}") 
+print(maePrintedResult)
+print(f"{bcolors.LIGHT_PURPLE}Oscillator Strength indicator:{bcolors.ENDC}") 
+print(osciPrintedResult)
+print(f"{bcolors.LIGHT_PURPLE}Dipole Moment indicator: {bcolors.ENDC}") 
+print(dipolePrintedResult)
+print(f"{bcolors.LIGHT_PURPLE}Transition Energy State indicator: {bcolors.ENDC}") 
 print(tranInd)
-
+    
 
 
