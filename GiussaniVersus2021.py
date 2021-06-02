@@ -109,10 +109,10 @@ def ToGuissani(theName):
 #print(bondLeng)
     #prints the values that would be parsed out manually to identify...
     #...the La/Lb energy states
-    if len(maeVersus) == 2:
+    #if len(maeVersus) == 2:
 
         #print(maeVersus)
-        print(osciVersus)
+        #print(osciVersus)
         #print(dipoleVersus)
         #print(tranVersus)
         #print(homoValue)
@@ -139,9 +139,7 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-def color (theString, theColor):
-    coloredString = ()
-    
+
 def MaeShows (theList):
     for k in theList:
         if k == True:
@@ -171,17 +169,17 @@ def TranShows (theList):
 #print (theList[1])
 #print (homoValue[0] + 1)
     if theList[0] == homoValue[0] and theList[1] == homoValue[0] + 1:
-        tranInd.append("La")
+        tranInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
     elif theList[0] == homoValue[0] - 1 and theList[1] == homoValue[0] + 1:
-        tranInd.append("Lb")
+        tranInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
     else:
-        tranInd.append("N/A")
+        tranInd.append(f"{bcolors.DARK_GRAY}N/A{bcolors.ENDC}")
     if theList[2] == homoValue[0] and theList[3] == homoValue[0] + 1:
-        tranInd.append("La")
+        tranInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
     elif theList[2] == homoValue[0] - 1 and theList[3] == homoValue[0] + 1:
-        tranInd.append("Lb")
+        tranInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
     else:
-        tranInd.append("N/A")
+        tranInd.append(f"{bcolors.DARK_GRAY}N/A{bcolors.ENDC}")
         
 #runs the functions that append to lists
 MaeShows(maeVersus)
@@ -214,17 +212,41 @@ else:
     + es2 + "'s dipole moment is closest to " + dipoleInd[1] + "\n"
     + es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
     + es2 + "'s dipole moment: " + str(dipoleVersus[1]) )
-tranPrintedResult = ""
 
-print("The four indicators tell us the identity of the indole's top two excited states")
-print(f"{bcolors.LIGHT_PURPLE + MAE indicator: {bcolors.ENDC}") 
+def transitionFormatter (state):
+    homo = int(homoValue[0])
+    stateString = ""
+    theState = int(state)
+    if (state >= homo + 1):
+        #AKA LUMO
+        stateString += "LUMO"
+        if (state > homo + 1):
+            #if the value is greater than the LUMO 
+            stateString += "+" + str(theState - homo + 1)
+    else:
+        #it is HOMO or lower
+        stateString += "HOMO"
+        if (state < homo):
+            stateString += "-" + str(homo - theState)
+    return stateString
+
+tranPrintedResult = ""
+tranPrintedResult += (es1 + "'s MO transition is closest to " + tranInd[0] + " \n"
++ es2 + "'s MO transition is closest to " + tranInd[1] + "\n"
++ es1 + "'s MO transition: " + transitionFormatter(tranVersus[0]) + 
+"->" + transitionFormatter(tranVersus[1]) + "\n"
++ es2 + "'s MO transition: " + transitionFormatter(tranVersus[2]) + 
+"->" + transitionFormatter(tranVersus[3]) )
+    
+print("Four indicators suggest the identity of the indole's top two excited states")
+print(f"{bcolors.LIGHT_PURPLE}MAE indicator:{bcolors.ENDC}") 
 print(maePrintedResult)
 print(f"{bcolors.LIGHT_PURPLE}Oscillator Strength indicator:{bcolors.ENDC}") 
 print(osciPrintedResult)
 print(f"{bcolors.LIGHT_PURPLE}Dipole Moment indicator: {bcolors.ENDC}") 
 print(dipolePrintedResult)
-print(f"{bcolors.LIGHT_PURPLE}Transition Energy State indicator: {bcolors.ENDC}") 
-print(tranInd)
+print(f"{bcolors.LIGHT_PURPLE}MO transition indicator: {bcolors.ENDC}") 
+print(tranPrintedResult)
     
 
 
