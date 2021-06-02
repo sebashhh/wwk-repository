@@ -120,7 +120,9 @@ def ToGuissani(theName):
 #populates the tranVersus list by fetching finding the highest coefficient
     coeffVersus= []
     lgstCoeff = 0
-
+    
+    #debug
+    #print(lastEtsecs)
 
     for i in lastEtsecs[0][0]:
         coeffVersus.append(i[2])
@@ -215,18 +217,16 @@ maePrintedResult += (es1 + "'s structure is closest to " + maeInd[0] + " \n" +
 es2 + "'s structure is closest to " + maeInd[1])
     
 osciPrintedResult = ""
-if (abs(osciVersus[0] - osciVersus[3]) < .0001):
-    osciPrintedResult += "Oscillator Strengths are too close." 
-    + " Optimization likely confused."
+if (abs(osciVersus[0] - osciVersus[3]) < .001):
+    osciPrintedResult += "Oscillator Strengths are too close. Optimization likely confused."
 else: 
     osciPrintedResult += (es1 + "'s oscillation energy is closest to " + osciInd[0] + " \n"
     + es2 + "'s oscillation energy is closest to " + osciInd[1] + "\n"
     + es1 + "'s oscillator strength: " + str(osciVersus[0]) + "\n"
     + es2 + "'s oscillator strength: " + str(osciVersus[3]) )
 dipolePrintedResult = ""
-if (abs(dipoleVersus[0] - dipoleVersus[1]) < .0001):
-    dipolePrintedResult += "Dipole Moments are too close." 
-    + " Optimization likely confused."
+if (abs(dipoleVersus[0] - dipoleVersus[1]) < .001):
+    dipolePrintedResult += "Dipole Moments are too close. Optimization likely confused."
 else: 
     dipolePrintedResult += (es1 + "'s dipole moment is closest to " + dipoleInd[0] + " \n"
     + es2 + "'s dipole moment is closest to " + dipoleInd[1] + "\n"
@@ -234,7 +234,13 @@ else:
     + es2 + "'s dipole moment: " + str(dipoleVersus[1]) )
 
 def transitionFormatter (state):
+    
+    #debug
+    #print("test:" + str(state))
     homo = int(homoValue[0])
+    
+    #debug
+    #print("test:" + str(homo))
     stateString = ""
     theState = int(state)
     if (state >= homo + 1):
@@ -254,9 +260,9 @@ tranPrintedResult = ""
 tranPrintedResult += (es1 + "'s MO transition is closest to " + tranInd[0] + " \n"
 + es2 + "'s MO transition is closest to " + tranInd[1] + "\n"
 + es1 + "'s MO transition: " + transitionFormatter(tranVersus[0]) + 
-"->" + transitionFormatter(tranVersus[1]) + "\n"
+f"{bcolors.LIGHT_RED}->{bcolors.ENDC}" + transitionFormatter(tranVersus[1]) + "\n"
 + es2 + "'s MO transition: " + transitionFormatter(tranVersus[2]) + 
-"->" + transitionFormatter(tranVersus[3]) )
+f"{bcolors.LIGHT_RED}->{bcolors.ENDC}" + transitionFormatter(tranVersus[3]) )
     
 print("Four indicators suggest the identity of the indole's top two excited states")
 print(f"{bcolors.LIGHT_PURPLE}MAE indicator:{bcolors.ENDC}") 
