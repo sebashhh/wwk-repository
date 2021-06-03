@@ -25,12 +25,18 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-    
+#tint colors a String inserted. It is more readable and can be autocompleted with Shift+Space.
+def tint(stringToInsert, color):
+    tintedString = f"{color}{stringToInsert}{bcolors.ENDC}".format(
+            color = color, stringToInsert = stringToInsert)
+    return tintedString
+
 listOfFiles = os.listdir('.')
 pattern = "*.log"
 fileChoices = []
 fileCounter = 0
-print(f"{bcolors.LIGHT_PURPLE}.log files present in directory:{bcolors.ENDC}")
+print(tint(".log files present in directory:", bcolors.LIGHT_PURPLE))
+
 for entry in listOfFiles:
     if fnmatch.fnmatch(entry, pattern):
             print (str(fileCounter) + ": " + entry)
@@ -68,8 +74,7 @@ zero = dict(zip(keys,zero))
 def ToGuissani(theName):
     filename=theName
     data = cclib.io.ccread(filename)
-   # print("There are %i atoms and %i MOs" % (data.natom, data.nmo))
-  #  print()
+    print("There are %i atoms and %i MOs" % (data.natom, data.nmo))
     data.atomcoords
     coords1= data.atomcoords[len(data.atomcoords)-1]
 #Automatically finds the bond lengths of the atom
@@ -121,17 +126,8 @@ def ToGuissani(theName):
     coeffVersus= []
     lgstCoeff = 0
     
-    #debug
-    #print(data.etsecs)
-    #lastEtsecs seems to be working as intended; the last optimization step is pulled from. 
-    #print(lastEtsecs)
-    print(lastEtsecs[0][0])
-    print(lastEtsecs[0][1])
-    print("second excited state transitions")
-    
     #if toGiussani has already been called on the first file
     if (len(tranVersus) == 2):
-        print("line 134")
         #for each guess at the transition in the first row
         for i in lastEtsecs[0][1]:
             #append the coefficient
@@ -141,68 +137,37 @@ def ToGuissani(theName):
                 lgstCoeff = element
         for j in lastEtsecs[0][1]:
             if j[2] == lgstCoeff:
-                print("line 158")
                 tranVersus.append(j[0][0])
                 tranVersus.append(j[1][0])
     else:
         #for each guess at the transition in the first row
         for i in lastEtsecs[0][0]:
             #append the coefficient
-            
-            #debug
-            #print("line140")
-            
             coeffVersus.append(i[2])
     #search for the highest
-    
-    #debug
-    print(coeffVersus)
-    print("coeffVersus")
-    #coeffVersus appears to be populated correctly 
-    
+
     for element in coeffVersus:
         if abs(element) > lgstCoeff:
             lgstCoeff = element
     #append the transition associated with the highest coefficient
     for j in lastEtsecs[0][0]:
-        #debug
-        print(lgstCoeff)
-        print("lgstCoeff")
-        print(j[2])
-        print("j[2]")
-        
         if j[2] == lgstCoeff:
-            print("line 158")
             tranVersus.append(j[0][0])
             tranVersus.append(j[1][0])
+            
 #finds the HOMO and stores it in HOMO value
     homoValue.append(data.homos[0])
-
-#print(bondLeng)
-    #prints the values that would be parsed out manually to identify...
-    #...the La/Lb energy states
-    #if len(maeVersus) == 2:
-
-        #print(maeVersus)
-        #print(osciVersus)
-        #print(dipoleVersus)
-        #print(tranVersus)
-        #print(homoValue)
         
 #runs the program
-print(f"{bcolors.LIGHT_GREEN}Type the number index of two optimization .log files to compare.{bcolors.ENDC}")
+print(tint("Type the number index of two optimization .log files to compare.", bcolors.LIGHT_GREEN))
 fileOne = int(input())
 print("Selected: " + fileChoices[fileOne]) 
 fileTwo = int(input())
 print("Selected: " + fileChoices[fileTwo] + "\n")
 
 ToGuissani(fileChoices[fileOne])
-#debug
-print(tranVersus)
-print("tranVersus at 174")
 ToGuissani(fileChoices[fileTwo])
-#debug
-print(tranVersus)
+
 maeInd = []
 osciInd = []
 dipoleInd = []
@@ -211,44 +176,40 @@ tranInd = []
 def MaeShows (theList):
     for k in theList:
         if k == True:
-            maeInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}") 
-
+            maeInd.append(tint("La", bcolors.YELLOW)) 
         else:
-            maeInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+            maeInd.append(tint("Lb", bcolors.CYAN))
+            
 def OsciShows (theList):
    if theList[0] > theList[3]:
-        osciInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
-        osciInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
-
+        osciInd.append(tint("La", bcolors.YELLOW))
+        osciInd.append(tint("Lb", bcolors.CYAN))
    else:
-        osciInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
-        osciInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+        osciInd.append(tint("Lb", bcolors.CYAN))
+        osciInd.append(tint("La", bcolors.YELLOW))
 
 def DipoleShows (theList):
      if theList[0] > theList[1]:
-        dipoleInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
-        dipoleInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+        dipoleInd.append(tint("La", bcolors.YELLOW))
+        dipoleInd.append(tint("Lb", bcolors.CYAN))
 
      else:
-        dipoleInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
-        dipoleInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+        dipoleInd.append(tint("Lb", bcolors.CYAN))
+        dipoleInd.append(tint("La", bcolors.YELLOW))
 
 def TranShows (theList):
-    #debug
-    print(theList)
-    print(homoValue[0])
     if theList[0] == homoValue[0] and theList[1] == homoValue[0] + 1:
-        tranInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+        tranInd.append(tint("La", bcolors.YELLOW))
     elif theList[0] == homoValue[0] - 1 and theList[1] == homoValue[0] + 1:
-        tranInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+        tranInd.append(tint("Lb", bcolors.CYAN))
     else:
-        tranInd.append(f"{bcolors.DARK_GRAY}N/A{bcolors.ENDC}")
+        tranInd.append(tint("N/A", bcolors.DARK_GRAY))
     if theList[2] == homoValue[0] and theList[3] == homoValue[0] + 1:
-        tranInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+        tranInd.append(tint("La", bcolors.YELLOW))
     elif theList[2] == homoValue[0] - 1 and theList[3] == homoValue[0] + 1:
-        tranInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+        tranInd.append(tint("Lb", bcolors.CYAN))
     else:
-        tranInd.append(f"{bcolors.DARK_GRAY}N/A{bcolors.ENDC}")
+        tranInd.append(tint("N/A", bcolors.DARK_GRAY))
         
 #runs the functions that append to lists
 MaeShows(maeVersus)
@@ -281,13 +242,7 @@ else:
     + es2 + "'s dipole moment: " + str(dipoleVersus[1]) )
 
 def transitionFormatter (state):
-    
-    #debug
-    #print("test:" + str(state))
     homo = int(homoValue[0])
-    
-    #debug
-    #print("test:" + str(homo))
     stateString = ""
     theState = int(state)
     if (state >= homo + 1):
@@ -307,18 +262,18 @@ tranPrintedResult = ""
 tranPrintedResult += (es1 + "'s MO transition is closest to " + tranInd[0] + " \n"
 + es2 + "'s MO transition is closest to " + tranInd[1] + "\n"
 + es1 + "'s MO transition: " + transitionFormatter(tranVersus[0]) + 
-f"{bcolors.LIGHT_RED}->{bcolors.ENDC}" + transitionFormatter(tranVersus[1]) + "\n"
+tint("->", bcolors.LIGHT_RED) + transitionFormatter(tranVersus[1]) + "\n"
 + es2 + "'s MO transition: " + transitionFormatter(tranVersus[2]) + 
-f"{bcolors.LIGHT_RED}->{bcolors.ENDC}" + transitionFormatter(tranVersus[3]) )
+tint("->", bcolors.LIGHT_RED) + transitionFormatter(tranVersus[3]) )
     
 print("Four indicators suggest the identity of the indole's top two excited states")
-print(f"{bcolors.LIGHT_PURPLE}MAE indicator:{bcolors.ENDC}") 
+print(tint("MAE indicator:", bcolors.LIGHT_PURPLE)) 
 print(maePrintedResult)
-print(f"{bcolors.LIGHT_PURPLE}Oscillator Strength indicator:{bcolors.ENDC}") 
+print(tint("Oscillator Strength indicator:", bcolors.LIGHT_PURPLE)) 
 print(osciPrintedResult)
-print(f"{bcolors.LIGHT_PURPLE}Dipole Moment indicator: {bcolors.ENDC}") 
+print(tint("Dipole Moment indicator:", bcolors.LIGHT_PURPLE)) 
 print(dipolePrintedResult)
-print(f"{bcolors.LIGHT_PURPLE}MO transition indicator: {bcolors.ENDC}") 
+print(tint("MO transition indicator:", bcolors.LIGHT_PURPLE)) 
 print(tranPrintedResult)
     
 
