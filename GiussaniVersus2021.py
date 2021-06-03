@@ -122,13 +122,33 @@ def ToGuissani(theName):
     lgstCoeff = 0
     
     #debug
-    #print(lastEtsecs)
-
-    for i in lastEtsecs[0][0]:
-        coeffVersus.append(i[2])
+    #print(data.etsecs)
+    #lastEtsecs seems to be working as intended; the last optimization step is pulled from. 
+    print(lastEtsecs)
+    print(lastEtsecs[0][0])
+    print(lastEtsecs[0][1])
+    #if toGiussani has already been called on the first file
+    if (len(tranVersus) == 2):
+        #for each guess at the transition in the first row
+        for i in lastEtsecs[0][1]:
+            #append the coefficient
+            coeffVersus.append(i[2])
+    else:
+        #for each guess at the transition in the first row
+        for i in lastEtsecs[0][0]:
+            #append the coefficient
+            coeffVersus.append(i[2])
+    #search for the highest
+    
+    #debug
+    print(coeffVersus)
+    print("coeffVersus")
+    #coeffVersus appears to be populated correctly 
+    
     for index in coeffVersus:
         if index > lgstCoeff:
             lgstCoeff = index
+    #append the transition associated with the highest coefficient
     for j in lastEtsecs[0][0]:
         if j[2] == lgstCoeff:
             tranVersus.append(j[0][0])
@@ -155,8 +175,12 @@ fileTwo = int(input())
 print("Selected: " + fileChoices[fileTwo] + "\n")
 
 ToGuissani(fileChoices[fileOne])
+#debug
+print(tranVersus)
+print("tranVersus at 174")
 ToGuissani(fileChoices[fileTwo])
-
+#debug
+print(tranVersus)
 maeInd = []
 osciInd = []
 dipoleInd = []
@@ -188,8 +212,9 @@ def DipoleShows (theList):
         dipoleInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
 
 def TranShows (theList):
-#print (theList[1])
-#print (homoValue[0] + 1)
+    #debug
+    print(theList)
+    print(homoValue[0])
     if theList[0] == homoValue[0] and theList[1] == homoValue[0] + 1:
         tranInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
     elif theList[0] == homoValue[0] - 1 and theList[1] == homoValue[0] + 1:
