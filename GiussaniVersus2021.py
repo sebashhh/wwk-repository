@@ -71,7 +71,7 @@ zero = dict(zip(keys,zero))
 def ToGuissani(theName):
     filename=theName
     data = cclib.io.ccread(filename)
-    print("There are %i atoms and %i MOs" % (data.natom, data.nmo))
+    print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + filename)
     data.atomcoords
     coords1= data.atomcoords[len(data.atomcoords)-1]
 #Automatically finds the bond lengths of the atom
@@ -266,7 +266,7 @@ tint("->", bcolors.LIGHT_RED) + transitionFormatter(tranVersus[1]) + "\n"
 + es2 + "'s MO transition: " + transitionFormatter(tranVersus[2]) + 
 tint("->", bcolors.LIGHT_RED) + transitionFormatter(tranVersus[3]) )
     
-print("Four indicators suggest the identity of the indole's top two excited states")
+print(" \nFour indicators suggest the identity of the indole's top two excited states")
 print(tint("MAE indicator:", bcolors.LIGHT_PURPLE)) 
 print(maePrintedResult)
 print(tint("Oscillator Strength indicator:", bcolors.LIGHT_PURPLE)) 
