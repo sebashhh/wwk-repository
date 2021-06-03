@@ -20,10 +20,7 @@ class bcolors:
     LIGHT_BLUE = "\033[1;34m"
     LIGHT_PURPLE = "\033[1;35m"
     LIGHT_CYAN = "\033[1;36m"
-    LIGHT_WHITE = "\033[1;37m"
-    ORANGE = "\033[48;2;255;165m"
     ENDC = '\033[0m'
-    BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 #tint colors a String inserted. It is more readable and can be autocompleted with Shift+Space.
 def tint(stringToInsert, color):
@@ -226,20 +223,23 @@ es2 + "'s structure is closest to " + maeInd[1])
     
 osciPrintedResult = ""
 if (abs(osciVersus[0] - osciVersus[3]) < .001):
-    osciPrintedResult += "Oscillator Strengths are too close. Optimization likely confused."
+    osciPrintedResult += "Oscillator Strengths are too close. Optimization likely confused. \n"
 else: 
     osciPrintedResult += (es1 + "'s oscillation energy is closest to " + osciInd[0] + " \n"
-    + es2 + "'s oscillation energy is closest to " + osciInd[1] + "\n"
-    + es1 + "'s oscillator strength: " + str(osciVersus[0]) + "\n"
+    + es2 + "'s oscillation energy is closest to " + osciInd[1] + "\n")
+
+osciPrintedResult += (es1 + "'s oscillator strength: " + str(osciVersus[0]) + "\n"
     + es2 + "'s oscillator strength: " + str(osciVersus[3]) )
+    
 dipolePrintedResult = ""
 if (abs(dipoleVersus[0] - dipoleVersus[1]) < .001):
     dipolePrintedResult += "Dipole Moments are too close. Optimization likely confused."
 else: 
     dipolePrintedResult += (es1 + "'s dipole moment is closest to " + dipoleInd[0] + " \n"
-    + es2 + "'s dipole moment is closest to " + dipoleInd[1] + "\n"
-    + es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
-    + es2 + "'s dipole moment: " + str(dipoleVersus[1]) )
+    + es2 + "'s dipole moment is closest to " + dipoleInd[1] + "\n")
+
+dipolePrintedResult += (es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
+                        + es2 + "'s dipole moment: " + str(dipoleVersus[1]))
 
 def transitionFormatter (state):
     homo = int(homoValue[0])
