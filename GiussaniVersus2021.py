@@ -124,19 +124,34 @@ def ToGuissani(theName):
     #debug
     #print(data.etsecs)
     #lastEtsecs seems to be working as intended; the last optimization step is pulled from. 
-    print(lastEtsecs)
+    #print(lastEtsecs)
     print(lastEtsecs[0][0])
     print(lastEtsecs[0][1])
+    print("second excited state transitions")
+    
     #if toGiussani has already been called on the first file
     if (len(tranVersus) == 2):
+        print("line 134")
         #for each guess at the transition in the first row
         for i in lastEtsecs[0][1]:
             #append the coefficient
             coeffVersus.append(i[2])
+        for element in coeffVersus:
+            if abs(element) > lgstCoeff:
+                lgstCoeff = element
+        for j in lastEtsecs[0][1]:
+            if j[2] == lgstCoeff:
+                print("line 158")
+                tranVersus.append(j[0][0])
+                tranVersus.append(j[1][0])
     else:
         #for each guess at the transition in the first row
         for i in lastEtsecs[0][0]:
             #append the coefficient
+            
+            #debug
+            #print("line140")
+            
             coeffVersus.append(i[2])
     #search for the highest
     
@@ -145,12 +160,19 @@ def ToGuissani(theName):
     print("coeffVersus")
     #coeffVersus appears to be populated correctly 
     
-    for index in coeffVersus:
-        if index > lgstCoeff:
-            lgstCoeff = index
+    for element in coeffVersus:
+        if abs(element) > lgstCoeff:
+            lgstCoeff = element
     #append the transition associated with the highest coefficient
     for j in lastEtsecs[0][0]:
+        #debug
+        print(lgstCoeff)
+        print("lgstCoeff")
+        print(j[2])
+        print("j[2]")
+        
         if j[2] == lgstCoeff:
+            print("line 158")
             tranVersus.append(j[0][0])
             tranVersus.append(j[1][0])
 #finds the HOMO and stores it in HOMO value
