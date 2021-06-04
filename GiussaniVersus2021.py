@@ -225,8 +225,8 @@ osciPrintedResult = ""
 if (abs(osciVersus[0] - osciVersus[3]) < .001):
     osciPrintedResult += "Oscillator Strengths are too close. Optimization likely confused. \n"
 else: 
-    osciPrintedResult += (es1 + "'s oscillation energy is closest to " + osciInd[0] + " \n"
-    + es2 + "'s oscillation energy is closest to " + osciInd[1] + "\n")
+    osciPrintedResult += (es1 + "'s oscillator strength is closest to " + osciInd[0] + " \n"
+    + es2 + "'s oscillator strength is closest to " + osciInd[1] + "\n")
 
 osciPrintedResult += (es1 + "'s oscillator strength: " + str(osciVersus[0]) + "\n"
     + es2 + "'s oscillator strength: " + str(osciVersus[3]) )
