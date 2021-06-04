@@ -10,6 +10,8 @@ import cclib
 import numpy as np
 import os, fnmatch
 
+#test commit 
+
 class bcolors:
     CYAN = "\033[0;36m"
     LIGHT_GRAY = "\033[0;37m"
@@ -120,8 +122,6 @@ def ToGuissani(theName):
 #breaks down Excited State Transition List
     lastEtsecs=[data.etsecs[-(6):-1]]
     
-    #debug
-    print(lastEtsecs)
 #populates the tranVersus list by fetching finding the highest coefficient
     coeffVersus= []
     lgstCoeff = 0
@@ -153,8 +153,6 @@ def ToGuissani(theName):
     #append the transition associated with the highest coefficient
         for j in lastEtsecs[0][0]:
             if j[2] == lgstCoeff:
-                print(lgstCoeff)
-                print("lgstCoeff")
                 
                 tranVersus.append(j[0][0])
                 tranVersus.append(j[1][0])
@@ -249,11 +247,7 @@ dipolePrintedResult += (es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
                         + es2 + "'s dipole moment: " + str(dipoleVersus[1]))
 
 def transitionFormatter (state):
-    print(state)
-    print("state")
     homo = int(homoValue[0])
-    print(homo)
-    print("homo")
     stateString = ""
     theState = int(state)
     if (state >= homo + 1):
