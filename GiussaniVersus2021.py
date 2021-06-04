@@ -119,6 +119,9 @@ def ToGuissani(theName):
 
 #breaks down Excited State Transition List
     lastEtsecs=[data.etsecs[-(6):-1]]
+    
+    #debug
+    print(lastEtsecs)
 #populates the tranVersus list by fetching finding the highest coefficient
     coeffVersus= []
     lgstCoeff = 0
@@ -130,7 +133,7 @@ def ToGuissani(theName):
             #append the coefficient
             coeffVersus.append(i[2])
         for element in coeffVersus:
-            if abs(element) > lgstCoeff:
+            if abs(element) > abs(lgstCoeff):
                 lgstCoeff = element
         for j in lastEtsecs[0][1]:
             if j[2] == lgstCoeff:
@@ -143,14 +146,18 @@ def ToGuissani(theName):
             coeffVersus.append(i[2])
     #search for the highest
 
-    for element in coeffVersus:
-        if abs(element) > lgstCoeff:
-            lgstCoeff = element
+        for element in coeffVersus:
+            if abs(element) > abs(lgstCoeff):
+                
+                lgstCoeff = element
     #append the transition associated with the highest coefficient
-    for j in lastEtsecs[0][0]:
-        if j[2] == lgstCoeff:
-            tranVersus.append(j[0][0])
-            tranVersus.append(j[1][0])
+        for j in lastEtsecs[0][0]:
+            if j[2] == lgstCoeff:
+                print(lgstCoeff)
+                print("lgstCoeff")
+                
+                tranVersus.append(j[0][0])
+                tranVersus.append(j[1][0])
             
 #finds the HOMO and stores it in HOMO value
     homoValue.append(data.homos[0])
@@ -242,7 +249,11 @@ dipolePrintedResult += (es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
                         + es2 + "'s dipole moment: " + str(dipoleVersus[1]))
 
 def transitionFormatter (state):
+    print(state)
+    print("state")
     homo = int(homoValue[0])
+    print(homo)
+    print("homo")
     stateString = ""
     theState = int(state)
     if (state >= homo + 1):
@@ -250,7 +261,7 @@ def transitionFormatter (state):
         stateString += "LUMO"
         if (state > homo + 1):
             #if the value is greater than the LUMO 
-            stateString += "+" + str(theState - homo + 1)
+            stateString += "+" + str(theState - (homo + 1))
     else:
         #it is HOMO or lower
         stateString += "HOMO"
