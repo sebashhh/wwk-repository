@@ -269,7 +269,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.5582
- Total energy for state  1:                  -360.40419343 au
+ Total energy for state  1:                  -360.40419343
     Multiplicity: Singlet
     Trans. Mom.:  0.4450 X  -0.5571 Y   0.0000 Z
     Strength   :     0.0567775279
@@ -277,14 +277,14 @@ $end
     D( 31) --> V(  1) amplitude =  0.8913
 
  Excited state   2: excitation energy (eV) =    4.7344
- Total energy for state  2:                  -360.39771613 au
+ Total energy for state  2:                  -360.39771613
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X   0.0000 Y   0.1079 Z
     Strength   :     0.0013496951
     D( 31) --> V(  2) amplitude =  0.9995
 
  Excited state   3: excitation energy (eV) =    4.7501
- Total energy for state  3:                  -360.39714129 au
+ Total energy for state  3:                  -360.39714129
     Multiplicity: Singlet
     Trans. Mom.:  0.3229 X   0.1302 Y  -0.0000 Z
     Strength   :     0.0141083914
@@ -648,14 +648,14 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.3074
- Total energy for state  1:                  -360.40905999 au
+ Total energy for state  1:                  -360.40905999
     Multiplicity: Singlet
     Trans. Mom.: -0.0000 X  -0.0000 Y  -0.0955 Z
     Strength   :     0.0009631106
     D( 31) --> V(  2) amplitude =  0.9995
 
  Excited state   2: excitation energy (eV) =    4.3598
- Total energy for state  2:                  -360.40713273 au
+ Total energy for state  2:                  -360.40713273
     Multiplicity: Singlet
     Trans. Mom.: -0.6463 X   0.5657 Y   0.0000 Z
     Strength   :     0.0787887400
@@ -664,7 +664,7 @@ $end
     D( 31) --> V(  3) amplitude =  0.2165
 
  Excited state   3: excitation energy (eV) =    4.7305
- Total energy for state  3:                  -360.39351037 au
+ Total energy for state  3:                  -360.39351037
     Multiplicity: Singlet
     Trans. Mom.:  0.0380 X  -0.1718 Y  -0.0000 Z
     Strength   :     0.0035902704
@@ -1027,7 +1027,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.0218
- Total energy for state  1:                  -360.41240207 au
+ Total energy for state  1:                  -360.41240207
     Multiplicity: Singlet
     Trans. Mom.:  0.5898 X  -0.5731 Y  -0.0000 Z
     Strength   :     0.0666320415
@@ -1035,14 +1035,14 @@ $end
     D( 31) --> V(  1) amplitude =  0.8992
 
  Excited state   2: excitation energy (eV) =    4.2019
- Total energy for state  2:                  -360.40578471 au
+ Total energy for state  2:                  -360.40578471
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X   0.0000 Y   0.0908 Z
     Strength   :     0.0008483236
     D( 31) --> V(  2) amplitude =  0.9995
 
  Excited state   3: excitation energy (eV) =    4.6446
- Total energy for state  3:                  -360.38951604 au
+ Total energy for state  3:                  -360.38951604
     Multiplicity: Singlet
     Trans. Mom.:  0.1157 X  -0.1627 Y   0.0000 Z
     Strength   :     0.0045347331
@@ -1407,7 +1407,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1708
- Total energy for state  1:                  -360.41151029 au
+ Total energy for state  1:                  -360.41151029
     Multiplicity: Singlet
     Trans. Mom.:  0.6008 X  -0.5646 Y  -0.0000 Z
     Strength   :     0.0694579639
@@ -1415,14 +1415,14 @@ $end
     D( 31) --> V(  1) amplitude =  0.8944
 
  Excited state   2: excitation energy (eV) =    4.2552
- Total energy for state  2:                  -360.40840858 au
+ Total energy for state  2:                  -360.40840858
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X  -0.0000 Y   0.0926 Z
     Strength   :     0.0008941199
     D( 31) --> V(  2) amplitude =  0.9995
 
  Excited state   3: excitation energy (eV) =    4.6743
- Total energy for state  3:                  -360.39300884 au
+ Total energy for state  3:                  -360.39300884
     Multiplicity: Singlet
     Trans. Mom.: -0.0545 X   0.1711 Y   0.0000 Z
     Strength   :     0.0036929296
@@ -1787,14 +1787,14 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1625
- Total energy for state  1:                  -360.41079869 au
+ Total energy for state  1:                  -360.41079869
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X  -0.0000 Y   0.0867 Z
     Strength   :     0.0007662621
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   2: excitation energy (eV) =    4.2854
- Total energy for state  2:                  -360.40628279 au
+ Total energy for state  2:                  -360.40628279
     Multiplicity: Singlet
     Trans. Mom.: -0.6644 X   0.5551 Y  -0.0000 Z
     Strength   :     0.0786858839
@@ -1803,7 +1803,7 @@ $end
     D( 31) --> V(  3) amplitude = -0.2267
 
  Excited state   3: excitation energy (eV) =    4.7128
- Total energy for state  3:                  -360.39057617 au
+ Total energy for state  3:                  -360.39057617
     Multiplicity: Singlet
     Trans. Mom.:  0.0926 X  -0.1658 Y  -0.0000 Z
     Strength   :     0.0041632605
@@ -2167,7 +2167,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1967
- Total energy for state  1:                  -360.40999523 au
+ Total energy for state  1:                  -360.40999523
     Multiplicity: Singlet
     Trans. Mom.: -0.6251 X   0.5619 Y   0.0000 Z
     Strength   :     0.0726370051
@@ -2175,14 +2175,14 @@ $end
     D( 31) --> V(  1) amplitude =  0.8925
 
  Excited state   2: excitation energy (eV) =    4.2113
- Total energy for state  2:                  -360.40945862 au
+ Total energy for state  2:                  -360.40945862
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X  -0.0000 Y   0.0898 Z
     Strength   :     0.0008313404
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   3: excitation energy (eV) =    4.6870
- Total energy for state  3:                  -360.39197640 au
+ Total energy for state  3:                  -360.39197640
     Multiplicity: Singlet
     Trans. Mom.: -0.0768 X   0.1671 Y  -0.0000 Z
     Strength   :     0.0038821913
@@ -2545,14 +2545,14 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1789
- Total energy for state  1:                  -360.41001496 au
+ Total energy for state  1:                  -360.41001496
     Multiplicity: Singlet
     Trans. Mom.: -0.0000 X   0.0000 Y   0.0874 Z
     Strength   :     0.0007823156
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   2: excitation energy (eV) =    4.2068
- Total energy for state  2:                  -360.40898952 au
+ Total energy for state  2:                  -360.40898952
     Multiplicity: Singlet
     Trans. Mom.:  0.6373 X  -0.5616 Y   0.0000 Z
     Strength   :     0.0743648621
@@ -2561,7 +2561,7 @@ $end
     D( 31) --> V(  3) amplitude =  0.2149
 
  Excited state   3: excitation energy (eV) =    4.6892
- Total energy for state  3:                  -360.39126044 au
+ Total energy for state  3:                  -360.39126044
     Multiplicity: Singlet
     Trans. Mom.: -0.0885 X   0.1657 Y  -0.0000 Z
     Strength   :     0.0040549174
@@ -2923,14 +2923,14 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1922
- Total energy for state  1:                  -360.40966750 au
+ Total energy for state  1:                  -360.40966750
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X  -0.0000 Y  -0.0883 Z
     Strength   :     0.0008011685
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   2: excitation energy (eV) =    4.1924
- Total energy for state  2:                  -360.40966068 au
+ Total energy for state  2:                  -360.40966068
     Multiplicity: Singlet
     Trans. Mom.: -0.6298 X   0.5609 Y  -0.0000 Z
     Strength   :     0.0730573166
@@ -2939,7 +2939,7 @@ $end
     D( 31) --> V(  3) amplitude =  0.2122
 
  Excited state   3: excitation energy (eV) =    4.6872
- Total energy for state  3:                  -360.39147954 au
+ Total energy for state  3:                  -360.39147954
     Multiplicity: Singlet
     Trans. Mom.:  0.0836 X  -0.1663 Y   0.0000 Z
     Strength   :     0.0039763641
@@ -3304,7 +3304,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    3.9200
- Total energy for state  1:                  -360.41610202 au
+ Total energy for state  1:                  -360.41610202
     Multiplicity: Singlet
     Trans. Mom.:  0.4928 X  -0.5272 Y  -0.0000 Z
     Strength   :     0.0500136051
@@ -3312,14 +3312,14 @@ $end
     D( 31) --> V(  1) amplitude =  0.9074
 
  Excited state   2: excitation energy (eV) =    4.4158
- Total energy for state  2:                  -360.39788045 au
+ Total energy for state  2:                  -360.39788045
     Multiplicity: Singlet
     Trans. Mom.: -0.0000 X  -0.0000 Y  -0.1053 Z
     Strength   :     0.0012002922
     D( 31) --> V(  2) amplitude =  0.9995
 
  Excited state   3: excitation energy (eV) =    4.6470
- Total energy for state  3:                  -360.38938289 au
+ Total energy for state  3:                  -360.38938289
     Multiplicity: Singlet
     Trans. Mom.:  0.0015 X  -0.1850 Y  -0.0000 Z
     Strength   :     0.0038959368
@@ -3683,7 +3683,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.0998
- Total energy for state  1:                  -360.41414119 au
+ Total energy for state  1:                  -360.41414119
     Multiplicity: Singlet
     Trans. Mom.:  0.5607 X  -0.5504 Y  -0.0000 Z
     Strength   :     0.0620049656
@@ -3691,14 +3691,14 @@ $end
     D( 31) --> V(  1) amplitude =  0.8989
 
  Excited state   2: excitation energy (eV) =    4.3301
- Total energy for state  2:                  -360.40567954 au
+ Total energy for state  2:                  -360.40567954
     Multiplicity: Singlet
     Trans. Mom.: -0.0000 X   0.0000 Y   0.0978 Z
     Strength   :     0.0010137995
     D( 31) --> V(  2) amplitude =  0.9995
 
  Excited state   3: excitation energy (eV) =    4.6699
- Total energy for state  3:                  -360.39319372 au
+ Total energy for state  3:                  -360.39319372
     Multiplicity: Singlet
     Trans. Mom.: -0.0346 X   0.1746 Y   0.0000 Z
     Strength   :     0.0036256890
@@ -4064,14 +4064,14 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.0140
- Total energy for state  1:                  -360.41215462 au
+ Total energy for state  1:                  -360.41215462
     Multiplicity: Singlet
     Trans. Mom.: -0.0000 X  -0.0000 Y   0.0800 Z
     Strength   :     0.0006299064
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   2: excitation energy (eV) =    4.3255
- Total energy for state  2:                  -360.40070536 au
+ Total energy for state  2:                  -360.40070536
     Multiplicity: Singlet
     Trans. Mom.: -0.7266 X   0.5722 Y  -0.0000 Z
     Strength   :     0.0906535730
@@ -4080,7 +4080,7 @@ $end
     D( 31) --> V(  3) amplitude = -0.2412
 
  Excited state   3: excitation energy (eV) =    4.7201
- Total energy for state  3:                  -360.38620598 au
+ Total energy for state  3:                  -360.38620598
     Multiplicity: Singlet
     Trans. Mom.:  0.1619 X  -0.1579 Y  -0.0000 Z
     Strength   :     0.0059134592
@@ -4444,7 +4444,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1938
- Total energy for state  1:                  -360.41061710 au
+ Total energy for state  1:                  -360.41061710
     Multiplicity: Singlet
     Trans. Mom.:  0.6166 X  -0.5620 Y   0.0000 Z
     Strength   :     0.0715117539
@@ -4452,14 +4452,14 @@ $end
     D( 31) --> V(  1) amplitude =  0.8929
 
  Excited state   2: excitation energy (eV) =    4.2363
- Total energy for state  2:                  -360.40905552 au
+ Total energy for state  2:                  -360.40905552
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X  -0.0000 Y  -0.0915 Z
     Strength   :     0.0008692076
     D( 31) --> V(  2) amplitude =  0.9995
 
  Excited state   3: excitation energy (eV) =    4.6843
- Total energy for state  3:                  -360.39259330 au
+ Total energy for state  3:                  -360.39259330
     Multiplicity: Singlet
     Trans. Mom.: -0.0697 X   0.1685 Y   0.0000 Z
     Strength   :     0.0038153946
@@ -4823,14 +4823,14 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1688
- Total energy for state  1:                  -360.41029858 au
+ Total energy for state  1:                  -360.41029858
     Multiplicity: Singlet
     Trans. Mom.: -0.0000 X   0.0000 Y  -0.0870 Z
     Strength   :     0.0007728973
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   2: excitation energy (eV) =    4.2215
- Total energy for state  2:                  -360.40836201 au
+ Total energy for state  2:                  -360.40836201
     Multiplicity: Singlet
     Trans. Mom.:  0.6439 X  -0.5645 Y  -0.0000 Z
     Strength   :     0.0758398796
@@ -4839,7 +4839,7 @@ $end
     D( 31) --> V(  3) amplitude =  0.2164
 
  Excited state   3: excitation energy (eV) =    4.6898
- Total energy for state  3:                  -360.39115341 au
+ Total energy for state  3:                  -360.39115341
     Multiplicity: Singlet
     Trans. Mom.: -0.0914 X   0.1655 Y   0.0000 Z
     Strength   :     0.0041070219
@@ -5202,7 +5202,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1929
- Total energy for state  1:                  -360.40988596 au
+ Total energy for state  1:                  -360.40988596
     Multiplicity: Singlet
     Trans. Mom.:  0.6277 X  -0.5614 Y   0.0000 Z
     Strength   :     0.0728409973
@@ -5210,14 +5210,14 @@ $end
     D( 31) --> V(  1) amplitude =  0.8924
 
  Excited state   2: excitation energy (eV) =    4.2025
- Total energy for state  2:                  -360.40953341 au
+ Total energy for state  2:                  -360.40953341
     Multiplicity: Singlet
     Trans. Mom.: -0.0000 X   0.0000 Y   0.0893 Z
     Strength   :     0.0008204145
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   3: excitation energy (eV) =    4.6865
- Total energy for state  3:                  -360.39174515 au
+ Total energy for state  3:                  -360.39174515
     Multiplicity: Singlet
     Trans. Mom.:  0.0814 X  -0.1667 Y  -0.0000 Z
     Strength   :     0.0039509496
@@ -5579,14 +5579,14 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1847
- Total energy for state  1:                  -360.40981331 au
+ Total energy for state  1:                  -360.40981331
     Multiplicity: Singlet
     Trans. Mom.: -0.0000 X   0.0000 Y  -0.0879 Z
     Strength   :     0.0007913579
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   2: excitation energy (eV) =    4.1961
- Total energy for state  2:                  -360.40939392 au
+ Total energy for state  2:                  -360.40939392
     Multiplicity: Singlet
     Trans. Mom.: -0.6328 X   0.5614 Y   0.0000 Z
     Strength   :     0.0735633429
@@ -5595,7 +5595,7 @@ $end
     D( 31) --> V(  3) amplitude = -0.2132
 
  Excited state   3: excitation energy (eV) =    4.6874
- Total energy for state  3:                  -360.39133853 au
+ Total energy for state  3:                  -360.39133853
     Multiplicity: Singlet
     Trans. Mom.:  0.0858 X  -0.1661 Y  -0.0000 Z
     Strength   :     0.0040132166
@@ -5956,7 +5956,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1893
- Total energy for state  1:                  -360.40971713 au
+ Total energy for state  1:                  -360.40971713
     Multiplicity: Singlet
     Trans. Mom.:  0.6291 X  -0.5604 Y  -0.0000 Z
     Strength   :     0.0728572485
@@ -5965,14 +5965,14 @@ $end
     D( 31) --> V(  3) amplitude =  0.2121
 
  Excited state   2: excitation energy (eV) =    4.1915
- Total energy for state  2:                  -360.40963843 au
+ Total energy for state  2:                  -360.40963843
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X  -0.0000 Y   0.0883 Z
     Strength   :     0.0007999016
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   3: excitation energy (eV) =    4.6867
- Total energy for state  3:                  -360.39143734 au
+ Total energy for state  3:                  -360.39143734
     Multiplicity: Singlet
     Trans. Mom.:  0.0836 X  -0.1664 Y   0.0000 Z
     Strength   :     0.0039816153
@@ -6333,14 +6333,14 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1864
- Total energy for state  1:                  -360.40970240 au
+ Total energy for state  1:                  -360.40970240
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X  -0.0000 Y   0.0878 Z
     Strength   :     0.0007903260
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   2: excitation energy (eV) =    4.1891
- Total energy for state  2:                  -360.40960517 au
+ Total energy for state  2:                  -360.40960517
     Multiplicity: Singlet
     Trans. Mom.:  0.6297 X  -0.5602 Y  -0.0000 Z
     Strength   :     0.0729050210
@@ -6349,7 +6349,7 @@ $end
     D( 31) --> V(  3) amplitude = -0.2123
 
  Excited state   3: excitation energy (eV) =    4.6869
- Total energy for state  3:                  -360.39130930 au
+ Total energy for state  3:                  -360.39130930
     Multiplicity: Singlet
     Trans. Mom.:  0.0844 X  -0.1663 Y  -0.0000 Z
     Strength   :     0.0039943387
@@ -6711,7 +6711,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1858
- Total energy for state  1:                  -360.40977442 au
+ Total energy for state  1:                  -360.40977442
     Multiplicity: Singlet
     Trans. Mom.:  0.6275 X  -0.5598 Y  -0.0000 Z
     Strength   :     0.0725202346
@@ -6719,14 +6719,14 @@ $end
     D( 31) --> V(  1) amplitude =  0.8927
 
  Excited state   2: excitation energy (eV) =    4.1904
- Total energy for state  2:                  -360.40960777 au
+ Total energy for state  2:                  -360.40960777
     Multiplicity: Singlet
     Trans. Mom.: -0.0000 X   0.0000 Y  -0.0880 Z
     Strength   :     0.0007946249
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   3: excitation energy (eV) =    4.6863
- Total energy for state  3:                  -360.39138176 au
+ Total energy for state  3:                  -360.39138176
     Multiplicity: Singlet
     Trans. Mom.: -0.0831 X   0.1666 Y  -0.0000 Z
     Strength   :     0.0039792031
@@ -7088,7 +7088,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1868
- Total energy for state  1:                  -360.40967985 au
+ Total energy for state  1:                  -360.40967985
     Multiplicity: Singlet
     Trans. Mom.:  0.6285 X  -0.5598 Y   0.0000 Z
     Strength   :     0.0726535991
@@ -7096,14 +7096,14 @@ $end
     D( 31) --> V(  1) amplitude =  0.8926
 
  Excited state   2: excitation energy (eV) =    4.1873
- Total energy for state  2:                  -360.40966127 au
+ Total energy for state  2:                  -360.40966127
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X  -0.0000 Y  -0.0878 Z
     Strength   :     0.0007902754
     D( 31) --> V(  2) amplitude =  0.9994
 
  Excited state   3: excitation energy (eV) =    4.6870
- Total energy for state  3:                  -360.39130061 au
+ Total energy for state  3:                  -360.39130061
     Multiplicity: Singlet
     Trans. Mom.:  0.0838 X  -0.1663 Y  -0.0000 Z
     Strength   :     0.0039837661
@@ -7469,14 +7469,14 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    3.6001
- Total energy for state  1:                  -360.41539913 au
+ Total energy for state  1:                  -360.41539913
     Multiplicity: Singlet
     Trans. Mom.:  0.0000 X  -0.0000 Y  -0.0549 Z
     Strength   :     0.0002658857
     D( 31) --> V(  2) amplitude =  0.9991
 
  Excited state   2: excitation energy (eV) =    4.3125
- Total energy for state  2:                  -360.38922077 au
+ Total energy for state  2:                  -360.38922077
     Multiplicity: Singlet
     Trans. Mom.: -0.7529 X   0.5572 Y  -0.0000 Z
     Strength   :     0.0926903061
@@ -7485,7 +7485,7 @@ $end
     D( 31) --> V(  3) amplitude = -0.2527
 
  Excited state   3: excitation energy (eV) =    4.7296
- Total energy for state  3:                  -360.37388915 au
+ Total energy for state  3:                  -360.37388915
     Multiplicity: Singlet
     Trans. Mom.:  0.2047 X  -0.1489 Y  -0.0000 Z
     Strength   :     0.0074229237
@@ -7850,14 +7850,14 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.0812
- Total energy for state  1:                  -360.41138010 au
+ Total energy for state  1:                  -360.41138010
     Multiplicity: Singlet
     Trans. Mom.: -0.0000 X  -0.0000 Y  -0.0793 Z
     Strength   :     0.0006291837
     D( 31) --> V(  2) amplitude =  0.9993
 
  Excited state   2: excitation energy (eV) =    4.2322
- Total energy for state  2:                  -360.40582898 au
+ Total energy for state  2:                  -360.40582898
     Multiplicity: Singlet
     Trans. Mom.:  0.6557 X  -0.5632 Y   0.0000 Z
     Strength   :     0.0774796835
@@ -7866,7 +7866,7 @@ $end
     D( 31) --> V(  3) amplitude =  0.2194
 
  Excited state   3: excitation energy (eV) =    4.6955
- Total energy for state  3:                  -360.38880516 au
+ Total energy for state  3:                  -360.38880516
     Multiplicity: Singlet
     Trans. Mom.:  0.1022 X  -0.1630 Y  -0.0000 Z
     Strength   :     0.0042575976
@@ -8232,7 +8232,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    3.9852
- Total energy for state  1:                  -360.41389595 au
+ Total energy for state  1:                  -360.41389595
     Multiplicity: Singlet
     Trans. Mom.: -0.5155 X   0.5397 Y  -0.0000 Z
     Strength   :     0.0543847096
@@ -8240,7 +8240,7 @@ $end
     D( 31) --> V(  1) amplitude =  0.9028
 
  Excited state   2: excitation energy (eV) =    4.6470
- Total energy for state  2:                  -360.38957498 au
+ Total energy for state  2:                  -360.38957498
     Multiplicity: Singlet
     Trans. Mom.:  0.0219 X  -0.1873 Y  -0.0000 Z
     Strength   :     0.0040478711
@@ -8248,7 +8248,7 @@ $end
     D( 31) --> V(  2) amplitude =  0.6705
 
  Excited state   3: excitation energy (eV) =    5.5954
- Total energy for state  3:                  -360.35472155 au
+ Total energy for state  3:                  -360.35472155
     Multiplicity: Singlet
     Trans. Mom.: -0.5520 X   0.4310 Y  -0.0000 Z
     Strength   :     0.0672264335
@@ -8617,7 +8617,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.1824
- Total energy for state  1:                  -360.41330490 au
+ Total energy for state  1:                  -360.41330490
     Multiplicity: Singlet
     Trans. Mom.: -0.5048 X   0.5616 Y  -0.0000 Z
     Strength   :     0.0584323230
@@ -8625,7 +8625,7 @@ $end
     D( 31) --> V(  1) amplitude =  0.8954
 
  Excited state   2: excitation energy (eV) =    4.5849
- Total energy for state  2:                  -360.39851312 au
+ Total energy for state  2:                  -360.39851312
     Multiplicity: Singlet
     Trans. Mom.: -0.1163 X  -0.2002 Y   0.0000 Z
     Strength   :     0.0060202072
@@ -8633,7 +8633,7 @@ $end
     D( 31) --> V(  2) amplitude =  0.6548
 
  Excited state   3: excitation energy (eV) =    5.6077
- Total energy for state  3:                  -360.36092804 au
+ Total energy for state  3:                  -360.36092804
     Multiplicity: Singlet
     Trans. Mom.: -0.5722 X   0.2909 Y  -0.0000 Z
     Strength   :     0.0566025388
@@ -9001,7 +9001,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.4513
- Total energy for state  1:                  -360.40496085 au
+ Total energy for state  1:                  -360.40496085
     Multiplicity: Singlet
     Trans. Mom.:  0.4064 X  -0.6205 Y  -0.0000 Z
     Strength   :     0.0600014593
@@ -9009,7 +9009,7 @@ $end
     D( 31) --> V(  1) amplitude =  0.8841
 
  Excited state   2: excitation energy (eV) =    4.5384
- Total energy for state  2:                  -360.40176051 au
+ Total energy for state  2:                  -360.40176051
     Multiplicity: Singlet
     Trans. Mom.:  0.4042 X   0.0732 Y  -0.0000 Z
     Strength   :     0.0187651714
@@ -9017,7 +9017,7 @@ $end
     D( 31) --> V(  2) amplitude = -0.6589
 
  Excited state   3: excitation energy (eV) =    5.6509
- Total energy for state  3:                  -360.36087667 au
+ Total energy for state  3:                  -360.36087667
     Multiplicity: Singlet
     Trans. Mom.:  0.5666 X  -0.0482 Y  -0.0000 Z
     Strength   :     0.0447653942
@@ -9383,7 +9383,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.4353
- Total energy for state  1:                  -360.40571334 au
+ Total energy for state  1:                  -360.40571334
     Multiplicity: Singlet
     Trans. Mom.:  0.5513 X  -0.5634 Y   0.0000 Z
     Strength   :     0.0675195583
@@ -9392,7 +9392,7 @@ $end
     D( 31) --> V(  2) amplitude = -0.2271
 
  Excited state   2: excitation energy (eV) =    4.5380
- Total energy for state  2:                  -360.40193737 au
+ Total energy for state  2:                  -360.40193737
     Multiplicity: Singlet
     Trans. Mom.:  0.1988 X   0.2555 Y   0.0000 Z
     Strength   :     0.0116529625
@@ -9400,7 +9400,7 @@ $end
     D( 31) --> V(  2) amplitude = -0.6260
 
  Excited state   3: excitation energy (eV) =    5.6523
- Total energy for state  3:                  -360.36099017 au
+ Total energy for state  3:                  -360.36099017
     Multiplicity: Singlet
     Trans. Mom.:  0.6707 X  -0.0367 Y   0.0000 Z
     Strength   :     0.0624758311
@@ -9766,7 +9766,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.4412
- Total energy for state  1:                  -360.40576521 au
+ Total energy for state  1:                  -360.40576521
     Multiplicity: Singlet
     Trans. Mom.:  0.5022 X  -0.5992 Y   0.0000 Z
     Strength   :     0.0665044651
@@ -9774,7 +9774,7 @@ $end
     D( 31) --> V(  1) amplitude =  0.8895
 
  Excited state   2: excitation energy (eV) =    4.5392
- Total energy for state  2:                  -360.40216228 au
+ Total energy for state  2:                  -360.40216228
     Multiplicity: Singlet
     Trans. Mom.: -0.2949 X  -0.1709 Y   0.0000 Z
     Strength   :     0.0129224160
@@ -9782,7 +9782,7 @@ $end
     D( 31) --> V(  2) amplitude =  0.6512
 
  Excited state   3: excitation energy (eV) =    5.6468
- Total energy for state  3:                  -360.36145874 au
+ Total energy for state  3:                  -360.36145874
     Multiplicity: Singlet
     Trans. Mom.:  0.6065 X  -0.0584 Y   0.0000 Z
     Strength   :     0.0513547342
@@ -10147,7 +10147,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.4529
- Total energy for state  1:                  -360.40515214 au
+ Total energy for state  1:                  -360.40515214
     Multiplicity: Singlet
     Trans. Mom.: -0.4977 X   0.6014 Y  -0.0000 Z
     Strength   :     0.0664814575
@@ -10155,7 +10155,7 @@ $end
     D( 31) --> V(  1) amplitude =  0.8891
 
  Excited state   2: excitation energy (eV) =    4.5339
- Total energy for state  2:                  -360.40217802 au
+ Total energy for state  2:                  -360.40217802
     Multiplicity: Singlet
     Trans. Mom.: -0.3063 X  -0.1639 Y   0.0000 Z
     Strength   :     0.0134046650
@@ -10163,7 +10163,7 @@ $end
     D( 31) --> V(  2) amplitude =  0.6525
 
  Excited state   3: excitation energy (eV) =    5.6489
- Total energy for state  3:                  -360.36120142 au
+ Total energy for state  3:                  -360.36120142
     Multiplicity: Singlet
     Trans. Mom.: -0.6126 X   0.0400 Y  -0.0000 Z
     Strength   :     0.0521552927
@@ -10527,7 +10527,7 @@ $end
  ---------------------------------------------------
 
  Excited state   1: excitation energy (eV) =    4.4537
- Total energy for state  1:                  -360.40514061 au
+ Total energy for state  1:                  -360.40514061
     Multiplicity: Singlet
     Trans. Mom.: -0.5006 X   0.6010 Y  -0.0000 Z
     Strength   :     0.0667569038
@@ -10535,7 +10535,7 @@ $end
     D( 31) --> V(  1) amplitude =  0.8890
 
  Excited state   2: excitation energy (eV) =    4.5343
- Total energy for state  2:                  -360.40217991 au
+ Total energy for state  2:                  -360.40217991
     Multiplicity: Singlet
     Trans. Mom.: -0.3024 X  -0.1661 Y  -0.0000 Z
     Strength   :     0.0132233646
@@ -10543,7 +10543,7 @@ $end
     D( 31) --> V(  2) amplitude = -0.6524
 
  Excited state   3: excitation energy (eV) =    5.6492
- Total energy for state  3:                  -360.36120665 au
+ Total energy for state  3:                  -360.36120665
     Multiplicity: Singlet
     Trans. Mom.: -0.6127 X   0.0401 Y  -0.0000 Z
     Strength   :     0.0521864167
