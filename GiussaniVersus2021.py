@@ -9,9 +9,13 @@ Created on Fri Nov 20 12:49:06 2020
 import cclib
 import numpy as np
 import os, fnmatch
+#import sys
 
-#test commit 
-
+#if not sys.warnoptions:
+    #import warnings
+    #warnings.simplefilter("ignore") # Change the filter in this process
+    
+    
 class bcolors:
     CYAN = "\033[0;36m"
     LIGHT_GRAY = "\033[0;37m"
