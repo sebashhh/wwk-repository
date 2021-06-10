@@ -1,0 +1,4 @@
+Q-Chem output files shoudln't have to be trimmed any longer: 
+Now with the newest edition of Anaconda and cclib, the warnings when the 
+geometry updates are suppressed and the "au" keyword doesn't cause any
+issue.

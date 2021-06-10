@@ -42,7 +42,7 @@ print(tint(".log files present in directory:", bcolors.LIGHT_PURPLE))
 
 for entry in listOfFiles:
     if fnmatch.fnmatch(entry, pattern):
-            print (str(fileCounter) + ": " + entry)
+            print (tint(str(fileCounter), bcolors.LIGHT_CYAN) + ": " + entry)
             fileCounter += 1
             fileChoices.append(entry)
 print()
