@@ -9,7 +9,13 @@ Created on Fri Nov 20 12:49:06 2020
 import cclib
 import numpy as np
 import os, fnmatch
+#import sys
 
+#if not sys.warnoptions:
+    #import warnings
+    #warnings.simplefilter("ignore") # Change the filter in this process
+    
+    
 class bcolors:
     CYAN = "\033[0;36m"
     LIGHT_GRAY = "\033[0;37m"
@@ -119,6 +125,7 @@ def ToGuissani(theName):
 
 #breaks down Excited State Transition List
     lastEtsecs=[data.etsecs[-(6):-1]]
+    
 #populates the tranVersus list by fetching finding the highest coefficient
     coeffVersus= []
     lgstCoeff = 0
@@ -130,7 +137,7 @@ def ToGuissani(theName):
             #append the coefficient
             coeffVersus.append(i[2])
         for element in coeffVersus:
-            if abs(element) > lgstCoeff:
+            if abs(element) > abs(lgstCoeff):
                 lgstCoeff = element
         for j in lastEtsecs[0][1]:
             if j[2] == lgstCoeff:
@@ -143,14 +150,16 @@ def ToGuissani(theName):
             coeffVersus.append(i[2])
     #search for the highest
 
-    for element in coeffVersus:
-        if abs(element) > lgstCoeff:
-            lgstCoeff = element
+        for element in coeffVersus:
+            if abs(element) > abs(lgstCoeff):
+                
+                lgstCoeff = element
     #append the transition associated with the highest coefficient
-    for j in lastEtsecs[0][0]:
-        if j[2] == lgstCoeff:
-            tranVersus.append(j[0][0])
-            tranVersus.append(j[1][0])
+        for j in lastEtsecs[0][0]:
+            if j[2] == lgstCoeff:
+                
+                tranVersus.append(j[0][0])
+                tranVersus.append(j[1][0])
             
 #finds the HOMO and stores it in HOMO value
     homoValue.append(data.homos[0])
@@ -225,8 +234,8 @@ osciPrintedResult = ""
 if (abs(osciVersus[0] - osciVersus[3]) < .001):
     osciPrintedResult += "Oscillator Strengths are too close. Optimization likely confused. \n"
 else: 
-    osciPrintedResult += (es1 + "'s oscillation energy is closest to " + osciInd[0] + " \n"
-    + es2 + "'s oscillation energy is closest to " + osciInd[1] + "\n")
+    osciPrintedResult += (es1 + "'s oscillator strength is closest to " + osciInd[0] + " \n"
+    + es2 + "'s oscillator strength is closest to " + osciInd[1] + "\n")
 
 osciPrintedResult += (es1 + "'s oscillator strength: " + str(osciVersus[0]) + "\n"
     + es2 + "'s oscillator strength: " + str(osciVersus[3]) )
@@ -250,7 +259,7 @@ def transitionFormatter (state):
         stateString += "LUMO"
         if (state > homo + 1):
             #if the value is greater than the LUMO 
-            stateString += "+" + str(theState - homo + 1)
+            stateString += "+" + str(theState - (homo + 1))
     else:
         #it is HOMO or lower
         stateString += "HOMO"
