@@ -8,7 +8,44 @@ Created on Fri Nov 20 12:49:06 2020
 #Possible future version could quantitatively say when values are too close to discern which way or the other
 import cclib
 import numpy as np
+import os, fnmatch
+#import sys
 
+#if not sys.warnoptions:
+    #import warnings
+    #warnings.simplefilter("ignore") # Change the filter in this process
+    
+    
+class bcolors:
+    CYAN = "\033[0;36m"
+    LIGHT_GRAY = "\033[0;37m"
+    DARK_GRAY = "\033[1;30m"
+    LIGHT_RED = "\033[1;31m"
+    LIGHT_GREEN = "\033[1;32m"
+    YELLOW = "\033[1;33m"
+    LIGHT_BLUE = "\033[1;34m"
+    LIGHT_PURPLE = "\033[1;35m"
+    LIGHT_CYAN = "\033[1;36m"
+    ENDC = '\033[0m'
+    UNDERLINE = '\033[4m'
+#tint colors a String inserted. It is more readable and can be autocompleted with Shift+Space.
+def tint(stringToInsert, color):
+    tintedString = f"{color}{stringToInsert}{bcolors.ENDC}".format(
+            color = color, stringToInsert = stringToInsert)
+    return tintedString
+
+listOfFiles = os.listdir('.')
+pattern = "*.log"
+fileChoices = []
+fileCounter = 0
+print(tint(".log files present in directory:", bcolors.LIGHT_PURPLE))
+
+for entry in listOfFiles:
+    if fnmatch.fnmatch(entry, pattern):
+            print (str(fileCounter) + ": " + entry)
+            fileCounter += 1
+            fileChoices.append(entry)
+print()
 maeVersus= []
 osciVersus= []
 dipoleVersus= []
@@ -40,8 +77,7 @@ zero = dict(zip(keys,zero))
 def ToGuissani(theName):
     filename=theName
     data = cclib.io.ccread(filename)
-   # print("There are %i atoms and %i MOs" % (data.natom, data.nmo))
-  #  print()
+    print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + filename)
     data.atomcoords
     coords1= data.atomcoords[len(data.atomcoords)-1]
 #Automatically finds the bond lengths of the atom
@@ -89,97 +125,97 @@ def ToGuissani(theName):
 
 #breaks down Excited State Transition List
     lastEtsecs=[data.etsecs[-(6):-1]]
+    
 #populates the tranVersus list by fetching finding the highest coefficient
     coeffVersus= []
     lgstCoeff = 0
+    
+    #if toGiussani has already been called on the first file
+    if (len(tranVersus) == 2):
+        #for each guess at the transition in the first row
+        for i in lastEtsecs[0][1]:
+            #append the coefficient
+            coeffVersus.append(i[2])
+        for element in coeffVersus:
+            if abs(element) > abs(lgstCoeff):
+                lgstCoeff = element
+        for j in lastEtsecs[0][1]:
+            if j[2] == lgstCoeff:
+                tranVersus.append(j[0][0])
+                tranVersus.append(j[1][0])
+    else:
+        #for each guess at the transition in the first row
+        for i in lastEtsecs[0][0]:
+            #append the coefficient
+            coeffVersus.append(i[2])
+    #search for the highest
 
-
-    for i in lastEtsecs[0][0]:
-        coeffVersus.append(i[2])
-    for index in coeffVersus:
-        if index > lgstCoeff:
-            lgstCoeff = index
-    for j in lastEtsecs[0][0]:
-        if j[2] == lgstCoeff:
-            tranVersus.append(j[0][0])
-            tranVersus.append(j[1][0])
+        for element in coeffVersus:
+            if abs(element) > abs(lgstCoeff):
+                
+                lgstCoeff = element
+    #append the transition associated with the highest coefficient
+        for j in lastEtsecs[0][0]:
+            if j[2] == lgstCoeff:
+                
+                tranVersus.append(j[0][0])
+                tranVersus.append(j[1][0])
+            
 #finds the HOMO and stores it in HOMO value
     homoValue.append(data.homos[0])
+        
+#runs the program
+print(tint("Type the number index of two optimization .log files to compare.", bcolors.LIGHT_GREEN))
+fileOne = int(input())
+print("Selected: " + fileChoices[fileOne]) 
+fileTwo = int(input())
+print("Selected: " + fileChoices[fileTwo] + "\n")
 
-#print(bondLeng)
-    #prints the values that would be parsed out manually to identify...
-    #...the La/Lb energy states
-    #if len(maeVersus) == 2:
-
-        #print(maeVersus)
-        #print(osciVersus)
-        #print(dipoleVersus)
-        #print(tranVersus)
-        #print(homoValue)
-ToGuissani("FuncsLSDA.log")
-ToGuissani("FuncsLSDA2nd.log")
+ToGuissani(fileChoices[fileOne])
+ToGuissani(fileChoices[fileTwo])
 
 maeInd = []
 osciInd = []
 dipoleInd = []
 tranInd = []
 
-class bcolors:
-    CYAN = "\033[0;36m"
-    LIGHT_GRAY = "\033[0;37m"
-    DARK_GRAY = "\033[1;30m"
-    LIGHT_RED = "\033[1;31m"
-    LIGHT_GREEN = "\033[1;32m"
-    YELLOW = "\033[1;33m"
-    LIGHT_BLUE = "\033[1;34m"
-    LIGHT_PURPLE = "\033[1;35m"
-    LIGHT_CYAN = "\033[1;36m"
-    LIGHT_WHITE = "\033[1;37m"
-    ORANGE = "\033[48;2;255;165m"
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-
 def MaeShows (theList):
     for k in theList:
         if k == True:
-            maeInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}") 
-
+            maeInd.append(tint("La", bcolors.YELLOW)) 
         else:
-            maeInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+            maeInd.append(tint("Lb", bcolors.CYAN))
+            
 def OsciShows (theList):
    if theList[0] > theList[3]:
-        osciInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
-        osciInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
-
+        osciInd.append(tint("La", bcolors.YELLOW))
+        osciInd.append(tint("Lb", bcolors.CYAN))
    else:
-        osciInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
-        osciInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+        osciInd.append(tint("Lb", bcolors.CYAN))
+        osciInd.append(tint("La", bcolors.YELLOW))
 
 def DipoleShows (theList):
      if theList[0] > theList[1]:
-        dipoleInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
-        dipoleInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+        dipoleInd.append(tint("La", bcolors.YELLOW))
+        dipoleInd.append(tint("Lb", bcolors.CYAN))
 
      else:
-        dipoleInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
-        dipoleInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+        dipoleInd.append(tint("Lb", bcolors.CYAN))
+        dipoleInd.append(tint("La", bcolors.YELLOW))
 
 def TranShows (theList):
-#print (theList[1])
-#print (homoValue[0] + 1)
     if theList[0] == homoValue[0] and theList[1] == homoValue[0] + 1:
-        tranInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+        tranInd.append(tint("La", bcolors.YELLOW))
     elif theList[0] == homoValue[0] - 1 and theList[1] == homoValue[0] + 1:
-        tranInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+        tranInd.append(tint("Lb", bcolors.CYAN))
     else:
-        tranInd.append(f"{bcolors.DARK_GRAY}N/A{bcolors.ENDC}")
+        tranInd.append(tint("N/A", bcolors.DARK_GRAY))
     if theList[2] == homoValue[0] and theList[3] == homoValue[0] + 1:
-        tranInd.append(f"{bcolors.YELLOW}La{bcolors.ENDC}")
+        tranInd.append(tint("La", bcolors.YELLOW))
     elif theList[2] == homoValue[0] - 1 and theList[3] == homoValue[0] + 1:
-        tranInd.append(f"{bcolors.CYAN}Lb{bcolors.ENDC}")
+        tranInd.append(tint("Lb", bcolors.CYAN))
     else:
-        tranInd.append(f"{bcolors.DARK_GRAY}N/A{bcolors.ENDC}")
+        tranInd.append(tint("N/A", bcolors.DARK_GRAY))
         
 #runs the functions that append to lists
 MaeShows(maeVersus)
@@ -195,23 +231,24 @@ maePrintedResult += (es1 + "'s structure is closest to " + maeInd[0] + " \n" +
 es2 + "'s structure is closest to " + maeInd[1])
     
 osciPrintedResult = ""
-if (abs(osciVersus[0] - osciVersus[3]) < .0001):
-    osciPrintedResult += "Oscillator Strengths are too close." 
-    + " Optimization likely confused."
+if (abs(osciVersus[0] - osciVersus[3]) < .001):
+    osciPrintedResult += "Oscillator Strengths are too close. Optimization likely confused. \n"
 else: 
-    osciPrintedResult += (es1 + "'s oscillation energy is closest to " + osciInd[0] + " \n"
-    + es2 + "'s oscillation energy is closest to " + osciInd[1] + "\n"
-    + es1 + "'s oscillator strength: " + str(osciVersus[0]) + "\n"
+    osciPrintedResult += (es1 + "'s oscillator strength is closest to " + osciInd[0] + " \n"
+    + es2 + "'s oscillator strength is closest to " + osciInd[1] + "\n")
+
+osciPrintedResult += (es1 + "'s oscillator strength: " + str(osciVersus[0]) + "\n"
     + es2 + "'s oscillator strength: " + str(osciVersus[3]) )
+    
 dipolePrintedResult = ""
-if (abs(dipoleVersus[0] - dipoleVersus[1]) < .0001):
-    dipolePrintedResult += "Dipole Moments are too close." 
-    + " Optimization likely confused."
+if (abs(dipoleVersus[0] - dipoleVersus[1]) < .001):
+    dipolePrintedResult += "Dipole Moments are too close. Optimization likely confused."
 else: 
     dipolePrintedResult += (es1 + "'s dipole moment is closest to " + dipoleInd[0] + " \n"
-    + es2 + "'s dipole moment is closest to " + dipoleInd[1] + "\n"
-    + es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
-    + es2 + "'s dipole moment: " + str(dipoleVersus[1]) )
+    + es2 + "'s dipole moment is closest to " + dipoleInd[1] + "\n")
+
+dipolePrintedResult += (es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
+                        + es2 + "'s dipole moment: " + str(dipoleVersus[1]))
 
 def transitionFormatter (state):
     homo = int(homoValue[0])
@@ -222,7 +259,7 @@ def transitionFormatter (state):
         stateString += "LUMO"
         if (state > homo + 1):
             #if the value is greater than the LUMO 
-            stateString += "+" + str(theState - homo + 1)
+            stateString += "+" + str(theState - (homo + 1))
     else:
         #it is HOMO or lower
         stateString += "HOMO"
@@ -234,18 +271,18 @@ tranPrintedResult = ""
 tranPrintedResult += (es1 + "'s MO transition is closest to " + tranInd[0] + " \n"
 + es2 + "'s MO transition is closest to " + tranInd[1] + "\n"
 + es1 + "'s MO transition: " + transitionFormatter(tranVersus[0]) + 
-"->" + transitionFormatter(tranVersus[1]) + "\n"
+tint("->", bcolors.LIGHT_RED) + transitionFormatter(tranVersus[1]) + "\n"
 + es2 + "'s MO transition: " + transitionFormatter(tranVersus[2]) + 
-"->" + transitionFormatter(tranVersus[3]) )
+tint("->", bcolors.LIGHT_RED) + transitionFormatter(tranVersus[3]) )
     
-print("Four indicators suggest the identity of the indole's top two excited states")
-print(f"{bcolors.LIGHT_PURPLE}MAE indicator:{bcolors.ENDC}") 
+print(" \nFour indicators suggest the identity of the indole's top two excited states")
+print(tint("MAE indicator:", bcolors.LIGHT_PURPLE)) 
 print(maePrintedResult)
-print(f"{bcolors.LIGHT_PURPLE}Oscillator Strength indicator:{bcolors.ENDC}") 
+print(tint("Oscillator Strength indicator:", bcolors.LIGHT_PURPLE)) 
 print(osciPrintedResult)
-print(f"{bcolors.LIGHT_PURPLE}Dipole Moment indicator: {bcolors.ENDC}") 
+print(tint("Dipole Moment indicator:", bcolors.LIGHT_PURPLE)) 
 print(dipolePrintedResult)
-print(f"{bcolors.LIGHT_PURPLE}MO transition indicator: {bcolors.ENDC}") 
+print(tint("MO transition indicator:", bcolors.LIGHT_PURPLE)) 
 print(tranPrintedResult)
     
 
