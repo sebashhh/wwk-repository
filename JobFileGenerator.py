@@ -35,10 +35,15 @@ romanNumeral = ""
 
 #loads the GJF template from the local directory
 with open("!GaussianInputJFG.gjf", 'r') as file :
-    filedata1 = file.read()
+    fileData1 = file.read()
 with open("!GaussianInputJFG.gjf", 'r') as file :
-    filedata2 = file.read()
-
+    fileData2 = file.read()
+#loads the gaussian.sh job submission template from the local directory
+with open("!gaussianJob.sh", 'r') as file2 :
+    shData1 = file2.read()
+with open("!gaussianJob.sh", 'r') as file2 :
+    shData2 = file2.read()
+    
 isConfiguring = True
 while isConfiguring:
     print(tint("Default Functional: ", bcolors.CYAN) + functional)
@@ -65,21 +70,28 @@ while isConfiguring:
         title1 += functional + romanNumeral + "1st"
         title2 += functional + romanNumeral + "2nd"
     
-        filedata1 = filedata1.replace('TITLE', title1)
-        filedata2 = filedata2.replace('TITLE', title2)
-        filedata1 = filedata1.replace('ROOT', 'root=1')
-        filedata2 = filedata2.replace('ROOT', 'root=2')
-        filedata1 = filedata1.replace('FUNCTIONAL', functional)
-        filedata2 = filedata2.replace('FUNCTIONAL', functional)
-        filedata1 = filedata1.replace('BASIS_SET', basisSet)
-        filedata2 = filedata2.replace('BASIS_SET', basisSet)
-
+        fileData1 = fileData1.replace('TITLE', title1)
+        fileData2 = fileData2.replace('TITLE', title2)
+        fileData1 = fileData1.replace('ROOT', 'root=1')
+        fileData2 = fileData2.replace('ROOT', 'root=2')
+        fileData1 = fileData1.replace('FUNCTIONAL', functional)
+        fileData2 = fileData2.replace('FUNCTIONAL', functional)
+        fileData1 = fileData1.replace('BASIS_SET', basisSet)
+        fileData2 = fileData2.replace('BASIS_SET', basisSet)
+        shData1 = shData1.replace('TITLE', title1)
+        shData2 = shData2.replace('TITLE', title2)
         #Creates root1.gjf
         with open(title1 + ".gjf", 'w') as file:
-            file.write(filedata1)
+            file.write(fileData1)
         #Creates root2.gjf    
         with open(title2 + ".gjf", 'w') as file:
-            file.write(filedata2)
+            file.write(fileData2)
+        #Creates root1.sh
+        with open(title1 + ".sh", 'w') as file2:
+            file2.write(shData1)
+        #Creates root2.sh    
+        with open(title2 + ".sh", 'w') as file2:
+            file2.write(shData2)
         isConfiguring = False
     else:
         print("So...you're not ready.")
