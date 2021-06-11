@@ -27,33 +27,17 @@ functional = ""
 basisSet = "6-31+G*"
 title1 = "Funcs"
 title2 = "Funcs"
-filedata1 = ""
-filedata2 = ""
+fileData1 = ""
+fileData2 = ""
+shData1 = ""
+shData2 = ""
 romanNumeral = ""
 
 #loads the GJF template from the local directory
 with open("!GaussianInputJFG.gjf", 'r') as file :
     filedata1 = file.read()
+with open("!GaussianInputJFG.gjf", 'r') as file :
     filedata2 = file.read()
-
-#create a root 1 & root 2 gjf file
-def generateGJFS():
-    theTitle1 = title1 + functional + romanNumeral + "1st"
-    theTitle2 = title2 + functional + romanNumeral + "2nd"
-    
-    theFiledata1 = filedata1.replace('TITLE', theTitle1)
-    theFiledata2 = filedata2.replace('TITLE', theTitle2)
-    theFiledata1 = filedata1.replace('ROOT', 'root=1')
-    theFiledata2 = filedata2.replace('ROOT', 'root=2')
-    
-    #Creates root1.gjf
-    with open(theTitle1, 'w') as file:
-        file.write(theFiledata1)
-    #Creates root2.gjf    
-    with open(theTitle2, 'w') as file:
-        file.write(theFiledata2)
-
-
 
 isConfiguring = True
 while isConfiguring:
@@ -78,10 +62,28 @@ while isConfiguring:
     print(tint("Set Gaussian Functional for testing. \nType 'ok' to generate your .gjf's.", bcolors.LIGHT_CYAN))
     theInput = str(input())
     if(theInput.lower() == "ok"):
-        generateGJFS()
-        isConfiguring == False
+        title1 += functional + romanNumeral + "1st"
+        title2 += functional + romanNumeral + "2nd"
+    
+        filedata1 = filedata1.replace('TITLE', title1)
+        filedata2 = filedata2.replace('TITLE', title2)
+        filedata1 = filedata1.replace('ROOT', 'root=1')
+        filedata2 = filedata2.replace('ROOT', 'root=2')
+        filedata1 = filedata1.replace('FUNCTIONAL', functional)
+        filedata2 = filedata2.replace('FUNCTIONAL', functional)
+        filedata1 = filedata1.replace('BASIS_SET', basisSet)
+        filedata2 = filedata2.replace('BASIS_SET', basisSet)
+
+        #Creates root1.gjf
+        with open(title1 + ".gjf", 'w') as file:
+            file.write(filedata1)
+        #Creates root2.gjf    
+        with open(title2 + ".gjf", 'w') as file:
+            file.write(filedata2)
+        isConfiguring = False
     else:
         print("So...you're not ready.")
+
 #TODO make a function to edit all the other things optionally
 
    

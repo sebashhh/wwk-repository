@@ -1,9 +1,9 @@
 %nprocshared=4
-%chk=TITLE.chk
+%chk=FuncsM062XII2nd.chk
 %Mem=3GB
-# td= (nstates=6, ROOT) FUNCTIONAL/BASIS_SET Opt density=current
+# td= (nstates=6, root=2) M06/6-31+G* Opt density=current
 
-TITLE
+FuncsM062XII2nd
 
 0 1
  C                 -2.15106300    0.68920800    0.00008800

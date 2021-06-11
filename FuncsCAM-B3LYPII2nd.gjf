@@ -1,8 +1,9 @@
 %nprocshared=4
-%chk=FuncsCAM-B3LYPII.chk
-# td= (nstates=6, root=1) CAM-B3LYP/6-31+G* Opt density=current
+%chk=FuncsCAM-B3LYPII2nd.chk
+%Mem=3GB
+# td= (nstates=6, root=2) CAM-B3LYP/6-31+G* Opt density=current
 
-FuncsCAM-B3LYPII1st
+FuncsCAM-B3LYPII2nd
 
 0 1
  C                 -2.15106300    0.68920800    0.00008800
