@@ -74,10 +74,10 @@ while isConfiguring:
     print(tint("Set Gaussian Functional for testing. \nType 'ok' to generate your .gjf's.", bcolors.LIGHT_CYAN))
     theInput = str(input())
     if(theInput.lower() == "ok"):
-        title1 += functional + romanNumeral + "1st"
-        title2 += functional + romanNumeral + "2nd"
-        title3 += functional + romanNumeral + "3rd"
-    
+        title1 += functional + "-" + romanNumeral + "-" + "1st"
+        title2 += functional + "-" + romanNumeral + "-" + "2nd"
+        title3 += functional + "-" + romanNumeral + "-" + "3rd"
+        
         fileData1 = fileData1.replace('TITLE', title1)
         fileData2 = fileData2.replace('TITLE', title2)
         fileData3 = fileData3.replace('TITLE', title3)
