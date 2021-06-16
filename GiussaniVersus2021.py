@@ -163,7 +163,9 @@ def ToGuissani(theName):
             
 #finds the HOMO and stores it in HOMO value
     homoValue.append(data.homos[0])
-        
+    
+    #print transition dipole moment
+    print(data.etdips)
 #runs the program
 print(tint("Type the number index of two optimization .log files to compare.", bcolors.LIGHT_GREEN))
 fileOne = int(input())
