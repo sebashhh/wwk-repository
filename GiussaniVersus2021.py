@@ -9,12 +9,12 @@ Created on Fri Nov 20 12:49:06 2020
 import cclib
 import numpy as np
 import os, fnmatch
-#import sys
 
-#if not sys.warnoptions:
-    #import warnings
-    #warnings.simplefilter("ignore") # Change the filter in this process
-    
+class logIndicators:
+    mae = ""
+    oscillator_strength = 0
+    dipole_moment = 0
+    mo_transition = ""
     
 class bcolors:
     CYAN = "\033[0;36m"
@@ -28,29 +28,19 @@ class bcolors:
     LIGHT_CYAN = "\033[1;36m"
     ENDC = '\033[0m'
     UNDERLINE = '\033[4m'
+
 #tint colors a String inserted. It is more readable and can be autocompleted with Shift+Space.
-def tint(stringToInsert, color):
-    tintedString = f"{color}{stringToInsert}{bcolors.ENDC}".format(
-            color = color, stringToInsert = stringToInsert)
-    return tintedString
+def tint(string_to_insert, color):
+    tinted_string = f"{color}{string_to_insert}{bcolors.ENDC}".format(
+            color = color, string_to_insert = string_to_insert)
+    return tinted_string
 
-listOfFiles = os.listdir('.')
-pattern = "*.log"
-fileChoices = []
-fileCounter = 0
-print(tint(".log files present in directory:", bcolors.LIGHT_PURPLE))
 
-for entry in listOfFiles:
-    if fnmatch.fnmatch(entry, pattern):
-            print (tint(str(fileCounter), bcolors.LIGHT_CYAN) + ": " + entry)
-            fileCounter += 1
-            fileChoices.append(entry)
-print()
 maeVersus= []
 osciVersus= []
 dipoleVersus= []
 tranVersus= []
-homoValue= []
+homo_value= []
 
 # simple function to compare one molecule to another and calculate sum of the absolute errors
 def compare(mol1, mol2):
@@ -74,28 +64,28 @@ guissaniLb = dict(zip(keys,guissaniLb))
 zero = dict(zip(keys,zero))
 
 #Prints Atoms, MOs, Bond Lengths, MAE, ESTs, the HOMO, Oscillator Strength
-def ToGuissani(theName):
-    filename=theName
+def to_guissani(the_name):
+    filename=the_name
     data = cclib.io.ccread(filename)
     print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + filename)
     data.atomcoords
     coords1= data.atomcoords[len(data.atomcoords)-1]
 #Automatically finds the bond lengths of the atom
     bondLeng= []
-    def disFormula(pos1, pos2):
+    def dis_formula(pos1, pos2):
         dist = np.linalg.norm(coords1[pos1] - coords1[pos2])
         bondLeng.append(dist)
 
-    disFormula(6, 8)
-    disFormula(8, 7)
-    disFormula(7, 4)
-    disFormula(4, 5)
-    disFormula(5, 0)
-    disFormula(0, 1)
-    disFormula(1, 2)
-    disFormula(2, 3)
-    disFormula(3, 6)
-    disFormula(3, 4)
+    dis_formula(6, 8)
+    dis_formula(8, 7)
+    dis_formula(7, 4)
+    dis_formula(4, 5)
+    dis_formula(5, 0)
+    dis_formula(0, 1)
+    dis_formula(1, 2)
+    dis_formula(2, 3)
+    dis_formula(3, 6)
+    dis_formula(3, 4)
 
 #defining the molecule as done with the keys
     molecule = bondLeng
@@ -162,29 +152,41 @@ def ToGuissani(theName):
                 tranVersus.append(j[1][0])
             
 #finds the HOMO and stores it in HOMO value
-    homoValue.append(data.homos[0])
+    homo_value.append(data.homos[0])
     print(data.etdips)
 
 #describes the raw MO transition numbers in relation to HOMO and LUMO
-def transitionFormatter (state):
-    homo = int(homoValue[0])
-    stateString = ""
-    theState = int(state)
+def transition_formatter (state):
+    homo = int(homo_value[0])
+    state_string = ""
+    the_state = int(state)
     if (state >= homo + 1):
         #AKA LUMO
-        stateString += "LUMO"
-        if (state > homo + 1):
+        state_string += "LUMO"
+        if (the_state > homo + 1):
             #if the value is greater than the LUMO 
-            stateString += "+" + str(theState - (homo + 1))
+            state_string += "+" + str(the_state - (homo + 1))
     else:
         #it is HOMO or lower
-        stateString += "HOMO"
+        state_string += "HOMO"
         if (state < homo):
-            stateString += "-" + str(homo - theState)
-    return stateString
+            state_string += "-" + str(homo - the_state)
+    return state_string
 
 #runs the program
-def promptUser():
+def prompt_user():
+    list_of_files = os.listdir('.')
+    pattern = "*.log"
+    file_choices = []
+    file_counter = 0
+    print(tint(".log files present in directory:", 
+               bcolors.LIGHT_PURPLE))
+    for entry in list_of_files:
+        if fnmatch.fnmatch(entry, pattern):
+            print (tint(str(file_counter), bcolors.LIGHT_CYAN) + ": " + entry)
+            file_counter += 1
+            file_choices.append(entry)
+            print()
     print(tint("Type the number index of a optimization .log and ENTER to learn about the indicators.", 
            bcolors.LIGHT_GREEN))
     print(tint("Type 'done' when complete.", 
@@ -195,12 +197,12 @@ def promptUser():
     theInput = ""
     while theInput != "done":    
         theInput = int(input())
-        print("Selected: " + fileChoices[theInput] + "\n")
-        logFiles.append(fileChoices[theInput])
+        print("Selected: " + file_choices[theInput] + "\n")
+        logFiles.append(file_choices[theInput])
     print(tint("Input done.", 
            bcolors.LIGHT_GREEN))
     for element in logFiles:
-        ToGuissani(element)
+        to_guissani(element)
 
 maeInd = []
 osciInd = []
@@ -283,10 +285,10 @@ dipolePrintedResult += (es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
 tranPrintedResult = ""
 tranPrintedResult += (es1 + "'s MO transition is closest to " + tranInd[0] + " \n"
 + es2 + "'s MO transition is closest to " + tranInd[1] + "\n"
-+ es1 + "'s MO transition: " + transitionFormatter(tranVersus[0]) + 
-tint("->", bcolors.LIGHT_RED) + transitionFormatter(tranVersus[1]) + "\n"
-+ es2 + "'s MO transition: " + transitionFormatter(tranVersus[2]) + 
-tint("->", bcolors.LIGHT_RED) + transitionFormatter(tranVersus[3]) )
++ es1 + "'s MO transition: " + transition_formatter(tranVersus[0]) + 
+tint("->", bcolors.LIGHT_RED) + transition_formatter(tranVersus[1]) + "\n"
++ es2 + "'s MO transition: " + transition_formatter(tranVersus[2]) + 
+tint("->", bcolors.LIGHT_RED) + transition_formatter(tranVersus[3]) )
 
    
 print(" \nFour indicators suggest the identity of the indole's top two excited states")
