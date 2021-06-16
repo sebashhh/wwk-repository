@@ -164,8 +164,27 @@ def ToGuissani(theName):
 #finds the HOMO and stores it in HOMO value
     homoValue.append(data.homos[0])
     print(data.etdips)
+
+#describes the raw MO transition numbers in relation to HOMO and LUMO
+def transitionFormatter (state):
+    homo = int(homoValue[0])
+    stateString = ""
+    theState = int(state)
+    if (state >= homo + 1):
+        #AKA LUMO
+        stateString += "LUMO"
+        if (state > homo + 1):
+            #if the value is greater than the LUMO 
+            stateString += "+" + str(theState - (homo + 1))
+    else:
+        #it is HOMO or lower
+        stateString += "HOMO"
+        if (state < homo):
+            stateString += "-" + str(homo - theState)
+    return stateString
+
 #runs the program
-def promptUser:
+def promptUser():
     print(tint("Type the number index of a optimization .log and ENTER to learn about the indicators.", 
            bcolors.LIGHT_GREEN))
     print(tint("Type 'done' when complete.", 
@@ -175,16 +194,13 @@ def promptUser:
     logFiles = [] 
     theInput = ""
     while theInput != "done":    
-        theInput input()
+        theInput = int(input())
+        print("Selected: " + fileChoices[theInput] + "\n")
+        logFiles.append(fileChoices[theInput])
     print(tint("Input done.", 
            bcolors.LIGHT_GREEN))
-
-print("Selected: " + fileChoices[fileOne]) 
-fileTwo = int(input())
-print("Selected: " + fileChoices[fileTwo] + "\n")
-
-ToGuissani(fileChoices[fileOne])
-ToGuissani(fileChoices[fileTwo])
+    for element in logFiles:
+        ToGuissani(element)
 
 maeInd = []
 osciInd = []
@@ -198,13 +214,13 @@ def MaeShows (theList):
         else:
             maeInd.append(tint("Lb", bcolors.CYAN))
             
-def OsciShows (theList):
-   if theList[0] > theList[3]:
-        osciInd.append(tint("La", bcolors.YELLOW))
-        osciInd.append(tint("Lb", bcolors.CYAN))
-   else:
-        osciInd.append(tint("Lb", bcolors.CYAN))
-        osciInd.append(tint("La", bcolors.YELLOW))
+#def OsciShows (theList):
+   #if theList[0] > theList[3]:
+        #osciInd.append(tint("La", bcolors.YELLOW))
+        #osciInd.append(tint("Lb", bcolors.CYAN))
+   #else:
+        #osciInd.append(tint("Lb", bcolors.CYAN))
+        #osciInd.append(tint("La", bcolors.YELLOW))
 
 def DipoleShows (theList):
      if theList[0] > theList[1]:
@@ -262,22 +278,7 @@ else:
 dipolePrintedResult += (es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
                         + es2 + "'s dipole moment: " + str(dipoleVersus[1]))
 
-def transitionFormatter (state):
-    homo = int(homoValue[0])
-    stateString = ""
-    theState = int(state)
-    if (state >= homo + 1):
-        #AKA LUMO
-        stateString += "LUMO"
-        if (state > homo + 1):
-            #if the value is greater than the LUMO 
-            stateString += "+" + str(theState - (homo + 1))
-    else:
-        #it is HOMO or lower
-        stateString += "HOMO"
-        if (state < homo):
-            stateString += "-" + str(homo - theState)
-    return stateString
+
 
 tranPrintedResult = ""
 tranPrintedResult += (es1 + "'s MO transition is closest to " + tranInd[0] + " \n"
@@ -286,7 +287,8 @@ tranPrintedResult += (es1 + "'s MO transition is closest to " + tranInd[0] + " \
 tint("->", bcolors.LIGHT_RED) + transitionFormatter(tranVersus[1]) + "\n"
 + es2 + "'s MO transition: " + transitionFormatter(tranVersus[2]) + 
 tint("->", bcolors.LIGHT_RED) + transitionFormatter(tranVersus[3]) )
-    
+
+   
 print(" \nFour indicators suggest the identity of the indole's top two excited states")
 print(tint("MAE indicator:", bcolors.LIGHT_PURPLE)) 
 print(maePrintedResult)
