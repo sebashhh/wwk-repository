@@ -163,10 +163,22 @@ def ToGuissani(theName):
             
 #finds the HOMO and stores it in HOMO value
     homoValue.append(data.homos[0])
-        
+    print(data.etdips)
 #runs the program
-print(tint("Type the number index of two optimization .log files to compare.", bcolors.LIGHT_GREEN))
-fileOne = int(input())
+def promptUser:
+    print(tint("Type the number index of a optimization .log and ENTER to learn about the indicators.", 
+           bcolors.LIGHT_GREEN))
+    print(tint("Type 'done' when complete.", 
+           bcolors.LIGHT_GREEN))
+    print(tint("Note: You should probably look at fewer files than the number of nstates.", 
+           bcolors.DARK_GRAY))
+    logFiles = [] 
+    theInput = ""
+    while theInput != "done":    
+        theInput input()
+    print(tint("Input done.", 
+           bcolors.LIGHT_GREEN))
+
 print("Selected: " + fileChoices[fileOne]) 
 fileTwo = int(input())
 print("Selected: " + fileChoices[fileTwo] + "\n")
