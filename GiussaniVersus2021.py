@@ -19,6 +19,8 @@ class logFileData:
     formatted_mo = ""
     root = 0
     homo = 0
+    mae_La = ""
+    mae_Lb = ""
     
     def __init__(self, file_name):
         self._file_name = file_name
@@ -29,19 +31,31 @@ class logFileData:
         return self._mae
      
     def set_mae(self, x):
-        self._mae = x
+        self._mae = str(x)
+    
+    def get_mae_La(self):
+        return self._mae_La
+     
+    def set_mae_La(self, x):
+        self._mae_La = str(x)
+    
+    def get_mae_Lb(self):
+        return self._mae_Lb
+     
+    def set_mae_Lb(self, x):
+        self._mae_Lb = str(x)
     
     def get_oscillator_strength(self):
         return self._oscillator_strength
     
     def set_oscillator_strength(self, x):
-        self._oscillator_strength = x
+        self._oscillator_strength = str(x)
     
     def get_dipole_moment(self):
         return self._dipole_moment
     
     def set_dipole_moment(self, x):
-        self._dipole_moment = x
+        self._dipole_moment = str(x)
     
     def get_mo(self):
         return self.mo
@@ -87,12 +101,6 @@ def tint(string_to_insert, color):
     return tinted_string
 
 
-maeVersus= []
-osciVersus= []
-dipoleVersus= []
-tranVersus= []
-homo_value= []
-
 # simple function to compare one molecule to another and calculate sum of the absolute errors
 def compare(mol1, mol2):
     mae = 0.0
@@ -103,15 +111,15 @@ def compare(mol1, mol2):
 
 #Defining the built in structures for this script, particularly the reference structures from the 2011 Guissani paper
 keys = ['r45', 'r56', 'r16', 'r12', 'r23', 'r34', 'r17', 'r78', 'r816', 'r216']
-guissaniGS = [ 1.376,  1.363,  1.441, 1.405, 1.384, 1.411, 1.385,  1.400,  1.372, 1.404]
-guissaniLa = [ 1.314,  1.445, 1.436, 1.412, 1.426,  1.377,  1.447,  1.391,  1.407, 1.403]
-guissaniLb = [ 1.403, 1.385, 1.420, 1.419, 1.430, 1.446, 1.431, 1.404, 1.367, 1.466]
+guissani_GS = [ 1.376,  1.363,  1.441, 1.405, 1.384, 1.411, 1.385,  1.400,  1.372, 1.404]
+guissani_La = [ 1.314,  1.445, 1.436, 1.412, 1.426,  1.377,  1.447,  1.391,  1.407, 1.403]
+guissani_Lb = [ 1.403, 1.385, 1.420, 1.419, 1.430, 1.446, 1.431, 1.404, 1.367, 1.466]
 zero = [ 0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0., 0.]
 
 #Now officially make the molecular structures, stored as python dictionaries using the bond labels as keys
-guissaniGS = dict(zip(keys,guissaniGS))
-guissaniLa = dict(zip(keys,guissaniLa))
-guissaniLb = dict(zip(keys,guissaniLb))
+guissani_GS = dict(zip(keys,guissani_GS))
+guissani_La = dict(zip(keys,guissani_La))
+guissani_Lb = dict(zip(keys,guissani_Lb))
 zero = dict(zip(keys,zero))
 
 #Prints Atoms, MOs, Bond Lengths, MAE, ESTs, the HOMO, Oscillator Strength
@@ -143,17 +151,18 @@ def to_guissani(logElement):
     molecule=dict(zip(keys,molecule))
 
     #Compare the opitmized structure to the reference structures
-    maeLa = compare(molecule, guissaniLa)
-    maeLb = compare(molecule, guissaniLb)
-    winner = True if maeLa < maeLb else False
+    mae_La = compare(molecule, guissani_La)
+    mae_Lb = compare(molecule, guissani_Lb)
+    winner = True if mae_La < mae_Lb else False
     the_mae = ""
     if (winner == True):
         the_mae = "La"
     else:
         the_mae = "Lb"
     logElement.set_mae(the_mae)
-    print("indole opt structure closest to %s (maeLa=%f, maeLb=%f)" % (winner, maeLa, maeLb))
-    
+    logElement.set_mae_La(mae_La)
+    logElement.set_mae_Lb(mae_Lb)
+
     the_osci = data.etoscs[int(logElement.get_root())]
     logElement.set_oscillator_strength(the_osci)
 
@@ -174,7 +183,6 @@ def to_guissani(logElement):
 
    #find the transitions and formats them
     for mo_element in mo_transitions_possible:
-        print(mo_element)
         coeff_versus.append(mo_element[2])
     for element in coeff_versus:
         if abs(element) > abs(lgst_coeff):
@@ -246,7 +254,7 @@ def prompt_user():
                        bcolors.LIGHT_GREEN))
         else:
             the_input = int(the_input)
-            print("Selected: " + file_choices[the_input] + "\n")
+            print("Selected: " + file_choices[the_input])
             #constructor call
             log_instance = logFileData(file_choices[the_input])
             log_files.append(log_instance)
@@ -260,7 +268,8 @@ def print_out_info():
     print(tint("MAE indicator:", bcolors.LIGHT_PURPLE)) 
     for element in log_files:
         mae_printed_result = (es + " " + element.get_root() + "'s structure is closest to " 
-                               + element.get_mae())
+                              + element.get_mae() + ". " + "maeLa: " + element.get_mae_La() 
+        + " maeLb: " + element.get_mae_Lb())
         print(mae_printed_result)
     print(tint("Oscillator Strength indicator:", bcolors.LIGHT_PURPLE)) 
     for element in log_files:
