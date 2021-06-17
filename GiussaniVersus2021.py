@@ -41,7 +41,7 @@ class logFileData:
         return self._dipole_moment
     
     def set_dipole_moment(self, x):
-        self.dipole_moment = x
+        self._dipole_moment = x
     
     def get_mo(self):
         return self.mo
@@ -121,7 +121,7 @@ def to_guissani(logElement):
     print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + file_name)
     data.atomcoords
     coords1 = data.atomcoords[len(data.atomcoords)-1]
-#Automatically finds the bond lengths of the atom
+    #Automatically finds the bond lengths of the atom
     bond_lengths = []
     def dis_formula(pos1, pos2):
         dist = np.linalg.norm(coords1[pos1] - coords1[pos2])
@@ -138,41 +138,40 @@ def to_guissani(logElement):
     dis_formula(3, 6)
     dis_formula(3, 4)
 
-#defining the molecule as done with the keys
+    #defining the molecule as done with the keys
     molecule = bond_lengths
     molecule=dict(zip(keys,molecule))
 
-#Compare the opitmized structure to the reference structures
+    #Compare the opitmized structure to the reference structures
     maeLa = compare(molecule, guissaniLa)
     maeLb = compare(molecule, guissaniLb)
     winner = True if maeLa < maeLb else False
-
-    logElement.set_mae(winner)
-    #  print("indole opt structure closest to %s (maeLa=%f, maeLb=%f) dipole=%s" % (winner, maeLa, maeLb, dipole))
-    #print(data.etoscs)
-   
-#Records the oscillator strength according to the function
-    #print(logElement.get_root())
-    #print("line 142")
+    the_mae = ""
+    if (winner == True):
+        the_mae = "La"
+    else:
+        the_mae = "Lb"
+    logElement.set_mae(the_mae)
+    print("indole opt structure closest to %s (maeLa=%f, maeLb=%f)" % (winner, maeLa, maeLb))
+    
     the_osci = data.etoscs[int(logElement.get_root())]
     logElement.set_oscillator_strength(the_osci)
 
-#Now look for the last dipole moment in the file 
-#(that of the optimum geometry and the state specified by root=)
+    #Now look for the last dipole moment in the file 
+    #(that of the optimum geometry and the state specified by root=)
     #print(data.moments)        
     dipole = np.linalg.norm(data.moments[1])
     logElement.set_dipole_moment(dipole)
 
-#Variables needed to find the largest coefficient for the transitions
+    #Variables needed to find the largest coefficient for the transitions
     coeff_versus= []
     lgst_coeff = 0
     
-#finds the homo and sets it
+    #finds the homo and sets it
     logElement.set_homo(data.homos[0])
-#breaks down Excited State Transition List
+    #breaks down Excited State Transition List
     mo_transitions_possible = data.etsecs[0]
-    print(data.etsecs)
-    print("line 153")
+
    #find the transitions and formats them
     for mo_element in mo_transitions_possible:
         print(mo_element)
@@ -184,18 +183,12 @@ def to_guissani(logElement):
         if mo_element[2] == lgst_coeff:
             logElement.append_to_mo(mo_element[0][0])
             logElement.append_to_mo(mo_element[1][0])
-    print("line 170")
-    print(logElement.get_mo())
-    
+
     the_mo = logElement.get_mo()
     logElement.set_formatted_mo(transition_formatter(logElement, the_mo[0]) 
                                 + tint("->", bcolors.LIGHT_RED) 
                                 + transition_formatter(logElement, the_mo[1]))
-    print("194")
-    print(logElement.get_formatted_mo())
-
-    print(data.etdips)
-   #debug
+ 
 #describes the raw MO transition numbers in relation to HOMO and LUMO
 def transition_formatter (logElement, state):
     homo = int(logElement.get_homo())
@@ -254,109 +247,42 @@ def prompt_user():
         else:
             the_input = int(the_input)
             print("Selected: " + file_choices[the_input] + "\n")
+            #constructor call
             log_instance = logFileData(file_choices[the_input])
             log_files.append(log_instance)
                   
     for element in log_files:
         to_guissani(element)
 
+def print_out_info():
+    es = "Energy State" 
+    print(" \nFour indicators suggest the identity of the indole's top two excited states")
+    print(tint("MAE indicator:", bcolors.LIGHT_PURPLE)) 
+    for element in log_files:
+        mae_printed_result = (es + " " + element.get_root() + "'s structure is closest to " 
+                               + element.get_mae())
+        print(mae_printed_result)
+    print(tint("Oscillator Strength indicator:", bcolors.LIGHT_PURPLE)) 
+    for element in log_files:
+        osci_printed_result = (es + " " + element.get_root() + "'s oscillator strength: " 
+                             + str(element.get_oscillator_strength()))
+        print(osci_printed_result)
+    print(tint("Dipole Moment indicator:", bcolors.LIGHT_PURPLE))
+    for element in log_files:
+        dipole_printed_result = (es + " " + element.get_root() + "'s dipole moment: " 
+                               + str(element.get_dipole_moment()))
+        print(dipole_printed_result)
+    print(tint("MO transition indicator:", bcolors.LIGHT_PURPLE)) 
+    for element in log_files:
+        tran_printed_result = (es + " " + element.get_root() + "'s MO transition is closest to " 
+                             + element.get_formatted_mo())
+        print(tran_printed_result)
+
+#actual method calls
 prompt_user()
-maeInd = []
-osciInd = []
-dipoleInd = []
-tranInd = []
-
-def MaeShows (theList):
-    for k in theList:
-        if k == True:
-            maeInd.append(tint("La", bcolors.YELLOW)) 
-        else:
-            maeInd.append(tint("Lb", bcolors.CYAN))
-            
-#def OsciShows (theList):
-   #if theList[0] > theList[3]:
-        #osciInd.append(tint("La", bcolors.YELLOW))
-        #osciInd.append(tint("Lb", bcolors.CYAN))
-   #else:
-        #osciInd.append(tint("Lb", bcolors.CYAN))
-        #osciInd.append(tint("La", bcolors.YELLOW))
-
-def DipoleShows (theList):
-     if theList[0] > theList[1]:
-        dipoleInd.append(tint("La", bcolors.YELLOW))
-        dipoleInd.append(tint("Lb", bcolors.CYAN))
-
-     else:
-        dipoleInd.append(tint("Lb", bcolors.CYAN))
-        dipoleInd.append(tint("La", bcolors.YELLOW))
-
- #def TranShows (theList):
-   # if theList[0] == homoValue[0] and theList[1] == homoValue[0] + 1:
-    #    tranInd.append(tint("La", bcolors.YELLOW))
-  #  elif theList[0] == homoValue[0] - 1 and theList[1] == homoValue[0] + 1:
-   #     tranInd.append(tint("Lb", bcolors.CYAN))
-  #  else:
-    #    tranInd.append(tint("N/A", bcolors.DARK_GRAY))
-  #  if theList[2] == homoValue[0] and theList[3] == homoValue[0] + 1:
-   #     tranInd.append(tint("La", bcolors.YELLOW))
-  #  elif theList[2] == homoValue[0] - 1 and theList[3] == homoValue[0] + 1:
-   #     tranInd.append(tint("Lb", bcolors.CYAN))
-  #  else:
-   #     tranInd.append(tint("N/A", bcolors.DARK_GRAY))
-        
-#runs the functions that append to lists
-#MaeShows(maeVersus)
-#OsciShows(osciVersus)
-#DipoleShows(dipoleVersus)
-#TranShows(tranVersus)
-    
-es1 = "Energy State 1"
-es2 = "Energy State 2"
-
-maePrintedResult = ""
-maePrintedResult += (es1 + "'s structure is closest to " + maeInd[0] + " \n" +
-es2 + "'s structure is closest to " + maeInd[1])
-    
-osciPrintedResult = ""
-if (abs(osciVersus[0] - osciVersus[3]) < .001):
-    osciPrintedResult += "Oscillator Strengths are too close. Optimization likely confused. \n"
-else: 
-    osciPrintedResult += (es1 + "'s oscillator strength is closest to " + osciInd[0] + " \n"
-    + es2 + "'s oscillator strength is closest to " + osciInd[1] + "\n")
-
-osciPrintedResult += (es1 + "'s oscillator strength: " + str(osciVersus[0]) + "\n"
-    + es2 + "'s oscillator strength: " + str(osciVersus[3]) )
-    
-dipolePrintedResult = ""
-if (abs(dipoleVersus[0] - dipoleVersus[1]) < .001):
-    dipolePrintedResult += "Dipole Moments are too close. Optimization likely confused."
-else: 
-    dipolePrintedResult += (es1 + "'s dipole moment is closest to " + dipoleInd[0] + " \n"
-    + es2 + "'s dipole moment is closest to " + dipoleInd[1] + "\n")
-
-dipolePrintedResult += (es1 + "'s dipole moment: " + str(dipoleVersus[0]) + "\n"
-                        + es2 + "'s dipole moment: " + str(dipoleVersus[1]))
+print_out_info()
 
 
-
-tranPrintedResult = ""
-tranPrintedResult += (es1 + "'s MO transition is closest to " + tranInd[0] + " \n"
-+ es2 + "'s MO transition is closest to " + tranInd[1] + "\n"
-+ es1 + "'s MO transition: " + transition_formatter(tranVersus[0]) + 
-tint("->", bcolors.LIGHT_RED) + transition_formatter(tranVersus[1]) + "\n"
-+ es2 + "'s MO transition: " + transition_formatter(tranVersus[2]) + 
-tint("->", bcolors.LIGHT_RED) + transition_formatter(tranVersus[3]) )
-
-   
-print(" \nFour indicators suggest the identity of the indole's top two excited states")
-print(tint("MAE indicator:", bcolors.LIGHT_PURPLE)) 
-print(maePrintedResult)
-print(tint("Oscillator Strength indicator:", bcolors.LIGHT_PURPLE)) 
-print(osciPrintedResult)
-print(tint("Dipole Moment indicator:", bcolors.LIGHT_PURPLE)) 
-print(dipolePrintedResult)
-print(tint("MO transition indicator:", bcolors.LIGHT_PURPLE)) 
-print(tranPrintedResult)
     
 
 
