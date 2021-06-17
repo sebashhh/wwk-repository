@@ -15,8 +15,10 @@ class logFileData:
     mae = ""
     oscillator_strength = 0
     dipole_moment = 0
-    mo_transition = []
+    mo = []
+    formatted_mo = ""
     root = 0
+    homo = 0
     
     def __init__(self, file_name):
         self._file_name = file_name
@@ -41,17 +43,29 @@ class logFileData:
     def set_dipole_moment(self, x):
         self.dipole_moment = x
     
-    def get_mo_transition(self):
-        return self._mo_transition
+    def get_mo(self):
+        return self.mo
     
-    def append_to_mo_transition(self, x):
-        self._mo_transition.append(x)
+    def append_to_mo(self, x):
+        (self.mo).append(x)
     
     def get_file_name(self):
         return self._file_name
     
     def get_root(self):
         return self._root
+    
+    def get_formatted_mo(self):
+        return self._formatted_mo
+    
+    def set_formatted_mo(self, x):
+        self._formatted_mo = x
+        
+    def get_homo(self):
+        return self._homo
+    
+    def set_homo(self, x):
+        self._homo = x
 
 class bcolors:
     CYAN = "\033[0;36m"
@@ -153,10 +167,13 @@ def to_guissani(logElement):
     coeff_versus= []
     lgst_coeff = 0
     
+#finds the homo and sets it
+    logElement.set_homo(data.homos[0])
 #breaks down Excited State Transition List
     mo_transitions_possible = data.etsecs[0]
     print(data.etsecs)
     print("line 153")
+   #find the transitions and formats them
     for mo_element in mo_transitions_possible:
         print(mo_element)
         coeff_versus.append(mo_element[2])
@@ -165,47 +182,23 @@ def to_guissani(logElement):
             lgst_coeff = element
     for mo_element in mo_transitions_possible:
         if mo_element[2] == lgst_coeff:
-            
-
+            logElement.append_to_mo(mo_element[0][0])
+            logElement.append_to_mo(mo_element[1][0])
+    print("line 170")
+    print(logElement.get_mo())
     
-    #if toGiussani has already been called on the first file
-    if (len(tranVersus) == 2):
-        #for each guess at the transition in the first row
-        for i in lastEtsecs[0][1]:
-            #append the coefficient
-            coeffVersus.append(i[2])
-        for element in coeffVersus:
-            if abs(element) > abs(lgstCoeff):
-                lgstCoeff = element
-        for j in lastEtsecs[0][1]:
-            if j[2] == lgstCoeff:
-                tranVersus.append(j[0][0])
-                tranVersus.append(j[1][0])
-    else:
-        #for each guess at the transition in the first row
-        for i in lastEtsecs[0][0]:
-            #append the coefficient
-            coeffVersus.append(i[2])
-    #search for the highest
+    the_mo = logElement.get_mo()
+    logElement.set_formatted_mo(transition_formatter(logElement, the_mo[0]) 
+                                + tint("->", bcolors.LIGHT_RED) 
+                                + transition_formatter(logElement, the_mo[1]))
+    print("194")
+    print(logElement.get_formatted_mo())
 
-        for element in coeffVersus:
-            if abs(element) > abs(lgstCoeff):
-                
-                lgstCoeff = element
-    #append the transition associated with the highest coefficient
-        for j in lastEtsecs[0][0]:
-            if j[2] == lgstCoeff:
-                
-                tranVersus.append(j[0][0])
-                tranVersus.append(j[1][0])
-            
-#finds the HOMO and stores it in HOMO value
-    homo_value.append(data.homos[0])
     print(data.etdips)
-
+   
 #describes the raw MO transition numbers in relation to HOMO and LUMO
-def transition_formatter (state):
-    homo = int(homo_value[0])
+def transition_formatter (logElement, state):
+    homo = int(logElement.get_homo())
     state_string = ""
     the_state = int(state)
     if (state >= homo + 1):
