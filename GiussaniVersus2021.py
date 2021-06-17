@@ -195,7 +195,7 @@ def to_guissani(logElement):
     print(logElement.get_formatted_mo())
 
     print(data.etdips)
-   
+   #debug
 #describes the raw MO transition numbers in relation to HOMO and LUMO
 def transition_formatter (logElement, state):
     homo = int(logElement.get_homo())
