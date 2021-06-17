@@ -11,16 +11,16 @@ import numpy as np
 import os, fnmatch
 
 class logFileData:
-    file_name = ""
-    mae = ""
-    oscillator_strength = 0
-    dipole_moment = 0
-    mo = []
-    formatted_mo = ""
-    root = 0
-    homo = 0
-    mae_La = ""
-    mae_Lb = ""
+    _file_name = ""
+    _mae = ""
+    _oscillator_strength = 0
+    _dipole_moment = 0
+    _mo = []
+    _formatted_mo = "N/A"
+    _root = 0
+    _homo = 0
+    _mae_La = ""
+    _mae_Lb = ""
     
     def __init__(self, file_name):
         self._file_name = file_name
@@ -58,10 +58,10 @@ class logFileData:
         self._dipole_moment = str(x)
     
     def get_mo(self):
-        return self.mo
+        return self._mo
     
     def append_to_mo(self, x):
-        (self.mo).append(x)
+        self._mo.append(x)
     
     def get_file_name(self):
         return self._file_name
@@ -99,7 +99,6 @@ def tint(string_to_insert, color):
     tinted_string = f"{color}{string_to_insert}{bcolors.ENDC}".format(
             color = color, string_to_insert = string_to_insert)
     return tinted_string
-
 
 # simple function to compare one molecule to another and calculate sum of the absolute errors
 def compare(mol1, mol2):
@@ -162,9 +161,13 @@ def to_guissani(logElement):
     logElement.set_mae(the_mae)
     logElement.set_mae_La(mae_La)
     logElement.set_mae_Lb(mae_Lb)
-
-    the_osci = data.etoscs[int(logElement.get_root())]
-    logElement.set_oscillator_strength(the_osci)
+    try:
+        the_osci = data.etoscs[int(logElement.get_root())]
+        logElement.set_oscillator_strength(the_osci)
+    except IndexError:
+        print(tint(("no oscillator strength found for root: " + logElement.get_root()), 
+              bcolors.DARK_GRAY))
+              
 
     #Now look for the last dipole moment in the file 
     #(that of the optimum geometry and the state specified by root=)
@@ -179,24 +182,28 @@ def to_guissani(logElement):
     #finds the homo and sets it
     logElement.set_homo(data.homos[0])
     #breaks down Excited State Transition List
-    mo_transitions_possible = data.etsecs[0]
+    try: 
+        mo_transitions_possible = data.etsecs[0]
 
-   #find the transitions and formats them
-    for mo_element in mo_transitions_possible:
-        coeff_versus.append(mo_element[2])
-    for element in coeff_versus:
-        if abs(element) > abs(lgst_coeff):
-            lgst_coeff = element
-    for mo_element in mo_transitions_possible:
-        if mo_element[2] == lgst_coeff:
-            logElement.append_to_mo(mo_element[0][0])
-            logElement.append_to_mo(mo_element[1][0])
+        #find the transitions and formats them
+        for mo_element in mo_transitions_possible:
+            coeff_versus.append(mo_element[2])
+        for element in coeff_versus:
+            if abs(element) > abs(lgst_coeff):
+                lgst_coeff = element
+        for mo_element in mo_transitions_possible:
+            if mo_element[2] == lgst_coeff:
+                logElement.append_to_mo(mo_element[0][0])
+                logElement.append_to_mo(mo_element[1][0])
 
-    the_mo = logElement.get_mo()
-    logElement.set_formatted_mo(transition_formatter(logElement, the_mo[0]) 
-                                + tint("->", bcolors.LIGHT_RED) 
-                                + transition_formatter(logElement, the_mo[1]))
- 
+        the_mo = logElement.get_mo()
+        logElement.set_formatted_mo(transition_formatter(logElement, the_mo[0]) 
+                                    + tint("->", bcolors.LIGHT_RED) 
+                                    + transition_formatter(logElement, the_mo[1]))
+    except IndexError:
+         print(tint(("no MO transition found for root: " + logElement.get_root()), 
+                    bcolors.DARK_GRAY))
+              
 #describes the raw MO transition numbers in relation to HOMO and LUMO
 def transition_formatter (logElement, state):
     homo = int(logElement.get_homo())
