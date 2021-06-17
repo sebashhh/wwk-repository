@@ -15,7 +15,7 @@ class logFileData:
     mae = ""
     oscillator_strength = 0
     dipole_moment = 0
-    mo_transition = ""
+    mo_transition = []
     root = 0
     
     def __init__(self, file_name):
@@ -44,8 +44,8 @@ class logFileData:
     def get_mo_transition(self):
         return self._mo_transition
     
-    def set_mo_transition(self, x):
-        self._mo_transition = x
+    def append_to_mo_transition(self, x):
+        self._mo_transition.append(x)
     
     def get_file_name(self):
         return self._file_name
@@ -102,13 +102,13 @@ zero = dict(zip(keys,zero))
 
 #Prints Atoms, MOs, Bond Lengths, MAE, ESTs, the HOMO, Oscillator Strength
 def to_guissani(logElement):
-    file_name=logElement.get_file_name()
+    file_name = logElement.get_file_name()
     data = cclib.io.ccread(file_name)
     print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + file_name)
     data.atomcoords
-    coords1= data.atomcoords[len(data.atomcoords)-1]
+    coords1 = data.atomcoords[len(data.atomcoords)-1]
 #Automatically finds the bond lengths of the atom
-    bond_lengths= []
+    bond_lengths = []
     def dis_formula(pos1, pos2):
         dist = np.linalg.norm(coords1[pos1] - coords1[pos2])
         bond_lengths.append(dist)
@@ -135,29 +135,38 @@ def to_guissani(logElement):
 
     logElement.set_mae(winner)
     #  print("indole opt structure closest to %s (maeLa=%f, maeLb=%f) dipole=%s" % (winner, maeLa, maeLb, dipole))
-    print(data.etoscs)
-    print("line 139")
-    print(data.etoscs[-(6):-1])
-#Appends the Oscillator Strength List
-    lastOscis=data.etoscs[-(6):-1]
-  #  print(data.etsecs[0][0])
-#Oscillator strength, excited state 1
-    osciVersus.append(lastOscis[0])
-#Oscillator strength, excited state 2
-    osciVersus.append(lastOscis[1])
+    #print(data.etoscs)
+   
+#Records the oscillator strength according to the function
+    #print(logElement.get_root())
+    #print("line 142")
+    the_osci = data.etoscs[int(logElement.get_root())]
+    logElement.set_oscillator_strength(the_osci)
 
-#Now look for the last dipole moment in the file (that of the optimum geometry and the state specified by root=)
+#Now look for the last dipole moment in the file 
+#(that of the optimum geometry and the state specified by root=)
+    #print(data.moments)        
     dipole = np.linalg.norm(data.moments[1])
+    logElement.set_dipole_moment(dipole)
 
-#And send it to Versus for Comparison
-    dipoleVersus.append(dipole)
-
-#breaks down Excited State Transition List
-    lastEtsecs=[data.etsecs[-(6):-1]]
+#Variables needed to find the largest coefficient for the transitions
+    coeff_versus= []
+    lgst_coeff = 0
     
-#populates the tranVersus list by fetching finding the highest coefficient
-    coeffVersus= []
-    lgstCoeff = 0
+#breaks down Excited State Transition List
+    mo_transitions_possible = data.etsecs[0]
+    print(data.etsecs)
+    print("line 153")
+    for mo_element in mo_transitions_possible:
+        print(mo_element)
+        coeff_versus.append(mo_element[2])
+    for element in coeff_versus:
+        if abs(element) > abs(lgst_coeff):
+            lgst_coeff = element
+    for mo_element in mo_transitions_possible:
+        if mo_element[2] == lgst_coeff:
+            
+
     
     #if toGiussani has already been called on the first file
     if (len(tranVersus) == 2):
