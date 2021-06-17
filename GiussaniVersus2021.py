@@ -11,11 +11,82 @@ import numpy as np
 import os, fnmatch
 #import sys
 
+<<<<<<< HEAD
 #if not sys.warnoptions:
     #import warnings
     #warnings.simplefilter("ignore") # Change the filter in this process
+=======
+class logFileData:
+    _file_name = ""
+    _mae = ""
+    _oscillator_strength = 0
+    _dipole_moment = 0
+    _mo = []
+    _formatted_mo = "N/A"
+    _root = 0
+    _homo = 0
+    _mae_La = ""
+    _mae_Lb = ""
+>>>>>>> 3ce0acc (functional for 1, 2, and 3)
     
     
+<<<<<<< HEAD
+=======
+    def get_mae(self):
+        return self._mae
+     
+    def set_mae(self, x):
+        self._mae = str(x)
+    
+    def get_mae_La(self):
+        return self._mae_La
+     
+    def set_mae_La(self, x):
+        self._mae_La = str(x)
+    
+    def get_mae_Lb(self):
+        return self._mae_Lb
+     
+    def set_mae_Lb(self, x):
+        self._mae_Lb = str(x)
+    
+    def get_oscillator_strength(self):
+        return self._oscillator_strength
+    
+    def set_oscillator_strength(self, x):
+        self._oscillator_strength = str(x)
+    
+    def get_dipole_moment(self):
+        return self._dipole_moment
+    
+    def set_dipole_moment(self, x):
+        self._dipole_moment = str(x)
+    
+    def get_mo(self):
+        return self._mo
+    
+    def append_to_mo(self, x):
+        self._mo.append(x)
+    
+    def get_file_name(self):
+        return self._file_name
+    
+    def get_root(self):
+        return self._root
+    
+    def get_formatted_mo(self):
+        return self._formatted_mo
+    
+    def set_formatted_mo(self, x):
+        self._formatted_mo = x
+        
+    def get_homo(self):
+        return self._homo
+    
+    def set_homo(self, x):
+        self._homo = x
+
+>>>>>>> 3ce0acc (functional for 1, 2, and 3)
 class bcolors:
     CYAN = "\033[0;36m"
     LIGHT_GRAY = "\033[0;37m"
@@ -40,6 +111,7 @@ fileChoices = []
 fileCounter = 0
 print(tint(".log files present in directory:", bcolors.LIGHT_PURPLE))
 
+<<<<<<< HEAD
 for entry in listOfFiles:
     if fnmatch.fnmatch(entry, pattern):
             print (tint(str(fileCounter), bcolors.LIGHT_CYAN) + ": " + entry)
@@ -52,6 +124,8 @@ dipoleVersus= []
 tranVersus= []
 homoValue= []
 
+=======
+>>>>>>> 3ce0acc (functional for 1, 2, and 3)
 # simple function to compare one molecule to another and calculate sum of the absolute errors
 def compare(mol1, mol2):
     mae = 0.0
@@ -101,6 +175,7 @@ def ToGuissani(theName):
     molecule = bondLeng
     molecule=dict(zip(keys,molecule))
 
+<<<<<<< HEAD
 #Compare the opitmized structure to the reference structures
     maeLa = compare(molecule, guissaniLa)
     maeLb = compare(molecule, guissaniLb)
@@ -108,6 +183,27 @@ def ToGuissani(theName):
 
     maeVersus.append(winner)
     #  print("indole opt structure closest to %s (maeLa=%f, maeLb=%f) dipole=%s" % (winner, maeLa, maeLb, dipole))
+=======
+    #Compare the opitmized structure to the reference structures
+    mae_La = compare(molecule, guissani_La)
+    mae_Lb = compare(molecule, guissani_Lb)
+    winner = True if mae_La < mae_Lb else False
+    the_mae = ""
+    if (winner == True):
+        the_mae = "La"
+    else:
+        the_mae = "Lb"
+    logElement.set_mae(the_mae)
+    logElement.set_mae_La(mae_La)
+    logElement.set_mae_Lb(mae_Lb)
+    try:
+        the_osci = data.etoscs[int(logElement.get_root())]
+        logElement.set_oscillator_strength(the_osci)
+    except IndexError:
+        print(tint(("no oscillator strength found for root: " + logElement.get_root()), 
+              bcolors.DARK_GRAY))
+              
+>>>>>>> 3ce0acc (functional for 1, 2, and 3)
 
 #Appends the Oscillator Strength List
     lastOscis=data.etoscs[-(6):-1]
@@ -164,6 +260,7 @@ def ToGuissani(theName):
 #finds the HOMO and stores it in HOMO value
     homoValue.append(data.homos[0])
     
+<<<<<<< HEAD
     #print transition dipole moment
     print(data.etdips)
 #runs the program
@@ -256,6 +353,38 @@ def transitionFormatter (state):
     homo = int(homoValue[0])
     stateString = ""
     theState = int(state)
+=======
+    #finds the homo and sets it
+    logElement.set_homo(data.homos[0])
+    #breaks down Excited State Transition List
+    try: 
+        mo_transitions_possible = data.etsecs[0]
+
+        #find the transitions and formats them
+        for mo_element in mo_transitions_possible:
+            coeff_versus.append(mo_element[2])
+        for element in coeff_versus:
+            if abs(element) > abs(lgst_coeff):
+                lgst_coeff = element
+        for mo_element in mo_transitions_possible:
+            if mo_element[2] == lgst_coeff:
+                logElement.append_to_mo(mo_element[0][0])
+                logElement.append_to_mo(mo_element[1][0])
+
+        the_mo = logElement.get_mo()
+        logElement.set_formatted_mo(transition_formatter(logElement, the_mo[0]) 
+                                    + tint("->", bcolors.LIGHT_RED) 
+                                    + transition_formatter(logElement, the_mo[1]))
+    except IndexError:
+         print(tint(("no MO transition found for root: " + logElement.get_root()), 
+                    bcolors.DARK_GRAY))
+              
+#describes the raw MO transition numbers in relation to HOMO and LUMO
+def transition_formatter (logElement, state):
+    homo = int(logElement.get_homo())
+    state_string = ""
+    the_state = int(state)
+>>>>>>> 3ce0acc (functional for 1, 2, and 3)
     if (state >= homo + 1):
         #AKA LUMO
         stateString += "LUMO"
