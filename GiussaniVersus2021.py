@@ -101,17 +101,17 @@ guissaniLb = dict(zip(keys,guissaniLb))
 zero = dict(zip(keys,zero))
 
 #Prints Atoms, MOs, Bond Lengths, MAE, ESTs, the HOMO, Oscillator Strength
-def to_guissani(logFileParsed):
-    file_name=logFileParsed.get_file_name
+def to_guissani(logElement):
+    file_name=logElement.get_file_name()
     data = cclib.io.ccread(file_name)
     print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + file_name)
     data.atomcoords
     coords1= data.atomcoords[len(data.atomcoords)-1]
 #Automatically finds the bond lengths of the atom
-    bondLeng= []
+    bond_lengths= []
     def dis_formula(pos1, pos2):
         dist = np.linalg.norm(coords1[pos1] - coords1[pos2])
-        bondLeng.append(dist)
+        bond_lengths.append(dist)
 
     dis_formula(6, 8)
     dis_formula(8, 7)
@@ -125,7 +125,7 @@ def to_guissani(logFileParsed):
     dis_formula(3, 4)
 
 #defining the molecule as done with the keys
-    molecule = bondLeng
+    molecule = bond_lengths
     molecule=dict(zip(keys,molecule))
 
 #Compare the opitmized structure to the reference structures
@@ -133,9 +133,11 @@ def to_guissani(logFileParsed):
     maeLb = compare(molecule, guissaniLb)
     winner = True if maeLa < maeLb else False
 
-    maeVersus.append(winner)
+    logElement.set_mae(winner)
     #  print("indole opt structure closest to %s (maeLa=%f, maeLb=%f) dipole=%s" % (winner, maeLa, maeLb, dipole))
-
+    print(data.etoscs)
+    print("line 139")
+    print(data.etoscs[-(6):-1])
 #Appends the Oscillator Strength List
     lastOscis=data.etoscs[-(6):-1]
   #  print(data.etsecs[0][0])
@@ -236,15 +238,23 @@ def prompt_user():
            bcolors.LIGHT_GREEN))
     print(tint("Note: You should probably look at fewer files than the number of nstates.", 
            bcolors.DARK_GRAY))
+    #log files should be accessible throughout the program
+    global log_files
     log_files = [] 
     the_input = ""
-    while (the_input != "done"):    
-        the_input = int(input())
-        print("Selected: " + file_choices[the_input] + "\n")
-        log_instance = logFileData(file_choices[the_input])
-        log_files.append(log_instance)
-    print(tint("Input done.", 
-           bcolors.LIGHT_GREEN))
+    is_inputting = True
+    while (is_inputting):    
+        the_input = input()
+        if (the_input == "done"):
+            is_inputting = False
+            print(tint("Input done.", 
+                       bcolors.LIGHT_GREEN))
+        else:
+            the_input = int(the_input)
+            print("Selected: " + file_choices[the_input] + "\n")
+            log_instance = logFileData(file_choices[the_input])
+            log_files.append(log_instance)
+                  
     for element in log_files:
         to_guissani(element)
 
