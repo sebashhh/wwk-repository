@@ -10,12 +10,43 @@ import cclib
 import numpy as np
 import os, fnmatch
 
-class logIndicators:
+class logFileParsed:
+    file_name = ""
     mae = ""
     oscillator_strength = 0
     dipole_moment = 0
     mo_transition = ""
+    root = 0
     
+    def __init__(self, file_name):
+        self._file_name = file_name
+        #assuming that the file names are standardized to end in 1st
+        self._root = file_name[-7]
+    
+    def get_mae(self):
+        return self._mae
+     
+    def set_mae(self, x):
+        self._mae = x
+    
+    def get_oscillator_strength(self):
+        return self._oscillator_strength
+    
+    def set_oscillator_strength(self, x):
+        self._oscillator_strength = x
+    
+    def get_dipole_moment(self):
+        return self._dipole_moment
+    
+    def set_dipole_moment(self, x):
+        self.dipole_moment = x
+    
+    def get_mo_transition(self):
+        return self._mo_transition
+    
+    def set_mo_transition(self, x):
+        self._mo_transition = x
+
 class bcolors:
     CYAN = "\033[0;36m"
     LIGHT_GRAY = "\033[0;37m"
@@ -65,9 +96,9 @@ zero = dict(zip(keys,zero))
 
 #Prints Atoms, MOs, Bond Lengths, MAE, ESTs, the HOMO, Oscillator Strength
 def to_guissani(the_name):
-    filename=the_name
-    data = cclib.io.ccread(filename)
-    print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + filename)
+    file_name=the_name
+    data = cclib.io.ccread(file_name)
+    print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + file_name)
     data.atomcoords
     coords1= data.atomcoords[len(data.atomcoords)-1]
 #Automatically finds the bond lengths of the atom
