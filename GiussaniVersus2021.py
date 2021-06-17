@@ -168,11 +168,9 @@ def to_guissani(logElement):
     except IndexError:
         print(tint(("no oscillator strength found for root: " + logElement.get_root()), 
               bcolors.DARK_GRAY))
-              
-
+             
     #Now look for the last dipole moment in the file 
-    #(that of the optimum geometry and the state specified by root=)
-    #print(data.moments)        
+    #(that of the optimum geometry and the state specified by root=)     
     dipole = np.linalg.norm(data.moments[1])
     logElement.set_dipole_moment(dipole)
 
