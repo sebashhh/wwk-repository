@@ -10,7 +10,7 @@ import cclib
 import numpy as np
 import os, fnmatch
 
-class logFileParsed:
+class logFileData:
     file_name = ""
     mae = ""
     oscillator_strength = 0
@@ -46,6 +46,12 @@ class logFileParsed:
     
     def set_mo_transition(self, x):
         self._mo_transition = x
+    
+    def get_file_name(self):
+        return self._file_name
+    
+    def get_root(self):
+        return self._root
 
 class bcolors:
     CYAN = "\033[0;36m"
@@ -95,8 +101,8 @@ guissaniLb = dict(zip(keys,guissaniLb))
 zero = dict(zip(keys,zero))
 
 #Prints Atoms, MOs, Bond Lengths, MAE, ESTs, the HOMO, Oscillator Strength
-def to_guissani(the_name):
-    file_name=the_name
+def to_guissani(logFileParsed):
+    file_name=logFileParsed.get_file_name
     data = cclib.io.ccread(file_name)
     print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + file_name)
     data.atomcoords
@@ -210,31 +216,39 @@ def prompt_user():
     pattern = "*.log"
     file_choices = []
     file_counter = 0
+    file_counter_2 = 0
     print(tint(".log files present in directory:", 
                bcolors.LIGHT_PURPLE))
+    #looks in current directory for all .log files
     for entry in list_of_files:
         if fnmatch.fnmatch(entry, pattern):
-            print (tint(str(file_counter), bcolors.LIGHT_CYAN) + ": " + entry)
+            print (tint(str(file_counter), bcolors.LIGHT_CYAN) + ": " + entry, end= " ")
             file_counter += 1
+            file_counter_2 += 1
             file_choices.append(entry)
-            print()
-    print(tint("Type the number index of a optimization .log and ENTER to learn about the indicators.", 
+            if (file_counter_2 == 3):
+                print()
+                file_counter_2 = 0
+    
+    print(tint("\nType the number index of a optimization .log and ENTER to learn about the indicators.", 
            bcolors.LIGHT_GREEN))
     print(tint("Type 'done' when complete.", 
            bcolors.LIGHT_GREEN))
     print(tint("Note: You should probably look at fewer files than the number of nstates.", 
            bcolors.DARK_GRAY))
-    logFiles = [] 
-    theInput = ""
-    while theInput != "done":    
-        theInput = int(input())
-        print("Selected: " + file_choices[theInput] + "\n")
-        logFiles.append(file_choices[theInput])
+    log_files = [] 
+    the_input = ""
+    while (the_input != "done"):    
+        the_input = int(input())
+        print("Selected: " + file_choices[the_input] + "\n")
+        log_instance = logFileData(file_choices[the_input])
+        log_files.append(log_instance)
     print(tint("Input done.", 
            bcolors.LIGHT_GREEN))
-    for element in logFiles:
+    for element in log_files:
         to_guissani(element)
 
+prompt_user()
 maeInd = []
 osciInd = []
 dipoleInd = []
@@ -264,25 +278,25 @@ def DipoleShows (theList):
         dipoleInd.append(tint("Lb", bcolors.CYAN))
         dipoleInd.append(tint("La", bcolors.YELLOW))
 
-def TranShows (theList):
-    if theList[0] == homoValue[0] and theList[1] == homoValue[0] + 1:
-        tranInd.append(tint("La", bcolors.YELLOW))
-    elif theList[0] == homoValue[0] - 1 and theList[1] == homoValue[0] + 1:
-        tranInd.append(tint("Lb", bcolors.CYAN))
-    else:
-        tranInd.append(tint("N/A", bcolors.DARK_GRAY))
-    if theList[2] == homoValue[0] and theList[3] == homoValue[0] + 1:
-        tranInd.append(tint("La", bcolors.YELLOW))
-    elif theList[2] == homoValue[0] - 1 and theList[3] == homoValue[0] + 1:
-        tranInd.append(tint("Lb", bcolors.CYAN))
-    else:
-        tranInd.append(tint("N/A", bcolors.DARK_GRAY))
+ #def TranShows (theList):
+   # if theList[0] == homoValue[0] and theList[1] == homoValue[0] + 1:
+    #    tranInd.append(tint("La", bcolors.YELLOW))
+  #  elif theList[0] == homoValue[0] - 1 and theList[1] == homoValue[0] + 1:
+   #     tranInd.append(tint("Lb", bcolors.CYAN))
+  #  else:
+    #    tranInd.append(tint("N/A", bcolors.DARK_GRAY))
+  #  if theList[2] == homoValue[0] and theList[3] == homoValue[0] + 1:
+   #     tranInd.append(tint("La", bcolors.YELLOW))
+  #  elif theList[2] == homoValue[0] - 1 and theList[3] == homoValue[0] + 1:
+   #     tranInd.append(tint("Lb", bcolors.CYAN))
+  #  else:
+   #     tranInd.append(tint("N/A", bcolors.DARK_GRAY))
         
 #runs the functions that append to lists
-MaeShows(maeVersus)
-OsciShows(osciVersus)
-DipoleShows(dipoleVersus)
-TranShows(tranVersus)
+#MaeShows(maeVersus)
+#OsciShows(osciVersus)
+#DipoleShows(dipoleVersus)
+#TranShows(tranVersus)
     
 es1 = "Energy State 1"
 es2 = "Energy State 2"
