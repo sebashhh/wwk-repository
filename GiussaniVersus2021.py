@@ -11,6 +11,7 @@ import cclib
 import numpy as np
 import os, fnmatch
 
+#a class that store the indicators of La/Lb states as attributes
 class logFileData:
     _file_name = ""
     _mae = ""
@@ -22,6 +23,8 @@ class logFileData:
     _homo = 0
     _mae_La = ""
     _mae_Lb = ""
+    _dmv_angle = 0
+    _dmv_quadrant = ""
     
     def __init__(self, file_name):
         self._file_name = file_name
@@ -81,7 +84,19 @@ class logFileData:
     
     def set_homo(self, x):
         self._homo = x
-
+    
+    def get_dmv_angle(self):
+        return self._dmv_angle
+    
+    def set_dmv_angle(self, x):
+        self._dmv_angle = x
+    
+    def get_dmv_quadrant(self):
+        return self._dmv_quadrant
+    
+    def set_dmv_quadrant(self, x):
+        self._dmv_quadrant = x
+#ANSI escape code colors
 class bcolors:
     CYAN = "\033[0;36m"
     LIGHT_GRAY = "\033[0;37m"
@@ -95,6 +110,13 @@ class bcolors:
     ENDC = '\033[0m'
     UNDERLINE = '\033[4m'
 
+#the quadrants of dipole moment vector (dmv) direction
+class quadrants:
+    ONE = "-,+"
+    TWO = "+,+"
+    THREE = "+,-"
+    FOUR = "-,-"
+    
 #tint colors a String inserted. It is more readable and can be autocompleted with Shift+Space.
 def tint(string_to_insert, color):
     tinted_string = f"{color}{string_to_insert}{bcolors.ENDC}".format(
@@ -122,7 +144,7 @@ guissani_La = dict(zip(keys,guissani_La))
 guissani_Lb = dict(zip(keys,guissani_Lb))
 zero = dict(zip(keys,zero))
 
-#Prints Atoms, MOs, Bond Lengths, MAE, ESTs, the HOMO, Oscillator Strength
+#Parses out the indicators for each 
 def to_guissani(logElement):
     file_name = logElement.get_file_name()
     data = cclib.io.ccread(file_name)
@@ -223,6 +245,7 @@ def transition_formatter (logElement, state):
 
 #runs the program
 def prompt_user():
+    
     list_of_files = os.listdir('.')
     pattern = "*.log"
     file_choices = []
@@ -267,7 +290,7 @@ def prompt_user():
                   
     for element in log_files:
         to_guissani(element)
-
+#prints out info on each indicator
 def print_out_info():
     es = "Energy State" 
     print(" \nFour indicators suggest the identity of the indole's top two excited states")
