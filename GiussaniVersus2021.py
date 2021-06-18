@@ -167,9 +167,9 @@ def to_guissani(logElement):
     
     #~here~
     
-    print(data.etdips)
-    print(data.etdips[0])
-    print(data.etdips[0][0])
+    #print(data.etdips)
+    #print(data.etdips[0])
+    #print(data.etdips[0][0])
     
     #~and here~
     def dis_formula(pos1, pos2):
@@ -244,9 +244,36 @@ def to_guissani(logElement):
          print(tint(("no MO transition found for root: " + logElement.get_root()), 
                     bcolors.DARK_GRAY))
     try: 
-        dmv = data.etdips[logElement.get_root()]
-        print("line 148")
+        #e.g. the first root would pull from the first excited state
+        dmv = data.etdips[logElement.get_root() - 1]
+        #TODO: if it's necessary, maybe it's better to preserve the negatives for the calculations
+        x_vector = dmv[0]
+        y_vector = dmv[1]
+        z_vector = dmv[2]
+        if (x_vector < 0):
+        #(-, ?)
+            if (y_vector < 0):
+                logElement.set_dmv_quadrant(quadrants.FOUR)
+            else:
+                logElement.set_dmv_quadrant(quadrants.ONE)
+        else:
+        #(+, ?)
+            if (y_vector < 0):
+                logElement.set_dmv_quadrant(quadrants.THREE)
+            else:
+                logElement.set_dmv_quadrant(quadrants.TWO)
+        dot_product = abs(x_vector * 1) + abs(y_vector * 0)
+        vector_magnitude = math.sqrt((x_vector**2) + (y_vector**2)) * math.sqrt((1**2) + (0**2))
+        theta = math.acos(dot_product/vector_magnitude)
+        logElement.set_dmv_angle(theta)
+        print("269")
+        print(logElement.get_dmv_angle())
         print(dmv)
+        print(data.etdips)
+        print(x_vector)
+        print(y_vector)
+        print(dot_product)
+        print(vector_magnitude)
     except IndexError:
          print(tint(("no dipole moment vector found for root: " + logElement.get_root()), 
                     bcolors.DARK_GRAY))
