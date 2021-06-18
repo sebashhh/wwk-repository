@@ -10,6 +10,7 @@ Created on Fri Nov 20 12:49:06 2020
 import cclib
 import numpy as np
 import os, fnmatch
+import math
 
 #a class that store the indicators of La/Lb states as attributes
 class logFileData:
@@ -24,7 +25,7 @@ class logFileData:
     _mae_La = ""
     _mae_Lb = ""
     _dmv_angle = 0
-    _dmv_quadrant = ""
+    _dmv_quadrant = "Phantom"
     
     def __init__(self, file_name):
         self._file_name = file_name
@@ -71,7 +72,7 @@ class logFileData:
         return self._file_name
     
     def get_root(self):
-        return self._root
+        return int(self._root)
     
     def get_formatted_mo(self):
         return self._formatted_mo
@@ -96,6 +97,7 @@ class logFileData:
     
     def set_dmv_quadrant(self, x):
         self._dmv_quadrant = x
+
 #ANSI escape code colors
 class bcolors:
     CYAN = "\033[0;36m"
@@ -110,18 +112,26 @@ class bcolors:
     ENDC = '\033[0m'
     UNDERLINE = '\033[4m'
 
-#the quadrants of dipole moment vector (dmv) direction
-class quadrants:
-    ONE = "-,+"
-    TWO = "+,+"
-    THREE = "+,-"
-    FOUR = "-,-"
-    
 #tint colors a String inserted. It is more readable and can be autocompleted with Shift+Space.
 def tint(string_to_insert, color):
     tinted_string = f"{color}{string_to_insert}{bcolors.ENDC}".format(
             color = color, string_to_insert = string_to_insert)
     return tinted_string
+
+#we may observe the dmv direction oscillating between quadrants, 
+#but keeping the same angle  
+#vertical angles are always congruent
+
+#the quadrants of dipole moment vector (dmv) direction
+class quadrants:
+    #Lb
+    ONE = "-,+"
+    #La
+    TWO = "+,+"
+    #Lb
+    THREE = "+,-"
+    #La
+    FOUR = "-,-"
 
 # simple function to compare one molecule to another and calculate sum of the absolute errors
 def compare(mol1, mol2):
@@ -153,6 +163,15 @@ def to_guissani(logElement):
     coords1 = data.atomcoords[len(data.atomcoords)-1]
     #Automatically finds the bond lengths of the atom
     bond_lengths = []
+    #if you want to just see the data.<attribute> of something quickly, put it between
+    
+    #~here~
+    
+    print(data.etdips)
+    print(data.etdips[0])
+    print(data.etdips[0][0])
+    
+    #~and here~
     def dis_formula(pos1, pos2):
         dist = np.linalg.norm(coords1[pos1] - coords1[pos2])
         bond_lengths.append(dist)
@@ -224,7 +243,14 @@ def to_guissani(logElement):
     except IndexError:
          print(tint(("no MO transition found for root: " + logElement.get_root()), 
                     bcolors.DARK_GRAY))
-              
+    try: 
+        dmv = data.etdips[logElement.get_root()]
+        print("line 148")
+        print(dmv)
+    except IndexError:
+         print(tint(("no dipole moment vector found for root: " + logElement.get_root()), 
+                    bcolors.DARK_GRAY))
+
 #describes the raw MO transition numbers in relation to HOMO and LUMO
 def transition_formatter (logElement, state):
     homo = int(logElement.get_homo())
@@ -290,29 +316,30 @@ def prompt_user():
                   
     for element in log_files:
         to_guissani(element)
+
 #prints out info on each indicator
 def print_out_info():
     es = "Energy State" 
     print(" \nFour indicators suggest the identity of the indole's top two excited states")
     print(tint("MAE indicator:", bcolors.LIGHT_PURPLE)) 
     for element in log_files:
-        mae_printed_result = (es + " " + element.get_root() + "'s structure is closest to " 
+        mae_printed_result = (es + " " + str(element.get_root()) + "'s structure is closest to " 
                               + element.get_mae() + ". " + "maeLa: " + element.get_mae_La() 
         + " maeLb: " + element.get_mae_Lb())
         print(mae_printed_result)
     print(tint("Oscillator Strength indicator:", bcolors.LIGHT_PURPLE)) 
     for element in log_files:
-        osci_printed_result = (es + " " + element.get_root() + "'s oscillator strength: " 
+        osci_printed_result = (es + " " + str(element.get_root()) + "'s oscillator strength: " 
                              + str(element.get_oscillator_strength()))
         print(osci_printed_result)
     print(tint("Dipole Moment indicator:", bcolors.LIGHT_PURPLE))
     for element in log_files:
-        dipole_printed_result = (es + " " + element.get_root() + "'s dipole moment: " 
+        dipole_printed_result = (es + " " + str(element.get_root()) + "'s dipole moment: " 
                                + str(element.get_dipole_moment()))
         print(dipole_printed_result)
     print(tint("MO transition indicator:", bcolors.LIGHT_PURPLE)) 
     for element in log_files:
-        tran_printed_result = (es + " " + element.get_root() + "'s MO transition is closest to " 
+        tran_printed_result = (es + " " + str(element.get_root()) + "'s MO transition is closest to " 
                              + element.get_formatted_mo())
         print(tran_printed_result)
 
