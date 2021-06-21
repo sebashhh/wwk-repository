@@ -265,7 +265,7 @@ def to_guissani(logElement):
         dot_product = abs(x_vector * 1) + abs(y_vector * 0)
         vector_magnitude = math.sqrt((x_vector**2) + (y_vector**2)) * math.sqrt((1**2) + (0**2))
         theta = math.acos(dot_product/vector_magnitude)
-        logElement.set_dmv_angle(theta)
+        logElement.set_dmv_angle(radian_to_degrees(theta))
         print("269")
         print(logElement.get_dmv_angle())
         print(dmv)
@@ -274,6 +274,9 @@ def to_guissani(logElement):
         print(y_vector)
         print(dot_product)
         print(vector_magnitude)
+        print("277")
+        print(theta)
+        print(logElement.get_dmv_angle())
     except IndexError:
          print(tint(("no dipole moment vector found for root: " + logElement.get_root()), 
                     bcolors.DARK_GRAY))
@@ -295,6 +298,12 @@ def transition_formatter (logElement, state):
         if (state < homo):
             state_string += "-" + str(homo - the_state)
     return state_string
+
+#converts radians to degrees 
+def radian_to_degrees(radian_value):
+    ratio = (180/(math.pi))
+    degree_value = radian_value * ratio
+    return degree_value
 
 #runs the program
 def prompt_user():
@@ -348,27 +357,36 @@ def prompt_user():
 def print_out_info():
     es = "Energy State" 
     print(" \nFour indicators suggest the identity of the indole's top two excited states")
-    print(tint("MAE indicator:", bcolors.LIGHT_PURPLE)) 
+    print(tint("MAE indicator:", 
+               bcolors.LIGHT_PURPLE)) 
     for element in log_files:
         mae_printed_result = (es + " " + str(element.get_root()) + "'s structure is closest to " 
                               + element.get_mae() + ". " + "maeLa: " + element.get_mae_La() 
         + " maeLb: " + element.get_mae_Lb())
         print(mae_printed_result)
-    print(tint("Oscillator Strength indicator:", bcolors.LIGHT_PURPLE)) 
+    print(tint("Oscillator Strength indicator:", 
+               bcolors.LIGHT_PURPLE)) 
     for element in log_files:
         osci_printed_result = (es + " " + str(element.get_root()) + "'s oscillator strength: " 
                              + str(element.get_oscillator_strength()))
         print(osci_printed_result)
-    print(tint("Dipole Moment indicator:", bcolors.LIGHT_PURPLE))
+    print(tint("Dipole Moment indicator:", 
+               bcolors.LIGHT_PURPLE))
     for element in log_files:
         dipole_printed_result = (es + " " + str(element.get_root()) + "'s dipole moment: " 
                                + str(element.get_dipole_moment()))
         print(dipole_printed_result)
-    print(tint("MO transition indicator:", bcolors.LIGHT_PURPLE)) 
+    print(tint("MO transition indicator:", 
+               bcolors.LIGHT_PURPLE)) 
     for element in log_files:
         tran_printed_result = (es + " " + str(element.get_root()) + "'s MO transition is closest to " 
                              + element.get_formatted_mo())
         print(tran_printed_result)
+    print(tint("Dipole Moment Vector indicator:", 
+               bcolors.LIGHT_PURPLE))
+    for element in log_files:
+        dmv_printed_result = (es + " " + str(element.get_root()) + "'s Dipole Moment Vector is closest to " 
+                             + element.get_formatted_mo())
 
 #actual method calls
 prompt_user()
