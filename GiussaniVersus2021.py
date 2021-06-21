@@ -206,7 +206,7 @@ def to_guissani(logElement):
         the_osci = data.etoscs[int(logElement.get_root())]
         logElement.set_oscillator_strength(the_osci)
     except IndexError:
-        print(tint(("no oscillator strength found for root: " + logElement.get_root()), 
+        print(tint(("no oscillator strength found for root: " + str(logElement.get_root())), 
               bcolors.DARK_GRAY))
              
     #Now look for the last dipole moment in the file 
@@ -240,7 +240,7 @@ def to_guissani(logElement):
                                     + tint("->", bcolors.LIGHT_RED) 
                                     + transition_formatter(logElement, the_mo[1]))
     except IndexError:
-         print(tint(("no MO transition found for root: " + logElement.get_root()), 
+         print(tint(("no MO transition found for root: " + str(logElement.get_root())), 
                     bcolors.DARK_GRAY))
     try: 
         #e.g. the first root would pull from the first excited state
@@ -266,7 +266,7 @@ def to_guissani(logElement):
         theta = math.acos(dot_product/vector_magnitude)
         logElement.set_dmv_angle(radian_to_degrees(theta))
     except IndexError:
-         print(tint(("no dipole moment vector found for root: " + logElement.get_root()), 
+         print(tint(("no dipole moment vector found for root: " + str(logElement.get_root())), 
                     bcolors.DARK_GRAY))
 
 #describes the raw MO transition numbers in relation to HOMO and LUMO
