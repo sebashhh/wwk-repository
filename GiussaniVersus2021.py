@@ -265,18 +265,6 @@ def to_guissani(logElement):
         vector_magnitude = math.sqrt((x_vector**2) + (y_vector**2)) * math.sqrt((1**2) + (0**2))
         theta = math.acos(dot_product/vector_magnitude)
         logElement.set_dmv_angle(radian_to_degrees(theta))
-        print("269")
-        print(logElement.get_dmv_angle())
-        print(dmv)
-        print(data.etdips)
-        print(x_vector)
-        print(y_vector)
-        print(logElement.get_dmv_quadrant())
-        print(dot_product)
-        print(vector_magnitude)
-        print("277")
-        print(theta)
-        print(logElement.get_dmv_angle())
     except IndexError:
          print(tint(("no dipole moment vector found for root: " + logElement.get_root()), 
                     bcolors.DARK_GRAY))
@@ -360,7 +348,7 @@ def print_out_info():
     print(tint("MAE indicator:", 
                bcolors.LIGHT_PURPLE)) 
     for element in log_files:
-        mae_printed_result = (es + " " + str(element.get_root()) + "'s structure is closest to " 
+        mae_printed_result = (es + " "Dipole + str(element.get_root()) + "'s structure is closest to " 
                               + element.get_mae() + ". " + "maeLa: " + element.get_mae_La() 
         + " maeLb: " + element.get_mae_Lb())
         print(mae_printed_result)
@@ -392,7 +380,7 @@ def print_out_info():
             dmv_printed_result += "La excited state"
         elif (element.get_dmv_quadrant() == quadrants.ONE or element.get_dmv_quadrant() == quadrants.THREE):
             dmv_printed_result += "Lb excited state"
-    print(dmv_printed_result)
+        print(dmv_printed_result)
 #actual method calls
 prompt_user()
 print_out_info()
