@@ -348,7 +348,7 @@ def print_out_info():
     print(tint("MAE indicator:", 
                bcolors.LIGHT_PURPLE)) 
     for element in log_files:
-        mae_printed_result = (es + " "Dipole + str(element.get_root()) + "'s structure is closest to " 
+        mae_printed_result = (es + " " + str(element.get_root()) + "'s structure is closest to " 
                               + element.get_mae() + ". " + "maeLa: " + element.get_mae_La() 
         + " maeLb: " + element.get_mae_Lb())
         print(mae_printed_result)
