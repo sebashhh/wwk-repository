@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -t 10:00:00
+#SBATCH -t 24:00:00
 #SBATCH --job-name="qchem"
 #SBATCH --output="qchem%j.%N.out"
 #SBATCH --error="qchem%j.%N.err"
@@ -12,7 +12,7 @@
 #SBATCH --account=smc102
 
 nthreads=4          #How many processors the job will use (match this to the #SBATCH--cpus-per-task line above
-jobstem=indole-qchem-M06c #Filename of qchem job file; assumes you use a inp extension so don't include it on this line
+jobstem=TITLE #Filename of qchem job file; assumes you use a inp extension so don't include it on this line
 jobfile=$jobstem.in
 outputfile=$jobstem.out
 
