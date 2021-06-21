@@ -94,7 +94,7 @@ class logFileData:
     
     def get_dmv_quadrant(self):
         return self._dmv_quadrant
-    
+   
     def set_dmv_quadrant(self, x):
         self._dmv_quadrant = x
 
@@ -118,7 +118,7 @@ def tint(string_to_insert, color):
             color = color, string_to_insert = string_to_insert)
     return tinted_string
 
-#we may observe the dmv direction oscillating between quadrants, 
+#we may observe the dmv direction osc9346illating between quadrants, 
 #but keeping the same angle  
 #vertical angles are always congruent
 
@@ -164,7 +164,6 @@ def to_guissani(logElement):
     #Automatically finds the bond lengths of the atom
     bond_lengths = []
     #if you want to just see the data.<attribute> of something quickly, put it between
-    
     #~here~
     
     #print(data.etdips)
@@ -272,6 +271,7 @@ def to_guissani(logElement):
         print(data.etdips)
         print(x_vector)
         print(y_vector)
+        print(logElement.get_dmv_quadrant())
         print(dot_product)
         print(vector_magnitude)
         print("277")
@@ -385,9 +385,14 @@ def print_out_info():
     print(tint("Dipole Moment Vector indicator:", 
                bcolors.LIGHT_PURPLE))
     for element in log_files:
-        dmv_printed_result = (es + " " + str(element.get_root()) + "'s Dipole Moment Vector is closest to " 
-                             + element.get_formatted_mo())
-
+        dmv_printed_result= (es + " " + str(element.get_root()) + "'s Dipole Moment Vector is: " 
+                             + str(element.get_dmv_angle()) + " degrees")
+        dmv_printed_result += ("\nThe vectors point: " + element.get_dmv_quadrant() + ", indicative of the ")
+        if (element.get_dmv_quadrant() == quadrants.TWO or element.get_dmv_quadrant() == quadrants.FOUR ):
+            dmv_printed_result += "La excited state"
+        elif (element.get_dmv_quadrant() == quadrants.ONE or element.get_dmv_quadrant() == quadrants.THREE):
+            dmv_printed_result += "Lb excited state"
+    print(dmv_printed_result)
 #actual method calls
 prompt_user()
 print_out_info()
