@@ -23,15 +23,16 @@ def tint(stringToInsert, color):
             color = color, stringToInsert = stringToInsert)
     return tintedString
 
+job_count = 3
 functional = ""
 basis_set = "6-31+G*"
-titles = []
-file_data = []
-sh_data = []
+titles = [''] * job_count
+file_data = [''] * job_count
+sh_data = [''] * job_count
 roman_numeral = ""
 
 #loads the GJF template from the local directory
-for i in range(2)
+for i in range(2):
     with open("!QChemInput.in", 'r') as file :
         file_data[i] = file.read()
 #loads the qchem.in job submission template from the local directory
@@ -71,55 +72,39 @@ while is_configuring:
                bcolors.LIGHT_CYAN))
     the_input = str(input())
     if(the_input.lower() == "ok"):
-        for i in range(2)
+        for i in range(2):
+            #defines titles
             titles[i] = "Qfuncs"
             titles[i] += functional + "-" + romanNumeral + "-"
             
             if (i == 0):
                 titles[i] += "1st"
-                elif (i == 1):
-                    titles[i] += "2nd"
-                    elif (i == 2):
-                        titles[i] += "3rd"
+            elif (i == 1):
+                titles[i] += "2nd"
+            elif (i == 2):
+                titles[i] += "3rd"
             
-        
+            #fills template with appropriate keywords
             file_data[i] = file_data[i].replace(
                 'TITLE', titles[i])
-        
-        fileData1 = fileData1.replace('ROOT', 'root=1')
-        fileData2 = fileData2.replace('ROOT', 'root=2')
-        fileData3 = fileData3.replace('ROOT', 'root=3')
-        
-        fileData1 = fileData1.replace('FUNCTIONAL', functional)
-        fileData2 = fileData2.replace('FUNCTIONAL', functional)
-        fileData3 = fileData3.replace('FUNCTIONAL', functional)
-        
-        fileData1 = fileData1.replace('BASIS_SET', basis_set)
-        fileData2 = fileData2.replace('BASIS_SET', basis_set)
-        fileData3 = fileData3.replace('BASIS_SET', basis_set)
-        
-        shData1 = shData1.replace('TITLE', title1)
-        shData2 = shData2.replace('TITLE', title2)
-        shData3 = shData3.replace('TITLE', title3)
-        #Creates root1.gjf
-        with open(title1 + ".gjf", 'w') as file:
-            file.write(fileData1)
-        #Creates root2.gjf    
-        with open(title2 + ".gjf", 'w') as file:
-            file.write(fileData2)
-        #Creates root3.gjf
-        with open(title3 + ".gjf", 'w') as file:
-            file.write(fileData3)
-        #Creates root1.sh
-        with open(title1 + ".sh", 'w') as file2:
-            file2.write(shData1)
-        #Creates root2.sh    
-        with open(title2 + ".sh", 'w') as file2:
-            file2.write(shData2)
-        #Creates root3.sh  
-        with open(title3 + ".sh", 'w') as file2:
-            file2.write(shData3)
-        isConfiguring = False
+            file_data[i] = file_data[i].replace(
+                'ROOT', ('root=' + str(i+1)))
+            file_data[i] = file_data[i].replace(
+                'FUNCTIONAL', functional)
+            file_data[i] = file_data[i].replace(
+                'BASIS_SET', basis_set)
+            sh_data[i] = sh_data[i].replace(
+                'TITLE', titles[i])
+            
+            #Creates .in files
+            with open(titles[i] + ".in", 'w') as file:
+                file.write(file_data[i])
+     
+            #Creates .sh files(qchem)
+            with open(titles[i] + ".sh", 'w') as file2:
+                file2.write(sh_data[i])
+               
+            isConfiguring = False
     else:
         print("So...you're not ready.")
 
