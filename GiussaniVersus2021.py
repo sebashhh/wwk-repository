@@ -65,8 +65,11 @@ class logFileData:
     def get_mo(self):
         return self._mo
     
-    def append_to_mo(self, x):
-        self._mo.append(x)
+    #def append_to_mo(self, x):
+        #self._mo.append(x)
+    
+    def set_mo(self, x, y):
+        self._mo = [x, y]
     
     def get_file_name(self):
         return self._file_name
@@ -159,8 +162,6 @@ zero = dict(zip(keys,zero))
 #Parses out the indicators for each 
 def to_guissani(logElement):
     file_name = logElement.get_file_name()
-    print("160")
-    print(file_name)
     data = cclib.io.ccread(file_name)
     print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + file_name)
     data.atomcoords
@@ -242,11 +243,13 @@ def to_guissani(logElement):
                 lgst_coeff = element
         for mo_element in mo_transitions_possible:
             if mo_element[2] == lgst_coeff:
-                logElement.append_to_mo(mo_element[0][0])
-                logElement.append_to_mo(mo_element[1][0])
+                logElement.set_mo(mo_element[0][0], mo_element[1][0])
                 print("242")
                 print(mo_element[0][0])
                 print(mo_element[1][0])
+        print("248")
+        print(logElement.get_mo())
+        print(logElement.get_oscillator_strength())
         print("238")
         print(lgst_coeff)
         the_mo = logElement.get_mo()
