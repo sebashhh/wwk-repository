@@ -97,7 +97,9 @@ class logFileData:
    
     def set_dmv_quadrant(self, x):
         self._dmv_quadrant = x
-
+    
+    def __str__(self):
+        return self._file_name + " is a logFileData object."
 #ANSI escape code colors
 class bcolors:
     CYAN = "\033[0;36m"
@@ -157,6 +159,8 @@ zero = dict(zip(keys,zero))
 #Parses out the indicators for each 
 def to_guissani(logElement):
     file_name = logElement.get_file_name()
+    print("160")
+    print(file_name)
     data = cclib.io.ccread(file_name)
     print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + file_name)
     data.atomcoords
@@ -350,6 +354,8 @@ def prompt_user():
             log_files.append(log_instance)
                   
     for element in log_files:
+        print("line 355")
+        print(element)
         to_guissani(element)
 
 #prints out info on each indicator
