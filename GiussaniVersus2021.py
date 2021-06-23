@@ -24,6 +24,7 @@ class logFileData:
     _homo = 0
     _mae_La = ""
     _mae_Lb = ""
+    _dmv = []
     _dmv_angle = 0
     _dmv_quadrant = "Phantom"
     _nitrogen_coords = []
@@ -108,6 +109,11 @@ class logFileData:
     def set_nitrogen_coords(self, x):
         self._nitrogen_coords = x
     
+    def get_dmv(self):
+        return self._dmv
+    
+    def set_dmv(self, x):
+        self._dmv = x
     #equivalent to toString in java, will get printed if you try to print the element
     def __str__(self):
         return self._file_name + " is a logFileData object."
@@ -257,6 +263,7 @@ def to_guissani(logElement):
     try: 
         #e.g. the first root would pull from the first excited state
         dmv = data.etdips[logElement.get_root() - 1]
+        logElement.set_dmv(dmv)
         #TODO: if it's necessary, maybe it's better to preserve the negatives for the calculations
         x_vector = dmv[0]
         y_vector = dmv[1]
@@ -280,7 +287,12 @@ def to_guissani(logElement):
     except IndexError:
          print(tint(("no dipole moment vector found for root: " + str(logElement.get_root())), 
                     bcolors.DARK_GRAY))
-
+    #set nitrogen coordinate. This is based on a hard coded value for now.
+    #perhaps it would be good to have a safeguard if the atom numbering changes?
+    
+    logElement.set_nitrogen_coords(data.atomcoords[-1][6])
+    print(logElement.get_nitrogen_coords())    
+    
 #describes the raw MO transition numbers in relation to HOMO and LUMO
 def transition_formatter (logElement, state):
     homo = int(logElement.get_homo())
@@ -357,6 +369,7 @@ def prompt_user():
 def print_out_info():
     es = "Energy State" 
     print(" \nFour indicators suggest the identity of the indole's top two excited states")
+    
     print(tint("MAE indicator:", 
                bcolors.LIGHT_PURPLE)) 
     for element in log_files:
@@ -364,35 +377,38 @@ def print_out_info():
                               + element.get_mae() + ". " + "maeLa: " + element.get_mae_La() 
         + " maeLb: " + element.get_mae_Lb())
         print(mae_printed_result)
+    
     print(tint("Oscillator Strength indicator:", 
                bcolors.LIGHT_PURPLE)) 
     for element in log_files:
         osci_printed_result = (es + " " + str(element.get_root()) + "'s oscillator strength: " 
                              + str(element.get_oscillator_strength()))
         print(osci_printed_result)
+    
     print(tint("Dipole Moment indicator:", 
                bcolors.LIGHT_PURPLE))
     for element in log_files:
         dipole_printed_result = (es + " " + str(element.get_root()) + "'s dipole moment: " 
                                + str(element.get_dipole_moment()))
         print(dipole_printed_result)
+    
     print(tint("MO transition indicator:", 
                bcolors.LIGHT_PURPLE)) 
     for element in log_files:
         tran_printed_result = (es + " " + str(element.get_root()) + "'s MO transition is closest to " 
                              + element.get_formatted_mo())
         print(tran_printed_result)
+    
     print(tint("Dipole Moment Vector indicator:", 
                bcolors.LIGHT_PURPLE))
     for element in log_files:
         dmv_printed_result= (es + " " + str(element.get_root()) + "'s Dipole Moment Vector is: " 
                              + str(element.get_dmv_angle()) + " degrees")
-        dmv_printed_result += ("\nThe vectors point: " + element.get_dmv_quadrant() + ", indicative of the ")
-        if (element.get_dmv_quadrant() == quadrants.TWO or element.get_dmv_quadrant() == quadrants.FOUR ):
-            dmv_printed_result += "La excited state"
-        elif (element.get_dmv_quadrant() == quadrants.ONE or element.get_dmv_quadrant() == quadrants.THREE):
-            dmv_printed_result += "Lb excited state"
+        dmv_printed_result += ("\nThe vectors point: " + element.get_dmv_quadrant() + ", " + str(element.get_dmv()))
+        dmv_printed_result += ("\nNitrogen atom coordinates: " + str(element.get_nitrogen_coords()))
         print(dmv_printed_result)
+    
+   
 #actual method calls
 prompt_user()
 print_out_info()
