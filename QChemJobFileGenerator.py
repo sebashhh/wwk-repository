@@ -32,11 +32,11 @@ sh_data = [''] * job_count
 roman_numeral = ""
 
 #loads the GJF template from the local directory
-for i in range(2):
-    with open("!QChemInput.in", 'r') as file :
+for i in range(job_count):
+    with open("theQChemInputJFG.in", 'r') as file :
         file_data[i] = file.read()
 #loads the qchem.in job submission template from the local directory
-    with open("!qchemJob.sh", 'r') as file_2 :
+    with open("theQchemJob.sh", 'r') as file_2 :
         sh_data[i] = file_2.read()
 
 #prompts the user to configure their settings
@@ -59,7 +59,7 @@ while is_configuring:
     
     the_input = str(input())
     if(the_input.lower() != "ok"):
-        romanNumeral = the_input.upper()
+        roman_numeral = the_input.upper()
     
     print(tint("Current Settings: ", 
                bcolors.CYAN))
@@ -68,14 +68,14 @@ while is_configuring:
     print("Roman Numeral: " + roman_numeral)
     
     print(tint("Set Q-Chem Functional for testing." +
-               "\nType 'ok' to generate your .gjf's.", 
+               "\nType 'ok' to generate your .in's.", 
                bcolors.LIGHT_CYAN))
     the_input = str(input())
     if(the_input.lower() == "ok"):
-        for i in range(2):
+        for i in range(job_count):
             #defines titles
             titles[i] = "Qfuncs"
-            titles[i] += functional + "-" + romanNumeral + "-"
+            titles[i] += functional + "-" + roman_numeral + "-"
             
             if (i == 0):
                 titles[i] += "1st"
@@ -88,7 +88,7 @@ while is_configuring:
             file_data[i] = file_data[i].replace(
                 'TITLE', titles[i])
             file_data[i] = file_data[i].replace(
-                'ROOT', ('root=' + str(i+1)))
+                'RT_EQUALS', (str(i+1)))
             file_data[i] = file_data[i].replace(
                 'FUNCTIONAL', functional)
             file_data[i] = file_data[i].replace(
@@ -103,8 +103,8 @@ while is_configuring:
             #Creates .sh files(qchem)
             with open(titles[i] + ".sh", 'w') as file2:
                 file2.write(sh_data[i])
-               
-            isConfiguring = False
+        is_configuring = False
+            
     else:
         print("So...you're not ready.")
 
