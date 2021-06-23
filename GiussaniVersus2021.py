@@ -26,6 +26,7 @@ class logFileData:
     _mae_Lb = ""
     _dmv_angle = 0
     _dmv_quadrant = "Phantom"
+    _nitrogen_coords = []
     
     def __init__(self, file_name):
         self._file_name = file_name
@@ -101,6 +102,13 @@ class logFileData:
     def set_dmv_quadrant(self, x):
         self._dmv_quadrant = x
     
+    def get_nitrogen_coords(self):
+        return self._nitrogen_coords
+    
+    def set_nitrogen_coords(self, x):
+        self._nitrogen_coords = x
+    
+    #equivalent to toString in java, will get printed if you try to print the element
     def __str__(self):
         return self._file_name + " is a logFileData object."
 #ANSI escape code colors
@@ -229,12 +237,7 @@ def to_guissani(logElement):
     try: 
         mo_transitions_possible = []
         mo_transitions_possible = data.etsecs[int(logElement.get_root()) - 1]
-        print("226")
-        print(mo_transitions_possible)
-        #print(data.etsecs)
-        print("229")
-        for i in data.etsecs:
-            print(i)
+        
         #find the transitions and formats them
         for mo_element in mo_transitions_possible:
             coeff_versus.append(mo_element[2])
@@ -244,16 +247,7 @@ def to_guissani(logElement):
         for mo_element in mo_transitions_possible:
             if mo_element[2] == lgst_coeff:
                 logElement.set_mo(mo_element[0][0], mo_element[1][0])
-                print("242")
-                print(mo_element[0][0])
-                print(mo_element[1][0])
-        print("248")
-        print(logElement.get_mo())
-        print(logElement.get_oscillator_strength())
-        print("238")
-        print(lgst_coeff)
         the_mo = logElement.get_mo()
-        print(the_mo) 
         logElement.set_formatted_mo(transition_formatter(logElement, the_mo[0]) 
                                     + tint("->", bcolors.LIGHT_RED) 
                                     + transition_formatter(logElement, the_mo[1]))
@@ -357,8 +351,6 @@ def prompt_user():
             log_files.append(log_instance)
                   
     for element in log_files:
-        print("line 355")
-        print(element)
         to_guissani(element)
 
 #prints out info on each indicator
