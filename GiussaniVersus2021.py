@@ -226,6 +226,9 @@ def to_guissani(logElement):
         print("226")
         print(mo_transitions_possible)
         print(data.etsecs)
+        print("229")
+        for i in data.etsecs:
+            print(i)
         #find the transitions and formats them
         for mo_element in mo_transitions_possible:
             coeff_versus.append(mo_element[2])
