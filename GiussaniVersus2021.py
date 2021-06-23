@@ -222,10 +222,11 @@ def to_guissani(logElement):
     logElement.set_homo(data.homos[0])
     #breaks down Excited State Transition List
     try: 
+        mo_transitions_possible = []
         mo_transitions_possible = data.etsecs[int(logElement.get_root()) - 1]
         print("226")
         print(mo_transitions_possible)
-        print(data.etsecs)
+        #print(data.etsecs)
         print("229")
         for i in data.etsecs:
             print(i)
@@ -239,9 +240,13 @@ def to_guissani(logElement):
             if mo_element[2] == lgst_coeff:
                 logElement.append_to_mo(mo_element[0][0])
                 logElement.append_to_mo(mo_element[1][0])
+                print("242")
+                print(mo_element[0][0])
+                print(mo_element[1][0])
         print("238")
         print(lgst_coeff)
         the_mo = logElement.get_mo()
+        print(the_mo) 
         logElement.set_formatted_mo(transition_formatter(logElement, the_mo[0]) 
                                     + tint("->", bcolors.LIGHT_RED) 
                                     + transition_formatter(logElement, the_mo[1]))
