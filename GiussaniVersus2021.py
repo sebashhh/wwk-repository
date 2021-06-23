@@ -203,6 +203,8 @@ def to_guissani(logElement):
     logElement.set_mae_La(mae_La)
     logElement.set_mae_Lb(mae_Lb)
     try:
+        print("206")
+        print(data.etoscs)
         the_osci = data.etoscs[int(logElement.get_root())]
         logElement.set_oscillator_strength(the_osci)
     except IndexError:
