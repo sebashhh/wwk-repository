@@ -203,9 +203,7 @@ def to_guissani(logElement):
     logElement.set_mae_La(mae_La)
     logElement.set_mae_Lb(mae_Lb)
     try:
-        print("206")
-        print(data.etoscs)
-        the_osci = data.etoscs[int(logElement.get_root())]
+        the_osci = data.etoscs[int(logElement.get_root()) - 1]
         logElement.set_oscillator_strength(the_osci)
     except IndexError:
         print(tint(("no oscillator strength found for root: " + str(logElement.get_root())), 
@@ -224,8 +222,10 @@ def to_guissani(logElement):
     logElement.set_homo(data.homos[0])
     #breaks down Excited State Transition List
     try: 
-        mo_transitions_possible = data.etsecs[0]
-
+        mo_transitions_possible = data.etsecs[int(logElement.get_root()) - 1]
+        print("226")
+        print(mo_transitions_possible)
+        print(data.etsecs)
         #find the transitions and formats them
         for mo_element in mo_transitions_possible:
             coeff_versus.append(mo_element[2])
@@ -236,7 +236,8 @@ def to_guissani(logElement):
             if mo_element[2] == lgst_coeff:
                 logElement.append_to_mo(mo_element[0][0])
                 logElement.append_to_mo(mo_element[1][0])
-
+        print("238")
+        print(lgst_coeff)
         the_mo = logElement.get_mo()
         logElement.set_formatted_mo(transition_formatter(logElement, the_mo[0]) 
                                     + tint("->", bcolors.LIGHT_RED) 

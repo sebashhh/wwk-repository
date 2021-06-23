@@ -37,18 +37,18 @@ shData3 = ""
 romanNumeral = ""
 
 #loads the GJF template from the local directory
-with open("!GaussianInputJFG.gjf", 'r') as file :
+with open("theGaussianInputJFG.gjf", 'r') as file :
     fileData1 = file.read()
-with open("!GaussianInputJFG.gjf", 'r') as file :
+with open("theGaussianInputJFG.gjf", 'r') as file :
     fileData2 = file.read()
-with open("!GaussianInputJFG.gjf", 'r') as file :
+with open("theGaussianInputJFG.gjf", 'r') as file :
     fileData3 = file.read()
 #loads the gaussian.sh job submission template from the local directory
-with open("!gaussianJob.sh", 'r') as file2 :
+with open("theGaussianJob.sh", 'r') as file2 :
     shData1 = file2.read()
-with open("!gaussianJob.sh", 'r') as file2 :
+with open("theGaussianJob.sh", 'r') as file2 :
     shData2 = file2.read()
-with open("!gaussianJob.sh", 'r') as file2 :
+with open("theGaussianJob.sh", 'r') as file2 :
     shData3 = file2.read()
 
 isConfiguring = True
