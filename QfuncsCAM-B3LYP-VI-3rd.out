@@ -123,8 +123,8 @@ CIS_N_ROOTS  = 3
 CIS_SINGLETS = true
 CIS_TRIPLETS = false
 CIS_STATE_DERIV = 3
-MEM_STATIC=500
-MEM_TOTAL=3000
+MEM_STATIC = 500
+MEM_TOTAL = 3000
 $end
 --------------------------------------------------------------
  ----------------------------------------------------------------
