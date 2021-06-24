@@ -321,7 +321,9 @@ def radian_to_degrees(radian_value):
 def prompt_user():
     
     list_of_files = os.listdir('.')
+    #the pattern for Gaussian output
     pattern = "*.log"
+    #the pattern for Q-Chem output
     pattern_2 = "*.out"
     file_choices = []
     file_counter = 0
