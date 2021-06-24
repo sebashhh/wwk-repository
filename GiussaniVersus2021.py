@@ -322,6 +322,7 @@ def prompt_user():
     
     list_of_files = os.listdir('.')
     pattern = "*.log"
+    pattern_2 = "*.out"
     file_choices = []
     file_counter = 0
     file_counter_2 = 0
@@ -329,7 +330,7 @@ def prompt_user():
                bcolors.LIGHT_PURPLE))
     #looks in current directory for all .log files
     for entry in list_of_files:
-        if fnmatch.fnmatch(entry, pattern):
+        if (fnmatch.fnmatch(entry, pattern)) or (fnmatch.fnmatch(entry, pattern_2)):
             print (tint(str(file_counter), bcolors.LIGHT_CYAN) + ": " + entry, end= " ")
             file_counter += 1
             file_counter_2 += 1
