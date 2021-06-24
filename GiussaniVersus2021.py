@@ -260,38 +260,7 @@ def to_guissani(logElement):
     except IndexError:
          print(tint(("no MO transition found for root: " + str(logElement.get_root())), 
                     bcolors.DARK_GRAY))
-    try: 
-        #e.g. the first root would pull from the first excited state
-        dmv = data.etdips[logElement.get_root() - 1]
-        logElement.set_dmv(dmv)
-        #TODO: if it's necessary, maybe it's better to preserve the negatives for the calculations
-        x_vector = dmv[0]
-        y_vector = dmv[1]
-        z_vector = dmv[2]
-        if (x_vector < 0):
-        #(-, ?)
-            if (y_vector < 0):
-                logElement.set_dmv_quadrant(quadrants.FOUR)
-            else:
-                logElement.set_dmv_quadrant(quadrants.ONE)
-        else:
-        #(+, ?)
-            if (y_vector < 0):
-                logElement.set_dmv_quadrant(quadrants.THREE)
-            else:
-                logElement.set_dmv_quadrant(quadrants.TWO)
-        dot_product = abs(x_vector * 1) + abs(y_vector * 0)
-        vector_magnitude = math.sqrt((x_vector**2) + (y_vector**2)) * math.sqrt((1**2) + (0**2))
-        theta = math.acos(dot_product/vector_magnitude)
-        logElement.set_dmv_angle(radian_to_degrees(theta))
-    except IndexError:
-         print(tint(("no dipole moment vector found for root: " + str(logElement.get_root())), 
-                    bcolors.DARK_GRAY))
-    #set nitrogen coordinate. This is based on a hard coded value for now.
-    #perhaps it would be good to have a safeguard if the atom numbering changes?
     
-    logElement.set_nitrogen_coords(data.atomcoords[-1][6])
-    print(logElement.get_nitrogen_coords())    
     
 #describes the raw MO transition numbers in relation to HOMO and LUMO
 def transition_formatter (logElement, state):
