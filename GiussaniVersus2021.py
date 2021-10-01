@@ -11,6 +11,7 @@ import cclib
 import numpy as np
 import os, fnmatch
 import math
+import StringTinter as t
 
 #a class that store the indicators of La/Lb states as attributes
 class logFileData:
@@ -117,27 +118,8 @@ class logFileData:
     #equivalent to toString in java, will get printed if you try to print the element
     def __str__(self):
         return self._file_name + " is a logFileData object."
-#ANSI escape code colors
-class bcolors:
-    CYAN = "\033[0;36m"
-    LIGHT_GRAY = "\033[0;37m"
-    DARK_GRAY = "\033[1;30m"
-    LIGHT_RED = "\033[1;31m"
-    LIGHT_GREEN = "\033[1;32m"
-    YELLOW = "\033[1;33m"
-    LIGHT_BLUE = "\033[1;34m"
-    LIGHT_PURPLE = "\033[1;35m"
-    LIGHT_CYAN = "\033[1;36m"
-    ENDC = '\033[0m'
-    UNDERLINE = '\033[4m'
 
-#tint colors a String inserted. It is more readable and can be autocompleted with Shift+Space.
-def tint(string_to_insert, color):
-    tinted_string = f"{color}{string_to_insert}{bcolors.ENDC}".format(
-            color = color, string_to_insert = string_to_insert)
-    return tinted_string
-
-#we may observe the dmv direction osc9346illating between quadrants, 
+#we may observe the dmv direction oscillating between quadrants, 
 #but keeping the same angle  
 #vertical angles are always congruent
 
@@ -225,8 +207,8 @@ def to_guissani(logElement):
         the_osci = data.etoscs[int(logElement.get_root()) - 1]
         logElement.set_oscillator_strength(the_osci)
     except IndexError:
-        print(tint(("no oscillator strength found for root: " + str(logElement.get_root())), 
-              bcolors.DARK_GRAY))
+        print(t.tint(("no oscillator strength found for root: " + str(logElement.get_root())), 
+              t.bcolors.DARK_GRAY))
              
     #Now look for the last dipole moment in the file 
     #(that of the optimum geometry and the state specified by root=)     
@@ -255,11 +237,11 @@ def to_guissani(logElement):
                 logElement.set_mo(mo_element[0][0], mo_element[1][0])
         the_mo = logElement.get_mo()
         logElement.set_formatted_mo(transition_formatter(logElement, the_mo[0]) 
-                                    + tint("->", bcolors.LIGHT_RED) 
+                                    + t.tint("->", t.bcolors.LIGHT_RED) 
                                     + transition_formatter(logElement, the_mo[1]))
     except IndexError:
-         print(tint(("no MO transition found for root: " + str(logElement.get_root())), 
-                    bcolors.DARK_GRAY))
+         print(t.tint(("no MO transition found for root: " + str(logElement.get_root())), 
+                    t.bcolors.DARK_GRAY))
     try: 
         #e.g. the first root would pull from the first excited state
         dmv = data.etdips[logElement.get_root() - 1]
@@ -285,8 +267,8 @@ def to_guissani(logElement):
         theta = math.acos(dot_product/vector_magnitude)
         logElement.set_dmv_angle(radian_to_degrees(theta))
     except IndexError:
-         print(tint(("no dipole moment vector found for root: " + str(logElement.get_root())), 
-                    bcolors.DARK_GRAY))
+         print(t.tint(("no dipole moment vector found for root: " + str(logElement.get_root())), 
+                    t.bcolors.DARK_GRAY))
     #set nitrogen coordinate. This is based on a hard coded value for now.
     #perhaps it would be good to have a safeguard if the atom numbering changes?
     
@@ -328,12 +310,12 @@ def prompt_user():
     file_choices = []
     file_counter = 0
     file_counter_2 = 0
-    print(tint(".log files present in directory:", 
-               bcolors.LIGHT_PURPLE))
+    print(t.tint(".log files present in directory:", 
+               t.bcolors.LIGHT_PURPLE))
     #looks in current directory for all .log files
     for entry in list_of_files:
         if (fnmatch.fnmatch(entry, pattern)) or (fnmatch.fnmatch(entry, pattern_2)):
-            print (tint(str(file_counter), bcolors.LIGHT_CYAN) + ": " + entry, end= " ")
+            print (t.tint(str(file_counter), t.bcolors.LIGHT_CYAN) + ": " + entry, end= " ")
             file_counter += 1
             file_counter_2 += 1
             file_choices.append(entry)
@@ -341,12 +323,12 @@ def prompt_user():
                 print()
                 file_counter_2 = 0
     
-    print(tint("\nType the number index of a optimization .log and ENTER to learn about the indicators.", 
-           bcolors.LIGHT_GREEN))
-    print(tint("Type 'done' when complete.", 
-           bcolors.LIGHT_GREEN))
-    print(tint("Note: You should probably look at fewer files than the number of nstates.", 
-           bcolors.DARK_GRAY))
+    print(t.tint("\nType the number index of a optimization .log and ENTER to learn about the indicators.", 
+           t.bcolors.LIGHT_GREEN))
+    print(t.tint("Type 'done' when complete.", 
+           t.bcolors.LIGHT_GREEN))
+    print(t.tint("Note: You should probably look at fewer files than the number of nstates.", 
+           t.bcolors.DARK_GRAY))
     #log files should be accessible throughout the program
     global log_files
     log_files = [] 
@@ -356,8 +338,8 @@ def prompt_user():
         the_input = input()
         if (the_input == "done"):
             is_inputting = False
-            print(tint("Input done.", 
-                       bcolors.LIGHT_GREEN))
+            print(t.tint("Input done.", 
+                       t.bcolors.LIGHT_GREEN))
         else:
             the_input = int(the_input)
             print("Selected: " + file_choices[the_input])
@@ -373,37 +355,37 @@ def print_out_info():
     es = "Energy State" 
     print(" \nFour indicators suggest the identity of the indole's top two excited states")
     
-    print(tint("MAE indicator:", 
-               bcolors.LIGHT_PURPLE)) 
+    print(t.tint("MAE indicator:", 
+               t.bcolors.LIGHT_PURPLE)) 
     for element in log_files:
         mae_printed_result = (es + " " + str(element.get_root()) + "'s structure is closest to " 
                               + element.get_mae() + ". " + "maeLa: " + element.get_mae_La() 
         + " maeLb: " + element.get_mae_Lb())
         print(mae_printed_result)
     
-    print(tint("Oscillator Strength indicator:", 
-               bcolors.LIGHT_PURPLE)) 
+    print(t.tint("Oscillator Strength indicator:", 
+               t.bcolors.LIGHT_PURPLE)) 
     for element in log_files:
         osci_printed_result = (es + " " + str(element.get_root()) + "'s oscillator strength: " 
                              + str(element.get_oscillator_strength()))
         print(osci_printed_result)
     
-    print(tint("Dipole Moment indicator:", 
-               bcolors.LIGHT_PURPLE))
+    print(t.tint("Dipole Moment indicator:", 
+               t.bcolors.LIGHT_PURPLE))
     for element in log_files:
         dipole_printed_result = (es + " " + str(element.get_root()) + "'s dipole moment: " 
                                + str(element.get_dipole_moment()))
         print(dipole_printed_result)
     
-    print(tint("MO transition indicator:", 
-               bcolors.LIGHT_PURPLE)) 
+    print(t.tint("MO transition indicator:", 
+               t.bcolors.LIGHT_PURPLE)) 
     for element in log_files:
         tran_printed_result = (es + " " + str(element.get_root()) + "'s MO transition is closest to " 
                              + element.get_formatted_mo())
         print(tran_printed_result)
     
-    print(tint("Dipole Moment Vector indicator:", 
-               bcolors.LIGHT_PURPLE))
+    print(t.tint("Dipole Moment Vector indicator:", 
+               t.bcolors.LIGHT_PURPLE))
     for element in log_files:
         dmv_printed_result= (es + " " + str(element.get_root()) + "'s Dipole Moment Vector is: " 
                              + str(element.get_dmv_angle()) + " degrees")

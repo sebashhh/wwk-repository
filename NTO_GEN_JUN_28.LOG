@@ -1,0 +1,228 @@
+ Entering Link 1 = C:\G09W\l1.exe PID=     13224.
+  
+ Copyright (c) 1988,1990,1992,1993,1995,1998,2003,2009,2013,
+            Gaussian, Inc.  All Rights Reserved.
+  
+ This is part of the Gaussian(R) 09 program.  It is based on
+ the Gaussian(R) 03 system (copyright 2003, Gaussian, Inc.),
+ the Gaussian(R) 98 system (copyright 1998, Gaussian, Inc.),
+ the Gaussian(R) 94 system (copyright 1995, Gaussian, Inc.),
+ the Gaussian 92(TM) system (copyright 1992, Gaussian, Inc.),
+ the Gaussian 90(TM) system (copyright 1990, Gaussian, Inc.),
+ the Gaussian 88(TM) system (copyright 1988, Gaussian, Inc.),
+ the Gaussian 86(TM) system (copyright 1986, Carnegie Mellon
+ University), and the Gaussian 82(TM) system (copyright 1983,
+ Carnegie Mellon University). Gaussian is a federally registered
+ trademark of Gaussian, Inc.
+  
+ This software contains proprietary and confidential information,
+ including trade secrets, belonging to Gaussian, Inc.
+  
+ This software is provided under written license and may be
+ used, copied, transmitted, or stored only in accord with that
+ written license.
+  
+ The following legend is applicable only to US Government
+ contracts under FAR:
+  
+                    RESTRICTED RIGHTS LEGEND
+  
+ Use, reproduction and disclosure by the US Government is
+ subject to restrictions as set forth in subparagraphs (a)
+ and (c) of the Commercial Computer Software - Restricted
+ Rights clause in FAR 52.227-19.
+  
+ Gaussian, Inc.
+ 340 Quinnipiac St., Bldg. 40, Wallingford CT 06492
+  
+  
+ ---------------------------------------------------------------
+ Warning -- This program may not be used in any manner that
+ competes with the business of Gaussian, Inc. or will provide
+ assistance to any competitor of Gaussian, Inc.  The licensee
+ of this program is prohibited from giving any competitor of
+ Gaussian, Inc. access to this program.  By using this program,
+ the user acknowledges that Gaussian, Inc. is engaged in the
+ business of creating and licensing software in the field of
+ computational chemistry and represents and warrants to the
+ licensee that it is not a competitor of Gaussian, Inc. and that
+ it will not use this program in any manner prohibited above.
+ ---------------------------------------------------------------
+  
+
+ Cite this work as:
+ Gaussian 09, Revision D.01,
+ M. J. Frisch, G. W. Trucks, H. B. Schlegel, G. E. Scuseria, 
+ M. A. Robb, J. R. Cheeseman, G. Scalmani, V. Barone, B. Mennucci, 
+ G. A. Petersson, H. Nakatsuji, M. Caricato, X. Li, H. P. Hratchian, 
+ A. F. Izmaylov, J. Bloino, G. Zheng, J. L. Sonnenberg, M. Hada, 
+ M. Ehara, K. Toyota, R. Fukuda, J. Hasegawa, M. Ishida, T. Nakajima, 
+ Y. Honda, O. Kitao, H. Nakai, T. Vreven, J. A. Montgomery, Jr., 
+ J. E. Peralta, F. Ogliaro, M. Bearpark, J. J. Heyd, E. Brothers, 
+ K. N. Kudin, V. N. Staroverov, T. Keith, R. Kobayashi, J. Normand, 
+ K. Raghavachari, A. Rendell, J. C. Burant, S. S. Iyengar, J. Tomasi, 
+ M. Cossi, N. Rega, J. M. Millam, M. Klene, J. E. Knox, J. B. Cross, 
+ V. Bakken, C. Adamo, J. Jaramillo, R. Gomperts, R. E. Stratmann, 
+ O. Yazyev, A. J. Austin, R. Cammi, C. Pomelli, J. W. Ochterski, 
+ R. L. Martin, K. Morokuma, V. G. Zakrzewski, G. A. Voth, 
+ P. Salvador, J. J. Dannenberg, S. Dapprich, A. D. Daniels, 
+ O. Farkas, J. B. Foresman, J. V. Ortiz, J. Cioslowski, 
+ and D. J. Fox, Gaussian, Inc., Wallingford CT, 2013.
+ 
+ ******************************************
+ Gaussian 09:  EM64W-G09RevD.01 13-Apr-2013
+                28-Jun-2021 
+ ******************************************
+ %chk=C:\Users\scaparas\.ssh\wwk-repository\NTO_gen_jun_28.chk
+ ------------------------------------------
+ # td b3lyp/6-311+g(2d,p) geom=connectivity
+ ------------------------------------------
+ 1/38=1,57=2/1;
+ 2/12=2,17=6,18=5,40=1/2;
+ 3/5=4,6=6,7=112,11=9,16=1,25=1,30=1,74=-5/1,2,8,3;
+ 4//1;
+ 5/5=2,38=5/2;
+ 8/6=1,10=2/1;
+ 9/42=1,70=2/14;
+ 6/7=2,8=2,9=2,10=2/1;
+ 99/5=1,9=1/99;
+ ------------------
+ cc-pvtzOptTemplate
+ ------------------
+ Symbolic Z-matrix:
+ Charge =  0 Multiplicity = 1
+ C                    -2.15936   0.69162   0.00011 
+ C                    -2.13588  -0.71874  -0.00002 
+ C                    -0.93512  -1.41882  -0.00005 
+ C                     0.24791  -0.67197  -0.00001 
+ C                     0.24999   0.75191  -0.00006 
+ C                    -0.98269   1.42884  -0.00006 
+ N                     1.56678  -1.08097  -0.00025 
+ C                     1.62599   1.16698  -0.0001 
+ C                     2.39038   0.03047   0.00027 
+ H                     1.88117  -2.03854   0.00076 
+ H                     1.99815   2.18234  -0.00037 
+ H                     3.46533  -0.08657   0.0004 
+ H                    -3.07324  -1.26832   0.00023 
+ H                    -0.91789  -2.50582  -0.00016 
+ H                    -3.11663   1.20635   0.00024 
+ H                    -1.01169   2.51556   0.0002 
+ 
+                          Input orientation:                          
+ ---------------------------------------------------------------------
+ Center     Atomic      Atomic             Coordinates (Angstroms)
+ Number     Number       Type             X           Y           Z
+ ---------------------------------------------------------------------
+      1          6           0       -2.159359    0.691624    0.000113
+      2          6           0       -2.135880   -0.718744   -0.000018
+      3          6           0       -0.935121   -1.418818   -0.000053
+      4          6           0        0.247906   -0.671966   -0.000012
+      5          6           0        0.249994    0.751914   -0.000059
+      6          6           0       -0.982690    1.428836   -0.000059
+      7          7           0        1.566781   -1.080974   -0.000254
+      8          6           0        1.625993    1.166981   -0.000103
+      9          6           0        2.390379    0.030474    0.000272
+     10          1           0        1.881172   -2.038536    0.000760
+     11          1           0        1.998151    2.182344   -0.000370
+     12          1           0        3.465333   -0.086570    0.000402
+     13          1           0       -3.073240   -1.268322    0.000232
+     14          1           0       -0.917889   -2.505823   -0.000155
+     15          1           0       -3.116628    1.206352    0.000235
+     16          1           0       -1.011693    2.515556    0.000195
+ ---------------------------------------------------------------------
+                    Distance matrix (angstroms):
+                    1          2          3          4          5
+     1  C    0.000000
+     2  C    1.410563   0.000000
+     3  C    2.439821   1.389937   0.000000
+     4  C    2.766641   2.384245   1.399050   0.000000
+     5  C    2.410107   2.802718   2.473171   1.423882   0.000000
+     6  C    1.388536   2.437611   2.848051   2.434694   1.406319
+     7  N    4.126284   3.720337   2.524609   1.380840   2.256858
+     8  C    3.815082   4.208046   3.639459   2.298010   1.437238
+     9  C    4.597525   4.587848   3.627588   2.254687   2.258700
+    10  H    4.876440   4.228304   2.883671   2.129571   3.232237
+    11  H    4.416688   5.050398   4.644615   3.348200   2.258801
+    12  H    5.678270   5.636775   4.597704   3.270248   3.322869
+    13  H    2.162537   1.086591   2.143409   3.374263   3.889118
+    14  H    3.430002   2.162673   1.087142   2.173042   3.460752
+    15  H    1.086880   2.160523   3.413281   3.853332   3.397154
+    16  H    2.154963   3.424105   3.935119   3.427373   2.168476
+                    6          7          8          9         10
+     6  C    0.000000
+     7  N    3.577562   0.000000
+     8  C    2.621792   2.248735   0.000000
+     9  C    3.651440   1.383340   1.369647   0.000000
+    10  H    4.497152   1.007853   3.215658   2.130750   0.000000
+    11  H    3.074604   3.291705   1.081417   2.187324   4.222501
+    12  H    4.699081   2.143208   2.225885   1.081307   2.513909
+    13  H    3.412486   4.643802   5.292777   5.615871   5.013923
+    14  H    3.935193   2.864224   4.467754   4.168626   2.837799
+    15  H    2.145505   5.212119   4.742784   5.631147   5.958800
+    16  H    1.087107   4.425331   2.962439   4.213042   5.395222
+                   11         12         13         14         15
+    11  H    0.000000
+    12  H    2.701961   0.000000
+    13  H    6.134012   6.644507   0.000000
+    14  H    5.521069   5.006538   2.485346   0.000000
+    15  H    5.207065   6.707746   2.475054   4.314475   0.000000
+    16  H    3.028232   5.178303   4.309026   5.022255   2.478864
+                   16
+    16  H    0.000000
+ Stoichiometry    C8H7N
+ Framework group  C1[X(C8H7N)]
+ Deg. of freedom    42
+ Full point group                 C1      NOp   1
+ Largest Abelian subgroup         C1      NOp   1
+ Largest concise Abelian subgroup C1      NOp   1
+                         Standard orientation:                         
+ ---------------------------------------------------------------------
+ Center     Atomic      Atomic             Coordinates (Angstroms)
+ Number     Number       Type             X           Y           Z
+ ---------------------------------------------------------------------
+      1          6           0       -2.159359    0.691624    0.000113
+      2          6           0       -2.135880   -0.718744   -0.000018
+      3          6           0       -0.935121   -1.418818   -0.000053
+      4          6           0        0.247906   -0.671966   -0.000012
+      5          6           0        0.249994    0.751914   -0.000059
+      6          6           0       -0.982690    1.428836   -0.000059
+      7          7           0        1.566781   -1.080974   -0.000254
+      8          6           0        1.625993    1.166981   -0.000103
+      9          6           0        2.390379    0.030474    0.000272
+     10          1           0        1.881172   -2.038536    0.000760
+     11          1           0        1.998151    2.182344   -0.000370
+     12          1           0        3.465333   -0.086570    0.000402
+     13          1           0       -3.073240   -1.268322    0.000232
+     14          1           0       -0.917889   -2.505823   -0.000155
+     15          1           0       -3.116628    1.206352    0.000235
+     16          1           0       -1.011693    2.515556    0.000195
+ ---------------------------------------------------------------------
+ Rotational constants (GHZ):      3.8784977      1.6312477      1.1482909
+ Standard basis: 6-311+G(2d,p) (5D, 7F)
+ There are   303 symmetry adapted cartesian basis functions of A   symmetry.
+ There are   285 symmetry adapted basis functions of A   symmetry.
+   285 basis functions,   434 primitive gaussians,   303 cartesian basis functions
+    31 alpha electrons       31 beta electrons
+       nuclear repulsion energy       399.8541458368 Hartrees.
+ NAtoms=   16 NActive=   16 NUniq=   16 SFac= 1.00D+00 NAtFMM=   60 NAOKFM=F Big=F
+ Integral buffers will be    131072 words long.
+ Regular integral format.
+ Two-electron integral symmetry is turned on.
+ One-electron integrals computed using PRISM.
+ NBasis=   285 RedAO= T EigKep=  2.68D-06  NBF=   285
+ NBsUse=   284 1.00D-06 EigRej=  8.95D-07 NBFU=   284
+ ExpMin= 4.38D-02 ExpMax= 6.29D+03 ExpMxC= 9.49D+02 IAcc=2 IRadAn=         4 AccDes= 0.00D+00
+ Harris functional with IExCor=  402 and IRadAn=       4 diagonalized for initial guess.
+ HarFok:  IExCor=  402 AccDes= 0.00D+00 IRadAn=         4 IDoV= 1 UseB2=F ITyADJ=14
+ ICtDFT=  3500011 ScaDFX=  1.000000  1.000000  1.000000  1.000000
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=T BraDBF=F KetDBF=T FulRan=T
+         wScrn=  0.000000 ICntrl=     500 IOpCl=  0 I1Cent=   200000004 NGrid=           0
+         NMat0=    1 NMatS0=      1 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Petite list used in FoFCou.
+ Requested convergence on RMS density matrix=1.00D-08 within 128 cycles.
+ Requested convergence on MAX density matrix=1.00D-06.
+ Requested convergence on             energy=1.00D-06.
+ No special actions if energy rises.
+ SCF Done:  E(RB3LYP) =  -363.922796779     A.U. after   13 cycles
+            NFock= 13  Conv=0.62D-08     -V/T= 2.0046
