@@ -299,8 +299,18 @@ def radian_to_degrees(radian_value):
     degree_value = radian_value * ratio
     return degree_value
 
+#Defines a local file select prompt. Sent in via the method call at the end of script.
+gv_file_select_prompt = (
+    (t.tint("\nType the number index of a optimization .log and ENTER to learn about the indicators.", 
+           t.bcolors.LIGHT_GREEN)) 
+    + "\n" + (t.tint("Type 'done' when complete.", 
+                     t.bcolors.LIGHT_GREEN)) 
+    + "\n" + (t.tint("Note: You should probably look at fewer files than the number of nstates.", 
+           t.bcolors.DARK_GRAY))
+    )
+
 #runs the program
-def prompt_user():
+def log_file_select(file_select_prompt):
     
     list_of_files = os.listdir('.')
     #the pattern for Gaussian output
@@ -323,12 +333,9 @@ def prompt_user():
                 print()
                 file_counter_2 = 0
     
-    print(t.tint("\nType the number index of a optimization .log and ENTER to learn about the indicators.", 
-           t.bcolors.LIGHT_GREEN))
-    print(t.tint("Type 'done' when complete.", 
-           t.bcolors.LIGHT_GREEN))
-    print(t.tint("Note: You should probably look at fewer files than the number of nstates.", 
-           t.bcolors.DARK_GRAY))
+    #prints a string to prompt user
+    print(file_select_prompt)
+   
     #log files should be accessible throughout the program
     global log_files
     log_files = [] 
@@ -347,8 +354,6 @@ def prompt_user():
             log_instance = logFileData(file_choices[the_input])
             log_files.append(log_instance)
                   
-    for element in log_files:
-        to_guissani(element)
 
 #prints out info on each indicator
 def print_out_info():
@@ -395,7 +400,9 @@ def print_out_info():
     
    
 #actual method calls
-prompt_user()
+log_file_select(gv_file_select_prompt)
+for element in log_files:
+    to_guissani(element)
 print_out_info()
 
 
