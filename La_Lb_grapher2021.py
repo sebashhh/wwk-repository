@@ -13,7 +13,7 @@ import StringTinter as t
 import GiussaniVersus2021 as gv
 
 La_Lb_grapher_prompt = (
-    (t.tint("Type the La, then the Lb of each functional you want to analyze.", 
+    (t.tint("Type the La file, then the Lb for each functional you want to plot.", 
            t.bcolors.LIGHT_GREEN)) 
     ) 
 
