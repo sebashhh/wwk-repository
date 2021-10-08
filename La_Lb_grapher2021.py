@@ -12,22 +12,32 @@ import matplotlib.pyplot as plt
 import StringTinter as t
 import GiussaniVersus2021 as gv
 
-La_Lb_grapher_prompt = (
-    (t.tint("Type the La file, then the Lb for each functional you want to plot.", 
-           t.bcolors.LIGHT_GREEN)) 
-    ) 
-
-gv.log_file_select(La_Lb_grapher_prompt)
-
 plot_width = 7.0
 plot_height = 4.0
 #sets bounds of plot
 fig = plt.figure(figsize=(plot_width, plot_height))
 
 #list of functionals in use (x, independent variable)
-functionals = ['','CIS','LSDA','BVP86','B3LYP-D','B3PW91','LC-BLYP','LC-PBEPBE',
-               'HSEH1PBE','mPW1PW91','$\omega$B97X','APFD','PBE1PBE','MN15','$\omega$B97XD',
-               'BH&HLYP','CAM-B3LYP','BMK','M062X','M06','']
+functionals = ['']
+
+La_Lb_grapher_prompt = (
+    (t.tint("\nType the La file, then the Lb for each functional you want to plot." +
+            "\nType 'done' when complete.", 
+           t.bcolors.LIGHT_GREEN)) 
+    ) 
+print("here")
+gv.log_file_select(La_Lb_grapher_prompt)
+the_count = 0
+for element in gv.log_files:
+    the_count = the_count + 1
+    gv.to_guissani(element)
+    #print(element.get_file_name())
+    #pulls the functional from what ought to be the root 1 entry
+    if (the_count % 2) == 1:
+        functionals.append(element.get_functional())
+functionals.append('')
+    
+
 
 #Vertical Excitation Energies in Gas Phase? (y, dependent variable)
 La = [None,5.0703,3.8250,3.7413,4,4.1984,

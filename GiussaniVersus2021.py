@@ -29,6 +29,7 @@ class logFileData:
     _dmv_angle = 0
     _dmv_quadrant = "Phantom"
     _nitrogen_coords = []
+    _functional = ""
     
     def __init__(self, file_name):
         self._file_name = file_name
@@ -118,6 +119,12 @@ class logFileData:
     #equivalent to toString in java, will get printed if you try to print the element
     def __str__(self):
         return self._file_name + " is a logFileData object."
+    
+    def get_functional(self):
+        return self._functional
+     
+    def set_functional(self, x):
+        self._functional = str(x)
 
 #we may observe the dmv direction oscillating between quadrants, 
 #but keeping the same angle  
@@ -155,11 +162,13 @@ guissani_La = dict(zip(keys,guissani_La))
 guissani_Lb = dict(zip(keys,guissani_Lb))
 zero = dict(zip(keys,zero))
 
+
 #Parses out the indicators for each 
 def to_guissani(logElement):
     file_name = logElement.get_file_name()
+
     data = cclib.io.ccread(file_name)
-    print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + file_name)
+    #print("There are %i atoms and %i MOs" % (data.natom, data.nmo) + " in " + file_name)
     data.atomcoords
     coords1 = data.atomcoords[len(data.atomcoords)-1]
     #Automatically finds the bond lengths of the atom
@@ -221,6 +230,10 @@ def to_guissani(logElement):
     
     #finds the homo and sets it
     logElement.set_homo(data.homos[0])
+    
+    #print(data.metadata)
+    #find the functional and sets it
+    logElement.set_functional(data.metadata["functional"])
     #breaks down Excited State Transition List
     try: 
         mo_transitions_possible = []
@@ -318,7 +331,9 @@ def log_file_select(file_select_prompt):
     #the pattern for Q-Chem output
     pattern_2 = "*.out"
     file_choices = []
+    #the cyan number displayed in front the entry
     file_counter = 0
+    #number of functional per line
     file_counter_2 = 0
     print(t.tint(".log files present in directory:", 
                t.bcolors.LIGHT_PURPLE))
@@ -330,7 +345,7 @@ def log_file_select(file_select_prompt):
             file_counter_2 += 1
             file_choices.append(entry)
             if (file_counter_2 == 3):
-                print()
+                #print("here")
                 file_counter_2 = 0
     
     #prints a string to prompt user
