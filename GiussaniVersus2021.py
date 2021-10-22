@@ -280,8 +280,11 @@ def to_guissani(logElement):
         theta = math.acos(dot_product/vector_magnitude)
         logElement.set_dmv_angle(radian_to_degrees(theta))
     except IndexError:
-         print(t.tint(("no dipole moment vector found for root: " + str(logElement.get_root())), 
-                    t.bcolors.DARK_GRAY))
+        print(t.tint(("no dipole moment vector found for root: " + str(logElement.get_root())), 
+                     t.bcolors.DARK_GRAY))
+    except AttributeError:
+        print(t.tint(("Q-chem not configured for Dipole Moment Vector: " + str(logElement.get_root())), 
+                     t.bcolors.DARK_GRAY))
     #set nitrogen coordinate. This is based on a hard coded value for now.
     #perhaps it would be good to have a safeguard if the atom numbering changes?
     
