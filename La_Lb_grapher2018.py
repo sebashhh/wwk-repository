@@ -12,15 +12,23 @@ import matplotlib.pyplot as plt
 
 
 fig = plt.figure(figsize=(7.0, 4.0))
-functionals = ['','CIS','LSDA','BVP86','B3LYP-D','B3PW91','LC-BLYP','LC-PBEPBE','HSEH1PBE','mPW1PW91',
-               '$\omega$B97X','APFD','PBE1PBE','MN15','$\omega$B97XD','BH&HLYP','CAM-B3LYP','BMK','M062X','M06','']
+
+q_chem_functionals = ['','B3PW91','BMK','CAM-B3LYP','HSE-HJS','LDA','MN15', 'MPW1PW91', 'PBE', '']
+
+functionals = q_chem_functionals
+
+q_chem_excitation_la = [None, 4.9586, 5.2497, 5.1591, 5.0022, 4.5785, 5.1187, 5.0226, 4.5743, None]
+
+q_chem_emission_la = [None, 4.3497, 4.9239, 4.8135, 4.4130, 4.1295, 4.8422, 4.4518, 3.9132, None]
+
+q_chem_excitation_lb = [None, 4.9586, 5.2497, 5.1591, 5.0022, 4.5785, 5.1187, 5.0226, 4.5743, None]
+
+q_chem_emission_lb = [None, 4.7701, 4.8539, 4.9034, 4.8154, 4.3658, 4.8159, 4.5683, 4.3812, None]
 
 #gas abs
-La = [None,5.0703,3.8250,3.7413,4,4.1984,4.7390,4.8256,4.2537,
-      4.2837,4.6176,4.2476,4.2848,4.3964,4.5017,4.5686,4.4862,4.4478,4.4971,4.6833, None]
+La = q_chem_excitation_la
 
-Lb = [None,5.1038,4.4951,4.3821,4,4.6961,4.9435,5.0218,4.7463,
-      4.7563,4.8241,4.7317,4.7619,4.3967,4.5013,4.5662,4.4850,4.4460,4.4964,4.6755, None]
+Lb = q_chem_excitation_lb
 
 
 x = np.arange(0,len(functionals))
