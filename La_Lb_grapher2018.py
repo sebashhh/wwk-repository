@@ -13,12 +13,12 @@ import matplotlib.pyplot as plt
 
 fig = plt.figure(figsize=(7.0, 4.0))
 
-plot_title = "Vertical Emission Energies in Gas Phase"
+plot_title = "Vertical Excitation Energies in Gas Phase"
 
-figure_name = 'Emission_Energies.pdf'
+figure_name = 'Excitation_Energies.pdf'
 
-q_chem_functionals = ['','B3PW91','BMK','CAM-B3LYP',
-                      'HSE-HJS','LDA','MN15', 'MPW1PW91', 'PBE', '']
+q_chem_functionals = ['','B3PW91','BMK','CAM-B3LYP','HSE-HJS','LDA',
+                      'MN15', 'MPW1PW91', 'PBE', '']
 
 functionals = q_chem_functionals
 
@@ -39,9 +39,9 @@ q_chem_emission_lb = [None, 4.7736, 5.0343, 4.9034, 4.8344, 4.5846,
                       None]
 
 #gas abs
-La = q_chem_emission_la
+La = q_chem_excitation_la
 
-Lb = q_chem_emission_lb
+Lb = q_chem_excitation_lb
 
 
 x = np.arange(0,len(functionals))
