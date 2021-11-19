@@ -13,22 +13,35 @@ import matplotlib.pyplot as plt
 
 fig = plt.figure(figsize=(7.0, 4.0))
 
-q_chem_functionals = ['','B3PW91','BMK','CAM-B3LYP','HSE-HJS','LDA','MN15', 'MPW1PW91', 'PBE', '']
+plot_title = "Vertical Emission Energies in Gas Phase"
+
+figure_name = 'Emission_Energies.pdf'
+
+q_chem_functionals = ['','B3PW91','BMK','CAM-B3LYP',
+                      'HSE-HJS','LDA','MN15', 'MPW1PW91', 'PBE', '']
 
 functionals = q_chem_functionals
 
-q_chem_excitation_la = [None, 4.9586, 5.2497, 5.1591, 5.0022, 4.5785, 5.1187, 5.0226, 4.5743, None]
+q_chem_excitation_la = [None, 4.9586, 5.2497, 5.2636, 5.0022, 4.7432, 
+                        5.1187, 5.0291, 4.5774, 
+                        None]
 
-q_chem_emission_la = [None, 4.3497, 4.9239, 4.8135, 4.4130, 4.1295, 4.8422, 4.4518, 3.9132, None]
+q_chem_emission_la = [None, 4.3497, 4.9239, 4.8754, 4.4130, 4.2273,
+                      4.8422, 4.6435, 4.2613,
+                      None]
 
-q_chem_excitation_lb = [None, 4.9586, 5.2497, 5.1591, 5.0022, 4.5785, 5.1187, 5.0226, 4.5743, None]
+q_chem_excitation_lb = [None, 5.0199, 5.3133, 5.1591, 5.0633, 4.7605, 
+                        5.2126, 5.0727, 4.7538,
+                        None]
 
-q_chem_emission_lb = [None, 4.7701, 4.8539, 4.9034, 4.8154, 4.3658, 4.8159, 4.5683, 4.3812, None]
+q_chem_emission_lb = [None, 4.7736, 5.0343, 4.9034, 4.8344, 4.5846,
+                      4.9261, 4.9847, 4.4659,
+                      None]
 
 #gas abs
-La = q_chem_excitation_la
+La = q_chem_emission_la
 
-Lb = q_chem_excitation_lb
+Lb = q_chem_emission_lb
 
 
 x = np.arange(0,len(functionals))
@@ -46,7 +59,7 @@ plt.xticks(x,functionals,rotation=65)
 
 
 
-plt.title("Vertical Excitation Energies in Gas Phase")
+plt.title(plot_title)
 plt.yticks(np.arange(4, 5.6, 0.5))
 plt.ylim([3.5,5.8])
 
@@ -56,4 +69,4 @@ plt.show()
 
 
 
-fig.savefig('Excitation_Energies.pdf', bbox_inches=None, pad_inches=0, format='pdf', dpi=1200)
+fig.savefig(figure_name, bbox_inches=None, pad_inches=0, format='pdf', dpi=1200)
